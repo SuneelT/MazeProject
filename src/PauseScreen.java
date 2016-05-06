@@ -3,9 +3,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class PauseScreen implements Observer, Screen{
+public class PauseScreen extends JFrame implements Observer, Screen{
 
 	@Override
 	public JPanel getContentPane() {

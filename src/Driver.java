@@ -5,6 +5,9 @@ public class Driver {
 	private Screen currScreen;
 	private List<Screen> screens = new LinkedList<Screen>();	
 	private Maze maze;
+	private final int MAZE = 0;
+	private final int MENU = 1;
+	private final int PAUSE = 2;
 
 	public static void main(String[] args) {
 		Driver sys = new Driver();
@@ -27,7 +30,10 @@ public class Driver {
 	}
 
 	private void init_GUI() {
-		// TODO Auto-generated method stub
+		screens.add(new MazeScreen());
+		screens.add(new MenuScreen());
+		screens.add(new PauseScreen());
+		currScreen = screens.get(MAZE);
 		
 	}
 }

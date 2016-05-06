@@ -3,9 +3,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MenuScreen implements Observer, Screen {
+public class MenuScreen extends JFrame implements Observer, Screen {
 
 	@Override
 	public JPanel getContentPane() {
