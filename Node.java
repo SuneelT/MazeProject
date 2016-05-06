@@ -1,0 +1,82 @@
+public class Node {
+	private State item;
+	private Edge up;
+	private Edge down;
+	private Edge left;
+	private Edge right;
+	
+	private int x;
+	private int y;
+	
+	public Node(State item, int x, int y) {
+		this.item = item;
+		this.up = null;
+		this.down = null;
+		this.left = null;
+		this.right = null;
+		
+		this.x = x;
+		this.y = y;
+	}
+	
+	public State getItem() {
+		return this.item;
+	}
+	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
+	}
+	
+	public boolean edgeExists(String edge) {
+		edge.toLowerCase();
+		if (edge.equals("up") && this.up == null) return false;
+		else if (edge.equals("down") && this.down == null) return false;
+		else if (edge.equals("left") && this.left == null) return false;
+		else if (edge.equals("right") && this.right == null) return false;
+		
+		if (edge.equals("up") && !this.up.getWall()) return true;
+		else if (edge.equals("down") && !this.down.getWall()) return true;
+		else if (edge.equals("left") && !this.left.getWall()) return true;
+		else if (edge.equals("right") && !this.right.getWall()) return true;
+		return false;
+	}
+	
+	public Node getUp() {
+		return up.getTo();
+	}
+	public Node getDown() {
+		return down.getTo();
+	}
+	public Node getLeft() {
+		return left.getTo();
+	}
+	public Node getRight() {
+		return right.getTo();
+	}
+	
+	public Edge getEdge(String edge) {
+		edge.toLowerCase();
+		if (edge.equals("up")) {return up;}
+		if (edge.equals("right")) {return right;}
+		if (edge.equals("down")) {return down;}
+		if (edge.equals("left")) {return left;}
+		return null;
+	}
+	
+	public void addConnectionUp(Node node, boolean wall) {
+		this.up = new Edge(this, node, wall);
+	}
+	public void addConnectionDown(Node node, boolean wall) {
+		this.down = new Edge(this, node, wall);
+	}
+	public void addConnectionLeft(Node node, boolean wall) {
+		this.left = new Edge(this, node, wall);
+	}
+	public void addConnectionRight(Node node, boolean wall) {
+		this.right = new Edge(this, node, wall);
+	}
+}
