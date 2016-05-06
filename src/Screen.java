@@ -8,10 +8,10 @@ public abstract class Screen extends JPanel implements Observer {
 	private static final long serialVersionUID = 2480454775809714426L;
 	private Container contentPane;
 	private List<Observer> mazeComponents = new LinkedList<Observer>();
-	private final GUI gui;
+	private GUI gui;
 	
-	public Screen(GUI gui) {
-		this.gui = gui;
+	public void setGUI(GUI g) {
+		this.gui = g;
 	}
 	
 	public List<Observer> getMazeComponents() {

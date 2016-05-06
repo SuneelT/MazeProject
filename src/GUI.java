@@ -32,7 +32,7 @@ public class GUI extends JFrame {
 	}
 	
 	public void switchScreen(String switchTo) {
-	((CardLayout) mainFrame.getLayout()).show(mainFrame, switchTo);		//to understand this code go look at java.util.CardLayout
+	((CardLayout) mainFrame.getLayout()).show(mainFrame, switchTo);		//to understand this code go look at java.awt.CardLayout
 	}
 
 	private void init_Maze() {

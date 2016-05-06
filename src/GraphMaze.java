@@ -110,7 +110,7 @@ public class GraphMaze extends Observable implements Maze {
 	@Override
 	public void updatePosition(int direction) {
 		movePlayer(direction);
-		
+		notifyObservers(direction);
 	}
 
 }
