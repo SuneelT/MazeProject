@@ -6,19 +6,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class PauseScreen extends JFrame implements Observer, Screen{
-
-	@Override
-	public JPanel getContentPane() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<JComponent> getMazeListeners() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public class PauseScreen extends Screen {
+	private final int ID = 2;
 
 	@Override
 	public void update(Observable arg0, Object arg1) {

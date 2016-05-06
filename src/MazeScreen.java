@@ -6,19 +6,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MazeScreen extends JFrame implements Observer, Screen {
-
-	@Override
-	public JPanel getContentPane() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<JComponent> getMazeListeners() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public class MazeScreen extends Screen {
+	private final int ID = 0;
 
 	@Override
 	public void update(Observable o, Object arg) {
