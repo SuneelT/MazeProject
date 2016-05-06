@@ -1,13 +1,11 @@
-import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
-
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class MazeScreen extends Screen {
-	private final int ID = 0;
+	private static final long serialVersionUID = -8972885841964219641L;
+
+	public MazeScreen(GUI gui) {
+		super(gui);
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {

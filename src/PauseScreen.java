@@ -1,13 +1,12 @@
-import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class PauseScreen extends Screen {
-	private final int ID = 2;
+	private static final long serialVersionUID = 3233877355262024159L;
+
+	public PauseScreen(GUI gui) {
+		super(gui);
+	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {

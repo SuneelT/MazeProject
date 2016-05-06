@@ -6,14 +6,31 @@ import javax.swing.*;
 
 public abstract class Screen extends JPanel implements Observer {
 	private static final long serialVersionUID = 2480454775809714426L;
-	protected Container contentPane;
-	protected List<JComponent> mazeComponents = new LinkedList<JComponent>();
+	private Container contentPane;
+	private List<JComponent> mazeComponents = new LinkedList<JComponent>();
+	private final GUI gui;
 	
-	public Container getContentPane() {
+	public Screen(GUI gui) {
+		this.gui = gui;
+	}
+	
+	public List<JComponent> getMazeComponents() {
+		return this.mazeComponents;
+	}
+	
+	public void addMazeComponent(JComponent c) {
+		this.mazeComponents.add(c);
+	}
+	
+	public void setCP(Container cp) {
+		this.contentPane = cp;
+	}
+	
+	public Container getCP() {
 		return this.contentPane;
 	}
 	
-	public List<JComponent> getMazeListeners() {
-		return this.mazeComponents;
+	public GUI getGUI() {
+		return this.gui;
 	}
 }

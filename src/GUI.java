@@ -28,14 +28,15 @@ public class GUI extends JFrame {
 	}
 
 	private void init_Maze() {
-		// TODO Auto-generated method stub
+		maze = new Maze();
+		
 		
 	}
 
 	private void init_GUI() {
-		screens.add(new MazeScreen());
-		screens.add(new MenuScreen());
-		screens.add(new PauseScreen());
+		screens.add(new MazeScreen(this));
+		screens.add(new MenuScreen(this));
+		screens.add(new PauseScreen(this));
 		mainFrame.setLayout(new CardLayout());
 		mainFrame.add(screens.get(MAZE), "MAZE");
 		mainFrame.add(screens.get(MENU), "MENU");
