@@ -7,14 +7,6 @@ public class GraphMaze extends Observable implements Maze {
 	private Node[][] nodes;
 	private Player player1;	
 	
-	public static void main (String[] args) {
-		GraphMaze g = new GraphMaze(3,3,3,3, null);
-		g.movePlayer("up");
-		g.movePlayer("up");
-		g.movePlayer("up");
-		g.movePlayer("up");
-	}
-	
 	// creates width*height nodes with no walls between them
 	// each node has value initVal
 	public GraphMaze(int width, int height, int playerX, int playerY, State initVal) {
@@ -105,15 +97,20 @@ public class GraphMaze extends Observable implements Maze {
 		return false;
 	}
 
-	@Override
-	public void movePlayer(int direction) {
+	private void movePlayer(int direction) {
 		player1.move(direction);
 		
 	}
 
-	@Override
-	public void movePlayer(String direction) {
+	
+	/*private void movePlayer(String direction) {
 		player1.move(direction);
+	}*/
+
+	@Override
+	public void updatePosition(int direction) {
+		movePlayer(direction);
+		
 	}
 
 }

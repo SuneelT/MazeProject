@@ -7,18 +7,18 @@ import javax.swing.*;
 public abstract class Screen extends JPanel implements Observer {
 	private static final long serialVersionUID = 2480454775809714426L;
 	private Container contentPane;
-	private List<JComponent> mazeComponents = new LinkedList<JComponent>();
+	private List<Observer> mazeComponents = new LinkedList<Observer>();
 	private final GUI gui;
 	
 	public Screen(GUI gui) {
 		this.gui = gui;
 	}
 	
-	public List<JComponent> getMazeComponents() {
+	public List<Observer> getMazeComponents() {
 		return this.mazeComponents;
 	}
 	
-	public void addMazeComponent(JComponent c) {
+	public void addMazeComponent(Observer c) {
 		this.mazeComponents.add(c);
 	}
 	
