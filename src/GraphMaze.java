@@ -85,15 +85,29 @@ public class GraphMaze extends Observable implements Maze {
 		while (edges.size() != 0) {
 			int index = generator.nextInt(edges.size());
 			examine = edges.remove(index);
-
-			if (!getConnected(examine.getTo(), examine.getFrom())) {
+			
+			ArrayList<Node> visited = new ArrayList<Node>();
+			if (!getConnected(visited, examine.getTo(), examine.getFrom())) {
 				examine.destroyWall();
 			}
 		}
 	}
 	
-	public boolean getConnected(Node to, Node from) {
+	public boolean getConnected(ArrayList<Node> visited, Node to, Node from) {
+		if (to == null) {return false;}
+		if (to.equals(from)) {return true;}
 		
+		if (visited.indexOf(to) == -1) { 
+			visited.add(to);
+			boolean connected = getConnected(visited, to.getUp(),from);
+			if (connected == true) {return true;}
+			connected = getConnected(visited, to.getLeft(),from);
+			if (connected == true) {return true;}
+			connected = getConnected(visited, to.getRight(),from);
+			if (connected == true) {return true;}
+			connected = getConnected(visited, to.getDown(),from);
+			if (connected == true) {return true;}
+		}
 		return false;
 	}
 
