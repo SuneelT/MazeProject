@@ -46,16 +46,24 @@ public class Node {
 	}
 	
 	public Node getUp() {
-		return up.getTo();
+		if (up == null) return null;
+		if (up.getWall() == false) return up.getTo();
+		return null;
 	}
 	public Node getDown() {
-		return down.getTo();
+		if (down == null) return null;
+		if (down.getWall() == false) return down.getTo();
+		return null;
 	}
 	public Node getLeft() {
-		return left.getTo();
+		if (left == null) return null;
+		if (left.getWall() == false) return left.getTo();
+		return null;
 	}
 	public Node getRight() {
-		return right.getTo();
+		if (right == null) return null;
+		if (right.getWall() == false) return right.getTo();
+		return null;
 	}
 	
 	public Edge getEdge(String edge) {
