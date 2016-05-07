@@ -3,6 +3,7 @@ import java.util.Observable;
 
 public class MazeScreen extends Screen {
 	private static final long serialVersionUID = -8972885841964219641L;
+	private MazePanel mazePanel = new MazePanel();
 
 	public MazeScreen(GUI gui) {
 		setGUI(gui);
