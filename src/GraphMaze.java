@@ -1,12 +1,10 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.Random;
 
-public class GraphMaze extends Observable implements Maze {
-	
-	private Node[][] nodes;
-	private Player player1;	
+public class GraphMaze implements Maze {
+	private Node[][] nodes;	
 	
 	// creates width*height nodes with no walls between them
 	// each node has value initVal
@@ -43,10 +41,6 @@ public class GraphMaze extends Observable implements Maze {
 			}
 		}
 		this.generateMaze();
-	}
-	
-	public void setPlayer(Player p) {
-		this.player1 = p;
 	}
 
 	private void generateMaze() {
@@ -90,14 +84,8 @@ public class GraphMaze extends Observable implements Maze {
 		return false;
 	}
 
-	@Override
-	public void updatePosition(int direction) {
-		player1.move(direction);
-		setChanged();
-		notifyObservers(player1);
-	}
-
 	public void draw(Graphics g, int width, int height) {
+		g.setColor(Color.red);
 		int intervalx = width/nodes.length;
 		int intervaly = height/nodes.length;
 		for (int posy = 1; posy <= nodes.length; posy++) {
@@ -115,5 +103,20 @@ public class GraphMaze extends Observable implements Maze {
 	public int getSize() {
 		return nodes.length;
 	}
-	
+
+	@Override
+	public boolean isConnected(int x, int y, String dir) {
+		switch (dir) {
+		case "UP":
+			return nodes[x][y].getUp() != null;
+		case "DOWN":
+			return nodes[x][y].getDown() != null;
+		case "LEFT":
+			return nodes[x][y].getLeft() != null;
+		case "RIGHT":
+			return nodes[x][y].getRight() != null;
+		default:
+			return false;
+		}
+	}
 }

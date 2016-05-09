@@ -6,13 +6,12 @@ import javax.swing.*;
 
 public class MazeScreen extends Screen {
 	private static final long serialVersionUID = -8972885841964219641L;
-	private Maze maze;
-	private Player player;
 
 	public MazeScreen(GUI gui) {
 		setGUI(gui);
 		setLayout(new BorderLayout());
 		JPanel mazePanel = new MazePanel();
+		mazePanel.setFocusable(true); mazePanel.requestFocusInWindow();
 		addMazeComponent((Observer)mazePanel);
 		add(mazePanel, BorderLayout.CENTER);
 		
@@ -38,24 +37,14 @@ public class MazeScreen extends Screen {
 		otherControls.add(pauseButton); otherControls.add(exitButton);
 	}
 	
-	public void setMaze(Maze m) {
-		this.maze = m;
-	}
-	
-	public void setPlayer(Player p) {
-		this.player = p;
-	}
-	
 	private class MazePanel extends JPanel implements Observer {
 		private static final long serialVersionUID = -3329021623371321857L;
-		private boolean mazeDrawn = false;
 		
 		public MazePanel() {
-			this.addKeyListener(new KeyAdapter() {
+		this.addKeyListener(new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
-					System.out.println("rferg");
-					getGUI().updateMaze(e.getKeyCode());
+					getModel().updatePlayer(e.getKeyCode());
 				}
 			});
 			setBackground(Color.white);
@@ -64,9 +53,8 @@ public class MazeScreen extends Screen {
 		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
-			g.setColor(Color.black);
-			if (!mazeDrawn) {maze.draw(g, getWidth(), getHeight()); mazeDrawn = true;}
-			player.draw(g, getWidth()/maze.getSize(), getHeight()/maze.getSize());
+			getModel().drawMaze(g, getWidth(), getHeight());
+			getModel().drawPlayer(g, getWidth(), getHeight());
 		}
 		
 		@Override

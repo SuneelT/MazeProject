@@ -23,4 +23,8 @@ public abstract class Screen extends JPanel {
 	public GUI getGUI() {
 		return this.gui;
 	}
+	
+	public Model getModel() {
+		return gui.getModel();
+	}
 }
