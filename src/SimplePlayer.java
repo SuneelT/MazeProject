@@ -30,11 +30,11 @@ public class SimplePlayer extends Observable implements Player {
 		case KeyEvent.VK_UP:
 			y = (maze.isConnected(x, y, "UP")) ? y-1 : y; break;
 		case KeyEvent.VK_DOWN:
-			y = (maze.isConnected(x, y, "DOWN"))? y+1: y; break;
+			y = (maze.isConnected(x, y, "DOWN")) ? y+1: y; break;
 		case KeyEvent.VK_LEFT:
 			x = (maze.isConnected(x, y, "LEFT")) ? x-1 : x; break;
 		case KeyEvent.VK_RIGHT:
-			x = (maze.isConnected(x, y, "RIGHT"))? x+1: x; break;
+			x = (maze.isConnected(x, y, "RIGHT")) ? x+1: x; break;
 		}
 		setChanged();
 		notifyObservers();

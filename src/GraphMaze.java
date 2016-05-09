@@ -88,12 +88,12 @@ public class GraphMaze implements Maze {
 		g.setColor(Color.red);
 		int intervalx = width/nodes.length;
 		int intervaly = height/nodes.length;
-		for (int posy = 1; posy <= nodes.length; posy++) {
-			for (int posx = 1; posx <= nodes.length; posx++) {
-				if (nodes[posx-1][posy-1].getDown() == null) {
+		for (int posy = 0; posy < nodes.length; posy++) {
+			for (int posx = 0; posx < nodes.length; posx++) {
+				if (nodes[posx][posy].getDown() == null) {
 					g.drawLine(posx*intervalx, posy*intervaly, (posx+1)*intervalx, posy*intervaly);
 				}
-				if (nodes[posx-1][posy-1].getRight() == null) {
+				if (nodes[posx][posy].getRight() == null) {
 					g.drawLine(posx*intervalx, posy*intervaly, posx*intervalx, (posy+1)*intervaly);
 				}
 			}
