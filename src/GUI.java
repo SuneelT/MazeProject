@@ -12,6 +12,8 @@ public class GUI extends JFrame {
 	private final int MAZE = 0;
 	private final int MENU = 1;
 	private final int PAUSE = 2;
+	private final int WIDTH = 800;
+	private final int HEIGHT = 600;
 
 	/**
 	 * This main function begins by adding to queue of runnable threads our GUI. This synchronises the GUI and prevents it from doing things like
@@ -25,9 +27,6 @@ public class GUI extends JFrame {
 		    public void run() {
 		        GUI ui = new GUI();
 		        ui.init_GUI();					//init till the end...I see stars reference
-		        ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		        ui.setVisible(true);ui.switchScreen("Menu");
-				ui.setSize(800, 600);
 		    }
 		});
 	}
@@ -40,13 +39,20 @@ public class GUI extends JFrame {
 	public void createMaze() {
 		init_Maze();
 	}
+	
+	public void updateMaze(int dir) {
+		maze.updatePosition(dir);
+	}
 
 	private void init_Maze() {
-		maze = new GraphMaze(3, 3, 3, 3, null);	//what does this mean??
+		maze = new GraphMaze(25, 25); ((MazeScreen) screens.get(MAZE)).setMaze(maze);
+		Player p = new Player(0, 0); ((MazeScreen) screens.get(MAZE)).setPlayer(p);
+		((GraphMaze) maze).setPlayer(p); 
 		for (Screen s: screens) {
-			for (Observer j: s.getMazeComponents()) ((GraphMaze) maze).addObserver(j);
+			for (Observer j: s.getMazeComponents()) {
+				((GraphMaze) maze).addObserver(j);
+			}
 		}
-		
 	}
 
 	private void init_GUI() {
@@ -57,5 +63,8 @@ public class GUI extends JFrame {
 		cards.add(screens.get(MENU), "Menu");
 		cards.add(screens.get(PAUSE), "Pause");
 		getContentPane().add(cards);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        setVisible(true); switchScreen("Menu");
+        setSize(WIDTH, HEIGHT);
 	}
 }

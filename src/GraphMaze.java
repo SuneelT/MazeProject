@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
@@ -9,7 +10,7 @@ public class GraphMaze extends Observable implements Maze {
 	
 	// creates width*height nodes with no walls between them
 	// each node has value initVal
-	public GraphMaze(int width, int height, int playerX, int playerY, State initVal) {
+	public GraphMaze(int width, int height) {
 		int x, y;
 		// need to initialize nodes
 		// need to call generator method to generate maze
@@ -23,8 +24,7 @@ public class GraphMaze extends Observable implements Maze {
 		
 		for (x = 0; x < width; x++) {
 			for (y = 0; y < height; y++) {
-				System.out.println(x + " " + y);
-				nodes[x][y] = new Node(initVal, x, y);
+				nodes[x][y] = new Node(null, x, y);
 			}
 		}
 		
@@ -42,34 +42,13 @@ public class GraphMaze extends Observable implements Maze {
 				if (x < width-1) curr.addConnectionRight(nodes[x+1][y], true);
 			}
 		}
-		
-		
-		this.player1 = new Player(playerX-1, playerY-1, nodes[playerX-1][playerY-1]);
-		System.out.println("blah");
 		this.generateMaze();
 	}
-
-/*
-	@Override
-	public int getHeight() {
-		return nodes[0].length;
+	
+	public void setPlayer(Player p) {
+		this.player1 = p;
 	}
 
-	@Override
-	public int getWidth() {
-		return nodes.length;
-	}
-
-	@Override
-	public int getPlayerX() {
-		return player1.getX();
-	}
-
-	@Override
-	public int getPlayerY() {
-		return player1.getY();
-	}
-*/
 	private void generateMaze() {
 		//Add all edges to a bag
 		ArrayList<Edge> edges = new ArrayList<Edge>();
@@ -111,20 +90,30 @@ public class GraphMaze extends Observable implements Maze {
 		return false;
 	}
 
-	private void movePlayer(int direction) {
-		player1.move(direction);
-		
-	}
-
-	
-	/*private void movePlayer(String direction) {
-		player1.move(direction);
-	}*/
-
 	@Override
 	public void updatePosition(int direction) {
-		movePlayer(direction);
-		notifyObservers(direction);
+		player1.move(direction);
+		setChanged();
+		notifyObservers(player1);
 	}
 
+	public void draw(Graphics g, int width, int height) {
+		int intervalx = width/nodes.length;
+		int intervaly = height/nodes.length;
+		for (int posy = 1; posy <= nodes.length; posy++) {
+			for (int posx = 1; posx <= nodes.length; posx++) {
+				if (nodes[posx-1][posy-1].getDown() == null) {
+					g.drawLine(posx*intervalx, posy*intervaly, (posx+1)*intervalx, posy*intervaly);
+				}
+				if (nodes[posx-1][posy-1].getRight() == null) {
+					g.drawLine(posx*intervalx, posy*intervaly, posx*intervalx, (posy+1)*intervaly);
+				}
+			}
+		}
+	}
+
+	public int getSize() {
+		return nodes.length;
+	}
+	
 }

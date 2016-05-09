@@ -1,12 +1,13 @@
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+
 public class Player {
-	int x;
-	int y;
-	Node current;
+	private int x;
+	private int y;
 	
-	public Player(int xStart, int yStart, Node startingNode) {
+	public Player(int xStart, int yStart) {
 		this.x = xStart;
 		this.y = yStart;
-		this.current = startingNode;
 	}
 	
 	public int getX() {
@@ -18,32 +19,19 @@ public class Player {
 	}
 	
 	public void move(int direction) {
-		if (direction == 0) this.x ++;
-		if (direction == 1) this.x --;
-		if (direction == 2) this.y ++;
-		if (direction == 3) this.y --;
+		switch(direction) {
+		case KeyEvent.VK_UP:
+			y++; break;
+		case KeyEvent.VK_DOWN:
+			y--; break;
+		case KeyEvent.VK_LEFT:
+			x--; break;
+		case KeyEvent.VK_RIGHT:
+			x++; break;
+		}
 	}
-	
-	public void move(String direction) {
-		direction.toLowerCase();
-		
-		if (!current.edgeExists(direction)) {
-			System.out.println("you ran into a wall");
-			return;
-		}
-		
-		if (direction.equals("right")) {
-			this.current = current.getRight();
-			this.x ++;
-		} else if (direction.equals("left")) {
-			this.current = current.getLeft();
-			this.x --;
-		} else if (direction.equals("up")) {
-			this.current = current.getUp();
-			this.y ++;
-		} else if (direction.equals("down")) {
-			this.current = current.getDown();
-			this.y --;
-		}
+
+	public void draw(Graphics g, int width, int height) {
+		g.drawOval(x, y, width, height);
 	}
 }
