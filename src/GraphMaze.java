@@ -91,10 +91,10 @@ public class GraphMaze implements Maze {
 		for (int posy = 0; posy < nodes.length; posy++) {
 			for (int posx = 0; posx < nodes.length; posx++) {
 				if (nodes[posx][posy].getDown() == null) {
-					g.drawLine(posx*intervalx, posy*intervaly, (posx+1)*intervalx, posy*intervaly);
+					g.drawLine(posx*intervalx, (posy+1)*intervaly, (posx+1)*intervalx, (posy+1)*intervaly);
 				}
 				if (nodes[posx][posy].getRight() == null) {
-					g.drawLine(posx*intervalx, posy*intervaly, posx*intervalx, (posy+1)*intervaly);
+					g.drawLine((posx+1)*intervalx, posy*intervaly, (posx+1)*intervalx, (posy+1)*intervaly);
 				}
 			}
 		}

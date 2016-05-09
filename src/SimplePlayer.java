@@ -44,4 +44,10 @@ public class SimplePlayer extends Observable implements Player {
 		g.setColor(Color.black);
 		g.drawOval(x*intervalx, y*intervaly, intervalx, intervaly);
 	}
+
+	@Override
+	public void reset() {
+		x = 0;
+		y = 0;
+	}
 }

@@ -6,12 +6,12 @@ import javax.swing.*;
 
 public class MazeScreen extends Screen {
 	private static final long serialVersionUID = -8972885841964219641L;
-
+	JPanel mazePanel;
+	
 	public MazeScreen(GUI gui) {
 		setGUI(gui);
 		setLayout(new BorderLayout());
-		JPanel mazePanel = new MazePanel();
-		mazePanel.setFocusable(true); mazePanel.requestFocusInWindow();
+		mazePanel = new MazePanel();
 		addMazeComponent((Observer)mazePanel);
 		add(mazePanel, BorderLayout.CENTER);
 		
@@ -48,11 +48,13 @@ public class MazeScreen extends Screen {
 				}
 			});
 			setBackground(Color.white);
-			setBorder(BorderFactory.createLineBorder(Color.black));
+			setBorder(BorderFactory.createLineBorder(Color.red));
+			setFocusable(true);
 		}
 		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
+			requestFocusInWindow();
 			getModel().drawMaze(g, getWidth(), getHeight());
 			getModel().drawPlayer(g, getWidth(), getHeight());
 		}

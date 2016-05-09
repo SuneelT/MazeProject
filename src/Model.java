@@ -28,4 +28,8 @@ public class Model {
 	public void drawPlayer(Graphics g, int width, int height) {
 		player.draw(g, width/maze.getSize(), height/maze.getSize());
 	}
+
+	public void resetPlayer() {
+		player.reset();		
+	}
 }
