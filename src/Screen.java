@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Observer;
 import javax.swing.*;
 
-public abstract class Screen extends JPanel implements Observer {
+public abstract class Screen extends JPanel {
 	private static final long serialVersionUID = 2480454775809714426L;
 	private Container contentPane;
 	private List<Observer> mazeComponents = new LinkedList<Observer>();

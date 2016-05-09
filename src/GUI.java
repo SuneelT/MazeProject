@@ -6,7 +6,7 @@ import java.util.Observer;
 
 public class GUI extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private final Container mainFrame = new JPanel();
+	private JPanel cards = new JPanel(new CardLayout());
 	private List<Screen> screens = new LinkedList<Screen>();	
 	private Maze maze;
 	private final int MAZE = 0;
@@ -24,15 +24,21 @@ public class GUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 		    public void run() {
 		        GUI ui = new GUI();
-		        ui.init_GUI(); ui.init_Maze();					//init till the end...I see stars reference
+		        ui.init_GUI();					//init till the end...I see stars reference
 		        ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		        ui.setVisible(true);
+		        ui.setVisible(true);ui.switchScreen("Menu");
+				ui.setSize(800, 600);
 		    }
 		});
 	}
 	
 	public void switchScreen(String switchTo) {
-	((CardLayout) mainFrame.getLayout()).show(mainFrame, switchTo);		//to understand this code go look at java.awt.CardLayout
+	((CardLayout) cards.getLayout()).show(cards, switchTo);		//to understand this code go look at java.awt.CardLayout
+	this.setTitle("Maze - "+switchTo);
+	}
+	
+	public void createMaze() {
+		init_Maze();
 	}
 
 	private void init_Maze() {
@@ -47,9 +53,9 @@ public class GUI extends JFrame {
 		screens.add(new MazeScreen(this));			//the screen constructors need (this) because without it they can't call switchScreen().
 		screens.add(new MenuScreen(this));
 		screens.add(new PauseScreen(this));
-		mainFrame.setLayout(new CardLayout());
-		mainFrame.add(screens.get(MAZE), "MAZE");	//add the various screens to the main JPanel frame, for ease of switching.
-		mainFrame.add(screens.get(MENU), "MENU");
-		mainFrame.add(screens.get(PAUSE), "PAUSE");
+		cards.add(screens.get(MAZE), "Maze");	//add the various screens to the main JPanel frame, for ease of switching.
+		cards.add(screens.get(MENU), "Menu");
+		cards.add(screens.get(PAUSE), "Pause");
+		getContentPane().add(cards);
 	}
 }

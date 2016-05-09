@@ -7,8 +7,9 @@ import java.util.Observer;
  */
 
 public class MazePanel extends JPanel implements Observer {
+	private static final long serialVersionUID = -3329021623371321857L;
 
-    @Override
+	@Override
     public void update(Observable observable, Object object) {
     }
 
