@@ -8,7 +8,7 @@ public class MazeScreen extends Screen {
 	private static final long serialVersionUID = -8972885841964219641L;
 	JPanel mazePanel;
 	
-	public MazeScreen(GUI gui) {
+	public MazeScreen(final GUI gui) {
 		setGUI(gui);
 		setLayout(new BorderLayout());
 		mazePanel = new MazePanel();
@@ -20,6 +20,10 @@ public class MazeScreen extends Screen {
 		otherControls.setBackground(Color.WHITE);
 		
 		JButton pauseButton = new JButton("Pause Game");
+		pauseButton.setBackground(Color.WHITE);
+	    pauseButton.setForeground(Color.BLACK);
+	    pauseButton.setFocusPainted(false);
+	    pauseButton.setFont(new Font("Ariel", Font.BOLD, 20));
 		pauseButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -28,10 +32,18 @@ public class MazeScreen extends Screen {
 		});
 		
 		JButton exitButton = new JButton("Exit To Menu");
+		exitButton.setBackground(Color.WHITE);
+	    exitButton.setForeground(Color.BLACK);
+	    exitButton.setFocusPainted(false);
+	    exitButton.setFont(new Font("Ariel", Font.BOLD, 20));
 		exitButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getGUI().switchScreen("Menu");
+				if(JOptionPane.showConfirmDialog(gui, "Are you sure you want to exit?", 
+				   "Exit", JOptionPane.YES_NO_OPTION, 
+				   JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+				   getGUI().switchScreen("Menu");
+				}
 			}
 		});
 		otherControls.add(pauseButton); otherControls.add(exitButton);
