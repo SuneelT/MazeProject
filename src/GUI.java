@@ -27,6 +27,7 @@ public class GUI extends JFrame {
 		cards.add(new MazeScreen(this), "Maze");	//add the various screens to the main JPanel frame, for ease of switching.
 		cards.add(new MenuScreen(this), "Menu");
 		cards.add(new PauseScreen(this), "Pause");
+		cards.add(new HelpScreen(this), "Help");
 		getContentPane().add(cards);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setVisible(true); setSize(WIDTH, HEIGHT);
