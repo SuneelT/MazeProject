@@ -37,7 +37,8 @@ public class SimplePlayer extends Observable implements Player {
 			x = (maze.isConnected(x, y, 3)) ? x+1: x; break;
 		}
 		setChanged();
-		notifyObservers();
+		if (x == maze.getSize()-1 && y == maze.getSize()-1) notifyObservers(true);
+		else notifyObservers();
 	}
 
 	public void draw(Graphics g, int intervalx, int intervaly) {

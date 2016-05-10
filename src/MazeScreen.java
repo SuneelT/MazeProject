@@ -73,7 +73,8 @@ public class MazeScreen extends Screen {
 		
 		@Override
 	    public void update(Observable observable, Object object) {
-			repaint();
+			if (object != null) getGUI().switchScreen("Menu");
+			else repaint();
 	    }
 	}
 }
