@@ -14,7 +14,7 @@ public class MenuScreen extends Screen {
 		playButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getGUI().createMaze(25);
+				getGUI().createMaze(40);
 				getModel().resetPlayer();
 				getGUI().switchScreen("Maze");
 			}

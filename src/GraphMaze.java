@@ -8,21 +8,21 @@ public class GraphMaze implements Maze {
 	
 	// creates width*height nodes with no walls between them
 	// each node has value initVal
-	public GraphMaze(int width, int height) {
+	public GraphMaze(int size) {
 		int x, y;
 		// need to initialize nodes
 		// need to call generator method to generate maze
-		this.nodes = new Node[width][];
-		for (x = 0; x < width; x++) {
-			nodes[x] = new Node[height];
+		this.nodes = new Node[size][];
+		for (x = 0; x < size; x++) {
+			nodes[x] = new Node[size];
 			
 		}
 		
 		// fill nodes with nodes with no connections and initial state 'initVal'
 		
-		for (x = 0; x < width; x++) {
-			for (y = 0; y < height; y++) {
-				nodes[x][y] = new Node(null, x, y);
+		for (x = 0; x < size; x++) {
+			for (y = 0; y < size; y++) {
+				nodes[x][y] = new Node(x, y);
 			}
 		}
 		
@@ -31,13 +31,13 @@ public class GraphMaze implements Maze {
 		// if x = width-1, no right connection
 		// if y = 0, no up connection
 		// if y = height-1, no down connection
-		for (x = 0; x < width; x++) {
-			for (y = 0; y < height; y++) {
+		for (x = 0; x < size; x++) {
+			for (y = 0; y < size; y++) {
 				Node curr = nodes[x][y];
 				if (y > 0) curr.addConnectionUp(nodes[x][y-1], true);
-				if (y < height-1) curr.addConnectionDown(nodes[x][y+1], true);
+				if (y < size-1) curr.addConnectionDown(nodes[x][y+1], true);
 				if (x > 0) curr.addConnectionLeft(nodes[x-1][y], true);
-				if (x < width-1) curr.addConnectionRight(nodes[x+1][y], true);
+				if (x < size-1) curr.addConnectionRight(nodes[x+1][y], true);
 			}
 		}
 		this.generateMaze();
@@ -105,15 +105,15 @@ public class GraphMaze implements Maze {
 	}
 
 	@Override
-	public boolean isConnected(int x, int y, String dir) {
+	public boolean isConnected(int x, int y, int dir) {
 		switch (dir) {
-		case "UP":
+		case 0:
 			return nodes[x][y].getUp() != null;
-		case "DOWN":
+		case 1:
 			return nodes[x][y].getDown() != null;
-		case "LEFT":
+		case 2:
 			return nodes[x][y].getLeft() != null;
-		case "RIGHT":
+		case 3:
 			return nodes[x][y].getRight() != null;
 		default:
 			return false;

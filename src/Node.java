@@ -1,5 +1,4 @@
 public class Node {
-	private State item;
 	private Edge up;
 	private Edge down;
 	private Edge left;
@@ -8,8 +7,7 @@ public class Node {
 	private int x;
 	private int y;
 	
-	public Node(State item, int x, int y) {
-		this.item = item;
+	public Node(int x, int y) {
 		this.up = null;
 		this.down = null;
 		this.left = null;
@@ -17,10 +15,6 @@ public class Node {
 		
 		this.x = x;
 		this.y = y;
-	}
-	
-	public State getItem() {
-		return this.item;
 	}
 	
 	public int getX() {

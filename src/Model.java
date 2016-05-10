@@ -7,7 +7,7 @@ public class Model {
 	private Player player;
 	
 	public void createMaze(int mazeSize) {
-		maze = new GraphMaze(mazeSize, mazeSize); 
+		maze = new GraphMaze(mazeSize); 
 		((SimplePlayer) player).setMaze(maze);
 	}
 	
