@@ -8,7 +8,7 @@ public class MenuScreen extends Screen {
 	public MenuScreen(GUI gui) {
 		setGUI(gui);
 		this.setLayout(new FlowLayout(FlowLayout.CENTER)); //one row, one column for now. in the future, change to 2 or 3 rows.
-		this.setBackground(Color.PINK);
+		this.setBackground(new Color(255,204,255));
 		JButton playButton = new JButton("Play");
 		playButton.setBackground(Color.WHITE);
 	    	playButton.setForeground(Color.BLACK);
