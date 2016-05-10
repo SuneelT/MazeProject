@@ -20,6 +20,10 @@ public class MazeScreen extends Screen {
 		otherControls.setBackground(Color.WHITE);
 		
 		JButton pauseButton = new JButton("Pause Game");
+		pauseButton.setBackground(Color.WHITE);
+	    	pauseButton.setForeground(Color.BLACK);
+	    	pauseButton.setFocusPainted(false);
+	    	pauseButton.setFont(new Font("Ariel", Font.BOLD, 20));
 		pauseButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -28,6 +32,10 @@ public class MazeScreen extends Screen {
 		});
 		
 		JButton exitButton = new JButton("Exit To Menu");
+		exitButton.setBackground(Color.WHITE);
+		exitButton.setForeground(Color.BLACK);
+	    	exitButton.setFocusPainted(false);
+		exitButton.setFont(new Font("Ariel", Font.BOLD, 20));
 		exitButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
