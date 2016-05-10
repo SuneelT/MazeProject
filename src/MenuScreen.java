@@ -23,6 +23,18 @@ public class MenuScreen extends Screen {
 				getGUI().switchScreen("Maze");
 			}
 		});
+		JButton helpButton = new JButton("Help");
+		helpButton.setBackground(Color.WHITE);
+		helpButton.setForeground(Color.BLACK);
+		helpButton.setFocusPainted(false);
+		helpButton.setFont(new Font("Ariel", Font.BOLD, 50));
+		this.add(helpButton);
+		helpButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				getGUI().switchScreen("Help");
+			}
+		});
 	}
 
 }
