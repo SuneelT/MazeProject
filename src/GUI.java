@@ -28,6 +28,7 @@ public class GUI extends JFrame {
 		cards.add(new MenuScreen(this), "Menu");
 		cards.add(new PauseScreen(this), "Pause");
 		cards.add(new HelpScreen(this), "Help");
+		cards.add(new SettingsScreen(this), "Settings");
 		getContentPane().add(cards);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setVisible(true); setSize(WIDTH, HEIGHT);
