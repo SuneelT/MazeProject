@@ -59,19 +59,6 @@ public class SettingsScreen extends Screen{
 		
 		// change theme - colours etc
 	    
-		
-	    // Save and continue previous
-	    JButton continueButton = new JButton("Save and Continue");
-		continueButton.setBackground(Color.WHITE);
-	    continueButton.setForeground(Color.BLACK);
-	    continueButton.setFocusPainted(false);
-	    continueButton.setFont(new Font("Ariel", Font.BOLD, 50));
-	    continueButton.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			getGUI().switchScreen("Maze");
-			}
-		});
 	    
 	    // Save and new game
 	    JButton saveButton = new JButton("New Game");
