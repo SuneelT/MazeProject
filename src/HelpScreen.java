@@ -4,7 +4,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class HelpScreen extends Screen {
-    JButton menuButton;
+	private static final long serialVersionUID = -264471428282433023L;
+	JButton menuButton;
     JLabel text;
 
     public HelpScreen(GUI gui) {
@@ -53,7 +54,8 @@ public class HelpScreen extends Screen {
     	
     	this.add(buttonPanel, c);
 
-        text = new JLabel("<html>Use the arrow keys on your keyboard to guide your character to the exit.</html>", JLabel.CENTER);
+        text = new JLabel("<html>Use the arrow keys on your keyboard to guide your character to the exit. The exit is the"
+        		+ "bottom right-hand corner of the maze.</html>", JLabel.CENTER);
         text.setFont(new Font("Ariel",Font.PLAIN, 30));
         c.gridy = 1;
         c.ipadx = 500;
