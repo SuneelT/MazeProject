@@ -15,7 +15,7 @@ public class MazeScreen extends Screen {
 		addMazeComponent((Observer)mazePanel);
 		add(mazePanel, BorderLayout.CENTER);
 		
-		JPanel otherControls = new JPanel(new GridLayout(2, 1, 100, 100));
+		JPanel otherControls = new JPanel(new GridLayout(3, 1, 100, 100));
 		add(otherControls, BorderLayout.EAST);
 		otherControls.setBackground(Color.WHITE);
 		
@@ -46,7 +46,21 @@ public class MazeScreen extends Screen {
 				}
 			}
 		});
-		otherControls.add(pauseButton); otherControls.add(exitButton);
+		
+		JButton settingsButton = new JButton("Settings");
+		settingsButton.setBackground(Color.WHITE);
+	    settingsButton.setForeground(Color.BLACK);
+	    settingsButton.setFocusPainted(false);
+	    settingsButton.setFont(new Font("Ariel", Font.BOLD, 20));
+		settingsButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				   getGUI().switchScreen("Settings");
+			}
+		});
+		otherControls.add(pauseButton); 
+		otherControls.add(settingsButton);
+		otherControls.add(exitButton); 
 	}
 	
 	private class MazePanel extends JPanel implements Observer {
