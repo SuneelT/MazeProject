@@ -79,7 +79,6 @@ public class SettingsScreen extends Screen{
 		difficulty.add(medium);
 		difficulty.add(hard);
 		returnToMaze.add(saveButton);
-		returnToMaze.add(continueButton);
 		
 		this.add(difficulty);
 		this.add(returnToMaze);
