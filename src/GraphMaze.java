@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class GraphMaze implements Maze {
 	private Node[][] nodes;	
+	private Node currentNode;
 	
 	// creates width*height nodes with no walls between them
 	// each node has value initVal
