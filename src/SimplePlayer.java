@@ -51,4 +51,10 @@ public class SimplePlayer extends Observable implements Player {
 		x = 0;
 		y = 0;
 	}
+	
+	@Override
+	public int[] getCoords() {
+		int[] coords = {x,y};
+		return coords;
+	}
 }
