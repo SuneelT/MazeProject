@@ -119,4 +119,26 @@ public class GraphMaze implements Maze {
 			return false;
 		}
 	}
+	
+	@Override
+	public void resetNode () {
+		currentNode = nodes[0][0];
+	}
+	
+	@Override
+	public boolean hasNext () {
+		if ((currentNode.getX()+1) == nodes.length && (currentNode.getY()+1) == nodes[0].length) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public void setNext() {
+		if ((currentNode.getX()+1) == nodes.length) {
+			currentNode = nodes[0][(currentNode.getY())+1];
+		} else {
+			currentNode = nodes[(currentNode.getX())+1][currentNode.getY()];
+		}
+	}
 }
