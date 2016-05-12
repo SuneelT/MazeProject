@@ -19,17 +19,17 @@ public class Collectable {
 	public void setImage(int mode, int index) {
 		if (mode == 1) {
 			switch (index) {
-			case 0: icon = new ImageIcon("images/F.JPG"); break;
-			case 1: icon = new ImageIcon("images/U.JPG"); break;
-			case 2: icon = new ImageIcon("images/N.JPG"); break;
+			case 0: icon = new ImageIcon("F.JPG"); break;
+			case 1: icon = new ImageIcon("U.JPG"); break;
+			case 2: icon = new ImageIcon("N.JPG"); break;
 			}
 		} else if (mode == 2) {
 			switch (index) {
-			case 0: icon = new ImageIcon("images/L.JPG"); break;
-			case 1: icon = new ImageIcon("images/E.JPG"); break;
-			case 2: icon = new ImageIcon("images/A.JPG"); break;
-			case 3: icon = new ImageIcon("images/R.JPG"); break;
-			case 4: icon = new ImageIcon("images/N.JPG"); break;
+			case 0: icon = new ImageIcon("L.JPG"); break;
+			case 1: icon = new ImageIcon("E.JPG"); break;
+			case 2: icon = new ImageIcon("A.JPG"); break;
+			case 3: icon = new ImageIcon("R.JPG"); break;
+			case 4: icon = new ImageIcon("N.JPG"); break;
 			}
 		}
 	}
