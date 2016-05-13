@@ -1,7 +1,4 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,18 +11,26 @@ public class SettingsScreen extends Screen{
 
 	public SettingsScreen(final GUI gui) {
 		setGUI(gui);
-		setLayout(new FlowLayout(FlowLayout.CENTER));
-		this.setBackground(Color.WHITE);
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		this.setBackground(new Color(255,204,255));
 		JPanel difficulty = new JPanel();
-		JPanel theme = new JPanel();
+        difficulty.setBackground(new Color(255,204,255));
 		JPanel returnToMaze = new JPanel();
-		
-		// change difficulty
-		JCheckBox easy = new JCheckBox("Easy");
+        returnToMaze.setBackground(new Color(255,204,255));
+
+        difficulty.setLayout(new GridBagLayout());
+		JButton easy = new JButton("Easy");
 		easy.setBackground(Color.GREEN);
 	    easy.setForeground(Color.WHITE);
 	    easy.setFocusPainted(false);
-	    easy.setFont(new Font("Ariel", Font.BOLD, 25));
+	    easy.setFont(new Font("Ariel", Font.BOLD, 50));
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 0.5;
+        c.weighty = 0.5;
+        c.insets = new Insets(20, 20, 20, 20);
+        difficulty.add(easy, c);
 	    easy.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -33,54 +38,54 @@ public class SettingsScreen extends Screen{
 			}
 		});
 	    
-	    JCheckBox medium = new JCheckBox("Medium");
+	    JButton medium = new JButton("Medium");
 		medium.setBackground(Color.ORANGE);
 	    medium.setForeground(Color.WHITE);
 	    medium.setFocusPainted(false);
-	    medium.setFont(new Font("Ariel", Font.BOLD, 25));
+	    medium.setFont(new Font("Ariel", Font.BOLD, 50));
+        c.gridy = 1;
+        difficulty.add(medium, c);
 	    medium.addMouseListener(new MouseAdapter() {
 		@Override
-		public void mouseClicked(MouseEvent e) {
-			getGUI().switchScreen("Maze");
-			}
+            public void mouseClicked(MouseEvent e) {
+                getGUI().switchScreen("Maze");
+                }
 		});
 	    
-	    JCheckBox hard = new JCheckBox("HARD");
+	    JButton hard = new JButton("Hard");
 		hard.setBackground(Color.RED);
 	    hard.setForeground(Color.WHITE);
 	    hard.setFocusPainted(false);
-	    hard.setFont(new Font("Ariel", Font.BOLD, 25));
+	    hard.setFont(new Font("Ariel", Font.BOLD, 50));
+        c.gridy = 2;
+        difficulty.add(hard, c);
 	    hard.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			getGUI().switchScreen("Maze");
-			}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                getGUI().switchScreen("Maze");
+                }
 		});
-		
-		// change theme - colours etc
-	    
-	    
-	    // Save and new game
+
 	    JButton saveButton = new JButton("New Game");
 		saveButton.setBackground(Color.WHITE);
 	    saveButton.setForeground(Color.BLACK);
 	    saveButton.setFocusPainted(false);
 	    saveButton.setFont(new Font("Ariel", Font.BOLD, 50));
 	    saveButton.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			getGUI().createMaze(25);
-			getModel().resetPlayer();
-			getGUI().switchScreen("Maze");
-			}
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                getGUI().createMaze(25);
+                getModel().resetPlayer();
+                getGUI().switchScreen("Maze");
+                }
 		});
 
-		difficulty.add(easy);
-		difficulty.add(medium);
-		difficulty.add(hard);
 		returnToMaze.add(saveButton);
-		
-		this.add(difficulty);
-		this.add(returnToMaze);
+
+        c.gridx = 0;
+        c.gridy = 0;
+		this.add(difficulty, c);
+        c.gridx = 1;
+		this.add(returnToMaze, c);
 	}
 }
