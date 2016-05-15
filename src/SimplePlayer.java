@@ -21,8 +21,20 @@ public class SimplePlayer extends Observable implements Player {
 		return this.y;
 	}
 	
+	public void setX(int position) {
+		x = position;
+	}
+	
+	public void setY(int position) {
+		y = position;
+	}
+	
 	public void setMaze(Maze m) {
 		this.maze = m;
+	}
+	
+	public Maze getMaze() {
+		return maze;
 	}
 	
 	public void move(int direction) {
