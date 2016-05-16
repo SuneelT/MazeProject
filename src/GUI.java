@@ -5,6 +5,7 @@ public class GUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel cards = new JPanel(new CardLayout());
 	private Model model;
+	private String lastScreen;
 	private final int WIDTH = 800;
 	private final int HEIGHT = 600;
 
@@ -24,11 +25,12 @@ public class GUI extends JFrame {
 	}
 	
 	public GUI() {
-		cards.add(new MazeScreen(this), "Maze");	//add the various screens to the main JPanel frame, for ease of switching.
-		cards.add(new MenuScreen(this), "Menu");
-		cards.add(new PauseScreen(this), "Pause");
-		cards.add(new HelpScreen(this), "Help");
-		cards.add(new SettingsScreen(this), "Settings");
+		/*Add all the different screens to the card layot for ease of switching*/
+		cards.add(new MazeScreen(this), "Maze"); cards.getComponent(0).setName("Maze");
+		cards.add(new MenuScreen(this), "Menu"); cards.getComponent(1).setName("Menu");
+		cards.add(new PauseScreen(this), "Pause"); cards.getComponent(2).setName("Pause");
+		cards.add(new HelpScreen(this), "Help"); cards.getComponent(3).setName("Help");
+		cards.add(new SettingsScreen(this), "Settings"); cards.getComponent(4).setName("Settings");
 		getContentPane().add(cards);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setVisible(true); setSize(WIDTH, HEIGHT);
@@ -38,15 +40,18 @@ public class GUI extends JFrame {
 	}
 	
 	public void switchScreen(String switchTo) {
-	((CardLayout) cards.getLayout()).show(cards, switchTo);		//to understand this code go look at java.awt.CardLayout
-	this.setTitle("Maze - "+switchTo);
-	}
-	
-	public void createMaze(int size) {
-		model.createMaze(size);
+		for (Component c: cards.getComponents()) {
+			if (c.isVisible()) lastScreen = c.getName();
+		}
+		((CardLayout) cards.getLayout()).show(cards, switchTo);		//to understand this code go look at java.awt.CardLayout
+		this.setTitle("Maze - "+switchTo);
 	}
 	
 	public Model getModel() {
 		return model;
+	}
+
+	public void switchToLastScreen() {
+		switchScreen(lastScreen);
 	}
 }

@@ -5,9 +5,10 @@ import java.util.Observer;
 public class Model {
 	private Maze maze;
 	private Player player;
+	private int difficulty = 15;
 	
-	public void createMaze(int mazeSize) {
-		maze = new GraphMaze(mazeSize); 
+	public void createMaze() {
+		maze = new GraphMaze(difficulty); 
 		((SimplePlayer) player).setMaze(maze);
 	}
 	
@@ -31,5 +32,13 @@ public class Model {
 
 	public void resetPlayer() {
 		player.reset();		
+	}
+
+	public int getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(int difficulty) {
+		this.difficulty = difficulty;
 	}
 }

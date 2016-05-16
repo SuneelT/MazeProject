@@ -3,11 +3,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 public class SettingsScreen extends Screen{
 	private static final long serialVersionUID = -4212692790730740664L;
+	private final int EASY = 15;
+	private final int MEDIUM = 25;
+	private final int HARD = 35;
 
 	public SettingsScreen(final GUI gui) {
 		setGUI(gui);
@@ -34,7 +36,8 @@ public class SettingsScreen extends Screen{
 	    easy.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			getGUI().switchScreen("Maze");
+			getModel().setDifficulty(EASY);
+			getGUI().switchToLastScreen();
 			}
 		});
 	    
@@ -48,7 +51,8 @@ public class SettingsScreen extends Screen{
 	    medium.addMouseListener(new MouseAdapter() {
 		@Override
             public void mouseClicked(MouseEvent e) {
-                getGUI().switchScreen("Maze");
+                getModel().setDifficulty(MEDIUM);
+                getGUI().switchToLastScreen();
                 }
 		});
 	    
@@ -62,11 +66,12 @@ public class SettingsScreen extends Screen{
 	    hard.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                getGUI().switchScreen("Maze");
+            	getModel().setDifficulty(HARD);
+                getGUI().switchToLastScreen();
                 }
 		});
 
-	    JButton saveButton = new JButton("New Game");
+	    JButton saveButton = new JButton("Return");
 		saveButton.setBackground(Color.WHITE);
 	    saveButton.setForeground(Color.BLACK);
 	    saveButton.setFocusPainted(false);
@@ -74,9 +79,7 @@ public class SettingsScreen extends Screen{
 	    saveButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                getGUI().createMaze(25);
-                getModel().resetPlayer();
-                getGUI().switchScreen("Maze");
+                getGUI().switchToLastScreen();
                 }
 		});
 

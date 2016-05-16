@@ -46,7 +46,7 @@ public class HelpScreen extends Screen {
     	playButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getGUI().createMaze(25);
+				getModel().createMaze();
 				getModel().resetPlayer();
 				getGUI().switchScreen("Maze");
 			}

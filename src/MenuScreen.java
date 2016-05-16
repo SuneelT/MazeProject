@@ -4,8 +4,9 @@ import javax.swing.*;
 
 public class MenuScreen extends Screen {
 	private static final long serialVersionUID = -1725872337351590898L;
-	JButton playButton;
-	JButton helpButton;
+	private JButton playButton;
+	private JButton helpButton;
+	JButton settingsBtn;
 
 	public MenuScreen(GUI gui) {
 		setGUI(gui);
@@ -26,7 +27,7 @@ public class MenuScreen extends Screen {
 		playButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getGUI().createMaze(40);
+				getModel().createMaze();
 				getModel().resetPlayer();
 				getGUI().switchScreen("Maze");
 			}
@@ -47,6 +48,15 @@ public class MenuScreen extends Screen {
 			}
 		});
 		this.add(helpButton, c);
+		
+		settingsBtn = new JButton("Settings");
+		settingsBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked (MouseEvent e) {
+				getGUI().switchScreen("Settings");
+			}
+		});
+		this.add(settingsBtn);
 	}
 
 }
