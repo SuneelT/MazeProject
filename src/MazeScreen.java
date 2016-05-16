@@ -42,7 +42,8 @@ public class MazeScreen extends Screen {
 				if(JOptionPane.showConfirmDialog(gui, "Are you sure you want to exit?", 
 				   "Exit", JOptionPane.YES_NO_OPTION, 
 				   JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-				   getGUI().switchScreen("Menu");
+					getModel().resetMaze();
+					getGUI().switchScreen("Menu");
 				}
 			}
 		});

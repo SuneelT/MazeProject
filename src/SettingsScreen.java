@@ -37,8 +37,7 @@ public class SettingsScreen extends Screen{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			getModel().setDifficulty(EASY);
-			getGUI().switchToLastScreen();
-			}
+		}
 		});
 	    
 	    JButton medium = new JButton("Medium");
@@ -52,8 +51,7 @@ public class SettingsScreen extends Screen{
 		@Override
             public void mouseClicked(MouseEvent e) {
                 getModel().setDifficulty(MEDIUM);
-                getGUI().switchToLastScreen();
-                }
+            }
 		});
 	    
 	    JButton hard = new JButton("Hard");
@@ -67,7 +65,6 @@ public class SettingsScreen extends Screen{
             @Override
             public void mouseClicked(MouseEvent e) {
             	getModel().setDifficulty(HARD);
-                getGUI().switchToLastScreen();
                 }
 		});
 
@@ -82,13 +79,23 @@ public class SettingsScreen extends Screen{
                 getGUI().switchToLastScreen();
                 }
 		});
-
 		returnToMaze.add(saveButton);
 
+		JButton newGame = new JButton("New Game");
+		newGame.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				getModel().createMaze();
+				getModel().resetPlayer();
+				getGUI().switchScreen("Maze");
+			}
+		});
+		
         c.gridx = 0;
         c.gridy = 0;
 		this.add(difficulty, c);
         c.gridx = 1;
 		this.add(returnToMaze, c);
+		this.add(newGame);
 	}
 }
