@@ -2,8 +2,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public class SettingsScreen extends Screen{
 	private static final long serialVersionUID = -4212692790730740664L;
@@ -22,16 +26,18 @@ public class SettingsScreen extends Screen{
         returnToMaze.setBackground(new Color(255,204,255));
 
         difficulty.setLayout(new GridBagLayout());
-		JButton easy = new JButton("Easy");
-		easy.setBackground(Color.GREEN);
-	    easy.setForeground(Color.WHITE);
-	    easy.setFocusPainted(false);
-	    easy.setFont(new Font("Ariel", Font.BOLD, 50));
-        c.gridx = 0;
+		        c.gridx = 0;
         c.gridy = 0;
         c.weightx = 0.5;
         c.weighty = 0.5;
         c.insets = new Insets(20, 20, 20, 20);
+        
+        JRadioButton easy = new JRadioButton("Easy", true);
+		easy.setBackground(Color.GREEN);
+	    easy.setForeground(Color.WHITE);
+	    easy.setFocusPainted(false);
+	    easy.setFont(new Font("Ariel", Font.BOLD, 50));
+
         difficulty.add(easy, c);
 	    easy.addMouseListener(new MouseAdapter() {
 		@Override
@@ -40,7 +46,7 @@ public class SettingsScreen extends Screen{
 		}
 		});
 	    
-	    JButton medium = new JButton("Medium");
+	    JRadioButton medium = new JRadioButton("Medium");
 		medium.setBackground(Color.ORANGE);
 	    medium.setForeground(Color.WHITE);
 	    medium.setFocusPainted(false);
@@ -54,7 +60,7 @@ public class SettingsScreen extends Screen{
             }
 		});
 	    
-	    JButton hard = new JButton("Hard");
+	    JRadioButton hard = new JRadioButton("Hard");
 		hard.setBackground(Color.RED);
 	    hard.setForeground(Color.WHITE);
 	    hard.setFocusPainted(false);
@@ -67,21 +73,33 @@ public class SettingsScreen extends Screen{
             	getModel().setDifficulty(HARD);
                 }
 		});
+	    ButtonGroup difficultyButtons = new ButtonGroup();
+	    difficultyButtons.add(easy);
+	    difficultyButtons.add(medium);
+	    difficultyButtons.add(hard);
 
-	    JButton saveButton = new JButton("Return");
-		saveButton.setBackground(Color.WHITE);
-	    saveButton.setForeground(Color.BLACK);
-	    saveButton.setFocusPainted(false);
-	    saveButton.setFont(new Font("Ariel", Font.BOLD, 50));
-	    saveButton.addMouseListener(new MouseAdapter() {
+	    JButton returnButton = new JButton("Return");
+		returnButton.setBackground(Color.WHITE);
+	    returnButton.setForeground(Color.BLACK);
+	    returnButton.setFocusPainted(false);
+	    returnButton.setFont(new Font("Ariel", Font.BOLD, 25));
+	    returnButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                getGUI().switchToLastScreen();
-                }
+            public void mouseClicked(MouseEvent e) {   
+	            if(JOptionPane.showConfirmDialog(gui, "Are you sure you want to discard Settings?", 
+	 				   "Exit", JOptionPane.YES_NO_OPTION, 
+	 				   JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+	 					getGUI().switchToLastScreen();
+	 				}
+            }
 		});
-		returnToMaze.add(saveButton);
+		returnToMaze.add(returnButton);
 
 		JButton newGame = new JButton("New Game");
+		newGame.setBackground(Color.WHITE);
+		newGame.setForeground(Color.BLACK);
+	    newGame.setFocusPainted(false);
+	    newGame.setFont(new Font("Ariel", Font.BOLD, 25));
 		newGame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
