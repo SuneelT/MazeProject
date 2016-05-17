@@ -1,4 +1,4 @@
-public class Node {
+public class State implements BaseState {
 	private Edge up;
 	private Edge down;
 	private Edge left;
@@ -7,24 +7,39 @@ public class Node {
 	private int x;
 	private int y;
 	
-	public Node(int x, int y) {
+	private boolean player;
+	
+	public State(int x, int y) {
 		this.up = null;
 		this.down = null;
 		this.left = null;
 		this.right = null;
-		
+		this.player = false;
 		this.x = x;
 		this.y = y;
 	}
 	
+	@Override
 	public int getX() {
 		return this.x;
 	}
 	
+	@Override
 	public int getY() {
 		return this.y;
 	}
 	
+	@Override
+	public boolean getPlayer() {
+		return this.player;
+	}
+	
+	@Override
+	public void movePlayer() {
+		this.player = true;
+	}
+	
+	@Override
 	public boolean edgeExists(String edge) {
 		edge.toLowerCase();
 		if (edge.equals("up") && this.up == null) return false;
@@ -39,27 +54,35 @@ public class Node {
 		return false;
 	}
 	
-	public Node getUp() {
+	@Override
+	public State getUp() {
 		if (up == null) return null;
 		if (up.getWall() == false) return up.getTo();
 		return null;
 	}
-	public Node getDown() {
+	
+	@Override
+	public State getDown() {
 		if (down == null) return null;
 		if (down.getWall() == false) return down.getTo();
 		return null;
 	}
-	public Node getLeft() {
+	
+	@Override
+	public State getLeft() {
 		if (left == null) return null;
 		if (left.getWall() == false) return left.getTo();
 		return null;
 	}
-	public Node getRight() {
+	
+	@Override
+	public State getRight() {
 		if (right == null) return null;
 		if (right.getWall() == false) return right.getTo();
 		return null;
 	}
 	
+	@Override
 	public Edge getEdge(String edge) {
 		edge.toLowerCase();
 		if (edge.equals("up")) {return up;}
@@ -69,16 +92,23 @@ public class Node {
 		return null;
 	}
 	
-	public void addConnectionUp(Node node, boolean wall) {
+	@Override
+	public void addConnectionUp(State node, boolean wall) {
 		this.up = new Edge(this, node, wall);
 	}
-	public void addConnectionDown(Node node, boolean wall) {
+	
+	@Override
+	public void addConnectionDown(State node, boolean wall) {
 		this.down = new Edge(this, node, wall);
 	}
-	public void addConnectionLeft(Node node, boolean wall) {
+	
+	@Override
+	public void addConnectionLeft(State node, boolean wall) {
 		this.left = new Edge(this, node, wall);
 	}
-	public void addConnectionRight(Node node, boolean wall) {
+	
+	@Override
+	public void addConnectionRight(State node, boolean wall) {
 		this.right = new Edge(this, node, wall);
 	}
 }

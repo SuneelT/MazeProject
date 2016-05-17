@@ -12,24 +12,12 @@ public class MazeScreen extends Screen {
 		setGUI(gui);
 		setLayout(new BorderLayout());
 		mazePanel = new MazePanel();
-		addMazeComponent((Observer)mazePanel);
+		getGUI().setPlayerObserver((Observer)mazePanel);
 		add(mazePanel, BorderLayout.CENTER);
 		
 		JPanel otherControls = new JPanel(new GridLayout(3, 1, 100, 100));
 		add(otherControls, BorderLayout.EAST);
 		otherControls.setBackground(Color.WHITE);
-		
-		JButton pauseButton = new JButton("Pause Game");
-		pauseButton.setBackground(Color.WHITE);
-	    pauseButton.setForeground(Color.BLACK);
-	    pauseButton.setFocusPainted(false);
-	    pauseButton.setFont(new Font("Ariel", Font.BOLD, 20));
-		pauseButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				getGUI().switchScreen("Pause");
-			}
-		});
 		
 		JButton exitButton = new JButton("Exit To Menu");
 		exitButton.setBackground(Color.WHITE);
@@ -42,25 +30,11 @@ public class MazeScreen extends Screen {
 				if(JOptionPane.showConfirmDialog(gui, "Are you sure you want to exit?", 
 				   "Exit", JOptionPane.YES_NO_OPTION, 
 				   JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-					getModel().resetMaze();
 					getGUI().switchScreen("Menu");
 				}
 			}
 		});
 		
-		JButton settingsButton = new JButton("Settings");
-		settingsButton.setBackground(Color.WHITE);
-	    settingsButton.setForeground(Color.BLACK);
-	    settingsButton.setFocusPainted(false);
-	    settingsButton.setFont(new Font("Ariel", Font.BOLD, 20));
-		settingsButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				   getGUI().switchScreen("Settings");
-			}
-		});
-		otherControls.add(pauseButton); 
-		otherControls.add(settingsButton);
 		otherControls.add(exitButton); 
 	}
 	
@@ -79,6 +53,7 @@ public class MazeScreen extends Screen {
 			setFocusable(true);
 		}
 		
+		@Override
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			requestFocusInWindow();
@@ -88,7 +63,7 @@ public class MazeScreen extends Screen {
 		
 		@Override
 	    public void update(Observable observable, Object object) {
-			if (object != null) getGUI().switchScreen("Menu");
+			if ((object instanceof Boolean) && object.equals(true)) getGUI().switchScreen("Menu");
 			else repaint();
 	    }
 	}

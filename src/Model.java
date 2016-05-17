@@ -1,5 +1,4 @@
 import java.awt.Graphics;
-import java.util.List;
 import java.util.Observer;
 
 public class Model {
@@ -7,19 +6,17 @@ public class Model {
 	private Player player;
 	private int difficulty = 15;
 	
-	public void createMaze() {
-		maze = new GraphMaze(difficulty); 
-		((SimplePlayer) player).setMaze(maze);
+	public Model() {
+		player = new SimplePlayer();
 	}
 	
-	public void createPlayer(List<Observer> observers) {
-		player = new SimplePlayer();
-		for (Observer j: observers)
-			((SimplePlayer) player).addObserver(j);
+	public void createMaze() {
+		player.reset();
+		maze = new Maze(difficulty); 
 	}
 
 	public void updatePlayer(int dir) {
-		player.move(dir);
+		player.move(dir, maze);
 	}
 
 	public void drawMaze(Graphics g, int width, int height) {
@@ -30,10 +27,6 @@ public class Model {
 		player.draw(g, width/maze.getSize(), height/maze.getSize());
 	}
 
-	public void resetPlayer() {
-		player.reset();		
-	}
-
 	public int getDifficulty() {
 		return difficulty;
 	}
@@ -42,7 +35,7 @@ public class Model {
 		this.difficulty = difficulty;
 	}
 
-	public void resetMaze() {
-		difficulty = 15;
+	public void setPlayerObserver(Observer o) {
+		player.addObserver(o);
 	}
 }

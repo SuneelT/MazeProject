@@ -6,7 +6,6 @@ import java.util.Observable;
 public class SimplePlayer extends Observable implements Player {
 	private int x;
 	private int y;
-	private Maze maze;
 	
 	public SimplePlayer() {
 		this.x = 0;
@@ -29,15 +28,7 @@ public class SimplePlayer extends Observable implements Player {
 		y = position;
 	}
 	
-	public void setMaze(Maze m) {
-		this.maze = m;
-	}
-	
-	public Maze getMaze() {
-		return maze;
-	}
-	
-	public void move(int direction) {
+	public void move(int direction, Maze maze) {
 		switch(direction) {
 		case KeyEvent.VK_UP:
 			y = (maze.isConnected(x, y, 0)) ? y-1 : y; break;
@@ -50,7 +41,7 @@ public class SimplePlayer extends Observable implements Player {
 		}
 		setChanged();
 		if (x == maze.getSize()-1 && y == maze.getSize()-1) notifyObservers(true);
-		else notifyObservers();
+		else notifyObservers(getCoords());
 	}
 
 	public void draw(Graphics g, int intervalx, int intervaly) {

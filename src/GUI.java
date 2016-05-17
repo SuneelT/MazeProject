@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.util.Observer;
+
 import javax.swing.*;
 
 public class GUI extends JFrame {
@@ -25,18 +27,15 @@ public class GUI extends JFrame {
 	}
 	
 	public GUI() {
+	    model = new Model();
 		/*Add all the different screens to the card layot for ease of switching*/
 		cards.add(new MazeScreen(this), "Maze"); cards.getComponent(0).setName("Maze");
 		cards.add(new MenuScreen(this), "Menu"); cards.getComponent(1).setName("Menu");
-		cards.add(new PauseScreen(this), "Pause"); cards.getComponent(2).setName("Pause");
-		cards.add(new HelpScreen(this), "Help"); cards.getComponent(3).setName("Help");
-		cards.add(new SettingsScreen(this), "Settings"); cards.getComponent(4).setName("Settings");
+		cards.add(new HelpScreen(this), "Help"); cards.getComponent(2).setName("Help");
 		getContentPane().add(cards);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setVisible(true); setSize(WIDTH, HEIGHT);
         switchScreen("Menu");
-        model = new Model();
-		model.createPlayer(((Screen) cards.getComponent(0)).getMazeComponents());
 	}
 	
 	public void switchScreen(String switchTo) {
@@ -53,5 +52,9 @@ public class GUI extends JFrame {
 
 	public void switchToLastScreen() {
 		switchScreen(lastScreen);
+	}
+
+	public void setPlayerObserver(Observer o) {
+		model.setPlayerObserver(o);
 	}
 }

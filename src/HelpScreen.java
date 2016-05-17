@@ -17,7 +17,7 @@ public class HelpScreen extends Screen {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(255,204,255));
         
-        menuButton = new JButton("Menu");
+        menuButton = new JButton("Return");
         menuButton.setBackground(Color.WHITE);
         menuButton.setForeground(Color.BLACK);
         menuButton.setFocusPainted(false);
@@ -33,24 +33,9 @@ public class HelpScreen extends Screen {
         menuButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                getGUI().switchScreen("Menu");
+                getGUI().switchToLastScreen();
             }
         });
-        
-        JButton playButton = new JButton("Play Now");
-		playButton.setBackground(Color.WHITE);
-    	playButton.setForeground(Color.BLACK);
-    	playButton.setFocusPainted(false);
-    	playButton.setFont(new Font("Ariel", Font.BOLD, 50));
-    	buttonPanel.add(playButton);
-    	playButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				getModel().createMaze();
-				getModel().resetPlayer();
-				getGUI().switchScreen("Maze");
-			}
-    	});
     	
     	this.add(buttonPanel, c);
 
@@ -63,8 +48,5 @@ public class HelpScreen extends Screen {
         c.insets = new Insets(20, 20, 250, 20);
         c.anchor = GridBagConstraints.CENTER;
         this.add(text, c);
-        
-        
     }
-
 }

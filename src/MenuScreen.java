@@ -7,6 +7,9 @@ public class MenuScreen extends Screen {
 	private JButton playButton;
 	private JButton helpButton;
 	JButton settingsBtn;
+	private final int EASY = 15;
+	private final int MEDIUM = 25;
+	private final int HARD = 35;
 
 	public MenuScreen(GUI gui) {
 		setGUI(gui);
@@ -28,7 +31,6 @@ public class MenuScreen extends Screen {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				getModel().createMaze();
-				getModel().resetPlayer();
 				getGUI().switchScreen("Maze");
 			}
 		});
@@ -49,14 +51,61 @@ public class MenuScreen extends Screen {
 		});
 		this.add(helpButton, c);
 		
-		settingsBtn = new JButton("Settings");
-		settingsBtn.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked (MouseEvent e) {
-				getGUI().switchScreen("Settings");
-			}
-		});
-		this.add(settingsBtn);
-	}
+		JPanel difficulty = new JPanel();
+        difficulty.setBackground(new Color(255,204,255));
+        difficulty.setLayout(new GridBagLayout());
+		        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 0.5;
+        c.weighty = 0.5;
+        c.insets = new Insets(20, 20, 20, 20);
+        
+        JRadioButton easy = new JRadioButton("Easy", true);
+		easy.setBackground(Color.GREEN);
+	    easy.setForeground(Color.WHITE);
+	    easy.setFocusPainted(false);
+	    easy.setFont(new Font("Ariel", Font.BOLD, 50));
 
+        difficulty.add(easy, c);
+	    easy.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			getModel().setDifficulty(EASY);
+		}
+		});
+	    
+	    JRadioButton medium = new JRadioButton("Medium");
+		medium.setBackground(Color.ORANGE);
+	    medium.setForeground(Color.WHITE);
+	    medium.setFocusPainted(false);
+	    medium.setFont(new Font("Ariel", Font.BOLD, 50));
+        c.gridy = 1;
+        difficulty.add(medium, c);
+	    medium.addMouseListener(new MouseAdapter() {
+		@Override
+            public void mouseClicked(MouseEvent e) {
+                getModel().setDifficulty(MEDIUM);
+            }
+		});
+	    
+	    JRadioButton hard = new JRadioButton("Hard");
+		hard.setBackground(Color.RED);
+	    hard.setForeground(Color.WHITE);
+	    hard.setFocusPainted(false);
+	    hard.setFont(new Font("Ariel", Font.BOLD, 50));
+        c.gridy = 2;
+        difficulty.add(hard, c);
+	    hard.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	getModel().setDifficulty(HARD);
+                }
+		});
+	    ButtonGroup difficultyButtons = new ButtonGroup();
+	    difficultyButtons.add(easy);
+	    difficultyButtons.add(medium);
+	    difficultyButtons.add(hard);
+	    
+	    this.add(difficulty);
+	}
 }
