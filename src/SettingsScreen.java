@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -86,7 +85,7 @@ public class SettingsScreen extends Screen{
 	    returnButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {   
-	            if(JOptionPane.showConfirmDialog(gui, "Are you sure you want to discard Settings?", 
+	            if(JOptionPane.showConfirmDialog(gui, "Are you sure you want to discard settings?", 
 	 				   "Exit", JOptionPane.YES_NO_OPTION, 
 	 				   JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
 	 					getGUI().switchToLastScreen();
