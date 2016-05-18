@@ -38,4 +38,12 @@ public class Model {
 	public void setPlayerObserver(Observer o) {
 		player.addObserver(o);
 	}
+
+	public int[] getPlayerPos() {
+		return player.getCoords();
+	}
+
+	public Maze getMaze() {
+		return maze;
+	}
 }

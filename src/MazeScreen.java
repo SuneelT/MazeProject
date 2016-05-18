@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.util.Observable;
 import java.util.Observer;
 
 import javax.sound.sampled.AudioInputStream;
@@ -18,7 +17,7 @@ public class MazeScreen extends Screen {
 	public MazeScreen(final GUI gui) {
 		setGUI(gui);
 		setLayout(new BorderLayout());
-		mazePanel = new MazePanel();
+		mazePanel = new MazePanel(getGUI());
 		getGUI().setPlayerObserver((Observer)mazePanel);
 		add(mazePanel, BorderLayout.CENTER);
 		
@@ -60,9 +59,8 @@ public class MazeScreen extends Screen {
 	    });
 	    
 	    otherControls.add(muteButton);
-		otherControls.add(exitButton); 
-		
-		music();
+		otherControls.add(exitButton); 	
+		//music();
 	}
 	
 	public static void music() {
@@ -75,35 +73,5 @@ public class MazeScreen extends Screen {
         } catch (Exception e) {
             e.printStackTrace();
         }
-	}
-	
-	private class MazePanel extends JPanel implements Observer {
-		private static final long serialVersionUID = -3329021623371321857L;
-		
-		public MazePanel() {
-		this.addKeyListener(new KeyAdapter() {
-				@Override
-				public void keyPressed(KeyEvent e) {
-					getModel().updatePlayer(e.getKeyCode());
-				}
-			});
-			setBackground(Color.white);
-			setBorder(BorderFactory.createLineBorder(Color.red));
-			setFocusable(true);
-		}
-		
-		@Override
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			requestFocusInWindow();
-			getModel().drawMaze(g, getWidth(), getHeight());
-			getModel().drawPlayer(g, getWidth(), getHeight());
-		}
-		
-		@Override
-	    public void update(Observable observable, Object object) {
-			if ((object instanceof Boolean) && object.equals(true)) getGUI().switchScreen("Menu");
-			else repaint();
-	    }
 	}
 }

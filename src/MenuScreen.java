@@ -7,9 +7,9 @@ public class MenuScreen extends Screen {
 	private JButton playButton;
 	private JButton helpButton;
 	JButton settingsBtn;
-	private final int EASY = 15;
-	private final int MEDIUM = 25;
-	private final int HARD = 35;
+	private final int EASY = 16;
+	private final int MEDIUM = 24;
+	private final int HARD = 32;
 
 	public MenuScreen(GUI gui) {
 		setGUI(gui);

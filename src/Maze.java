@@ -134,7 +134,9 @@ public class Maze implements Iterable<State> {
 
 			@Override
 			public State next() {
-				return states[x++][y++];
+				State s = states[x++][y];
+				if (x == getSize()) {x = 0; y++;}
+				return s;
 			}
 
 			@Override
