@@ -21,7 +21,7 @@ public class MenuScreen extends Screen {
 		playButton.setBackground(Color.WHITE);
 		playButton.setForeground(Color.BLACK);
 		playButton.setFocusPainted(false);
-		playButton.setFont(new Font("Ariel", Font.BOLD, 50));
+		playButton.setFont(new Font("Ariel", Font.BOLD, 40));
 		c.gridx = 0;
 		c.gridy = 0;
 		c.weightx = 0.5;
@@ -40,7 +40,7 @@ public class MenuScreen extends Screen {
 		helpButton.setBackground(Color.WHITE);
 		helpButton.setForeground(Color.BLACK);
 		helpButton.setFocusPainted(false);
-		helpButton.setFont(new Font("Ariel", Font.BOLD, 50));
+		helpButton.setFont(new Font("Ariel", Font.BOLD, 40));
         c.gridx = 1;
         c.insets = new Insets(20, 20, 20, 120);
         helpButton.addMouseListener(new MouseAdapter() {
