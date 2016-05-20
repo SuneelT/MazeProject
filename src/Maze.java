@@ -128,7 +128,7 @@ public class Maze implements Iterable<State> {
 
 			@Override
 			public boolean hasNext() {
-				if (y == getSize()-1 && x == getSize()-1) return false;
+				if (y == getSize()) return false;
 				else return true;
 			}
 

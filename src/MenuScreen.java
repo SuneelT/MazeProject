@@ -10,20 +10,18 @@ public class MenuScreen extends Screen {
 	private static final long serialVersionUID = -1725872337351590898L;
 	private JButton playButton;
 	private JButton helpButton;
-	JButton settingsBtn;
 	private final int EASY = 16;
 	private final int MEDIUM = 24;
 	private final int HARD = 32;
+	private Image bg;
 
 	public MenuScreen(GUI gui) {
 		setGUI(gui);
-		this.setBackground(Color.black);
-		JLabel bg = null;
+		this.setLayout(new BorderLayout());
 		try {
-			bg = new JLabel(new ImageIcon(ImageIO.read(new File("images/blueBG.jpg"))));
-			this.add(bg);
+			bg = ImageIO.read(new File("images/blueBG.jpg"));
 		} catch (IOException e1) {}
-		bg.setLayout(new GridBagLayout());
+		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
 		playButton = new JButton("Play");
@@ -43,8 +41,7 @@ public class MenuScreen extends Screen {
 				getGUI().switchScreen("Maze");
 			}
 		});
-		//this.add(playButton, c);
-		bg.add(playButton, c);
+		this.add(playButton, c);
 
 		helpButton = new JButton("Help");
 		helpButton.setBackground(Color.WHITE);
@@ -59,7 +56,7 @@ public class MenuScreen extends Screen {
 				getGUI().switchScreen("Help");
 			}
 		});
-        bg.add(helpButton, c);
+        this.add(helpButton, c);
 		
 		JPanel difficulty = new JPanel();
         difficulty.setOpaque(false);
@@ -116,7 +113,12 @@ public class MenuScreen extends Screen {
 	    difficultyButtons.add(medium);
 	    difficultyButtons.add(hard);
 	    
-	    bg.add(difficulty);
-
+	    this.add(difficulty);
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
 	}
 }

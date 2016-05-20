@@ -28,4 +28,12 @@ public interface BaseState {
 	public void addConnectionLeft(State node, boolean wall);
 	
 	public void addConnectionRight(State node, boolean wall);
+	
+	public boolean isTopWall();
+	
+	public boolean isBottomWall();
+	
+	public boolean isLeftWall();
+	
+	public boolean isRightWall();
 }

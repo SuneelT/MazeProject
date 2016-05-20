@@ -111,4 +111,36 @@ public class State implements BaseState {
 	public void addConnectionRight(State node, boolean wall) {
 		this.right = new Edge(this, node, wall);
 	}
+	
+	@Override
+	public boolean isTopWall() {
+		if (getY() == 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isBottomWall() {
+		if (down == null) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isLeftWall() {
+		if (getX() == 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isRightWall() {
+		if (right == null) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -8,8 +8,8 @@ public class GUI extends JFrame {
 	private JPanel cards = new JPanel(new CardLayout());
 	private Model model;
 	private String lastScreen;
-	private final int WIDTH = 800;
-	private final int HEIGHT = 600;
+	private final int WIDTH = 840;
+	private final int HEIGHT = 680;
 
 	/**
 	 * This main function begins by adding to queue of runnable threads our GUI. This synchronises the GUI and prevents it from doing things like
@@ -35,6 +35,7 @@ public class GUI extends JFrame {
 		getContentPane().add(cards);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         setVisible(true); setSize(WIDTH, HEIGHT);
+        //(false);
         switchScreen("Menu");
 	}
 	

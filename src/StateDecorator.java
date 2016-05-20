@@ -75,5 +75,24 @@ public class StateDecorator implements BaseState{
 	public void addConnectionRight(State node, boolean wall) {
 		state.addConnectionRight(node, wall);
 	}
+	
+	public boolean isTopWall() {
+		return state.isTopWall();
+	}
+
+	@Override
+	public boolean isBottomWall() {
+		return state.isBottomWall();
+	}
+
+	@Override
+	public boolean isLeftWall() {
+		return state.isLeftWall();
+	}
+
+	@Override
+	public boolean isRightWall() {
+		return state.isRightWall();
+	}
 
 }

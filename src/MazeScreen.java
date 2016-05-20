@@ -15,22 +15,21 @@ public class MazeScreen extends Screen {
 	JPanel mazePanel;
 	private Clip clip; 
 	private boolean muted;
+	private Image bg;
 	
 	public MazeScreen(final GUI gui) {
 		setGUI(gui);
-		this.setBackground(Color.black);
-		JLabel bg = null;
+		this.setLayout(new BorderLayout());
 		try {
-			bg = new JLabel(new ImageIcon(ImageIO.read(new File("images/redBG.jpg"))));
-			this.add(bg);
+			bg = ImageIO.read(new File("images/redBG.jpg"));
 		} catch (IOException e1) {}
-		bg.setLayout(new BorderLayout());
+		this.setLayout(new BorderLayout());
 		mazePanel = new MazePanel(getGUI());
 		getGUI().setPlayerObserver((Observer)mazePanel);
-		bg.add(mazePanel, BorderLayout.CENTER);
+		this.add(mazePanel, BorderLayout.CENTER);
 		
 		JPanel otherControls = new JPanel(new GridLayout(2, 1, 100, 100));
-		bg.add(otherControls, BorderLayout.EAST);
+		this.add(otherControls, BorderLayout.EAST);
 		otherControls.setOpaque(false);
 		
 		JButton exitButton = new JButton("Exit To Menu");
@@ -69,6 +68,11 @@ public class MazeScreen extends Screen {
 	    otherControls.add(muteButton);
 		otherControls.add(exitButton); 	
 		//music();
+	}
+	
+	@Override public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
 	}
 	
 	private void music() {

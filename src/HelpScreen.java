@@ -10,16 +10,16 @@ public class HelpScreen extends Screen {
 	private static final long serialVersionUID = -264471428282433023L;
 	JButton returnButton;
     JLabel text;
+    private Image bg;
 
     public HelpScreen(GUI gui) {
         setGUI(gui);
 		this.setBackground(Color.black);
-		JLabel bg = null;
+		this.setLayout(new BorderLayout());
 		try {
-			bg = new JLabel(new ImageIcon(ImageIO.read(new File("images/yellowBG.jpg"))));
-			this.add(bg);
+			bg = ImageIO.read(new File("images/yellowBG.jpg"));
 		} catch (IOException e1) {}
-        bg.setLayout(new GridBagLayout());
+       this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         JPanel buttonPanel = new JPanel();
@@ -44,7 +44,7 @@ public class HelpScreen extends Screen {
             }
         });
     	
-    	bg.add(buttonPanel, c);
+    	this.add(buttonPanel, c);
 
         text = new JLabel("<html>Use the arrow keys on your keyboard to guide your character to the exit. The exit is the"
         		+ "bottom right-hand corner of the maze.</html>", JLabel.CENTER);
@@ -54,6 +54,12 @@ public class HelpScreen extends Screen {
         c.ipady = 10;
         c.insets = new Insets(20, 20, 250, 20);
         c.anchor = GridBagConstraints.CENTER;
-        bg.add(text, c);
+        this.add(text, c);
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+    	super.paintComponent(g);
+    	g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
     }
 }
