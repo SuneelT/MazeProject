@@ -79,8 +79,9 @@ public class Maze implements Iterable<BaseState> {
 				if (x > 0) edges.add(individualNode.getEdge("left"));
 			}
 		}
-
+		System.out.println(edges.size());
 		Random generator = new Random(); Edge examine = null;
+		
 		while (edges.size() != 0) {
 			int index = generator.nextInt(edges.size());
 			examine = edges.remove(index);
@@ -131,6 +132,7 @@ public class Maze implements Iterable<BaseState> {
 	}
 
 	public boolean isConnected(int x, int y, int dir) {
+		if (states == null) return cisConnected(x,y,dir);
 		switch (dir) {
 		case 0:
 			if (states != null)
@@ -141,6 +143,22 @@ public class Maze implements Iterable<BaseState> {
 			return states[x][y].getLeft() != null;
 		case 3:
 			return states[x][y].getRight() != null;
+		default:
+			return false;
+		}
+	}
+	
+	public boolean cisConnected(int x, int y, int dir) {
+		switch (dir) {
+		case 0:
+			if (states != null)
+			return cStates[x][y].getUp() != null;
+		case 1:
+			return cStates[x][y].getDown() != null;
+		case 2:
+			return cStates[x][y].getLeft() != null;
+		case 3:
+			return cStates[x][y].getRight() != null;
 		default:
 			return false;
 		}

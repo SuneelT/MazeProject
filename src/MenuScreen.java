@@ -14,9 +14,11 @@ public class MenuScreen extends Screen {
 	private final int MEDIUM = 24;
 	private final int HARD = 32;
 	private Image bg;
+	private boolean classic;
 
 	public MenuScreen(GUI gui) {
 		setGUI(gui);
+		this.classic = true;
 		this.setLayout(new BorderLayout());
 		try {
 			bg = ImageIO.read(new File("images/blueBG.jpg"));
@@ -116,22 +118,19 @@ public class MenuScreen extends Screen {
 	    this.add(difficulty);
 	    
 	    JPanel mode = new JPanel();
-	    JRadioButton classic = new JRadioButton("Classic", true);
-	    classic.addMouseListener(new MouseAdapter() {
-	    	@Override
-	    	public void mouseClicked(MouseEvent e) {
-	    		getModel().setClassicMode();
-	    	}
-	    });
-	    
 	    JRadioButton collector = new JRadioButton("Collector");
-	    classic.addMouseListener(new MouseAdapter() {
+	    collector.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
-	    		getModel().setCollectorMode();
+	    		if (classic == true) {
+	    			getModel().setCollectorMode();
+	    			classic = false;
+	    		} else {
+	    			getModel().setClassicMode();
+	    			classic = true;
+	    		}
 	    	}
 	    });
-	    mode.add(classic);
 	    mode.add(collector);
 	    this.add(mode);
 	}
