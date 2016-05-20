@@ -34,8 +34,7 @@ public class GUI extends JFrame {
 		cards.add(new HelpScreen(this), "Help"); cards.getComponent(2).setName("Help");
 		getContentPane().add(cards);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        setVisible(true); setSize(WIDTH, HEIGHT);
-        //(false);
+        setVisible(true); setSize(WIDTH, HEIGHT); setResizable(false);
         switchScreen("Menu");
 	}
 	

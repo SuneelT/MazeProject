@@ -11,8 +11,8 @@ public class Model {
 	}
 	
 	public void createMaze() {
-		player.reset();
-		maze = new Maze(difficulty); 
+		maze = new Maze(difficulty);
+		player.reset(); 
 	}
 
 	public void updatePlayer(int dir) {

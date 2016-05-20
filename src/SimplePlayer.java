@@ -53,6 +53,8 @@ public class SimplePlayer extends Observable implements Player {
 	public void reset() {
 		x = 0;
 		y = 0;
+		setChanged();
+		notifyObservers("Create");
 	}
 	
 	@Override

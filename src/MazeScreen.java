@@ -26,7 +26,7 @@ public class MazeScreen extends Screen {
 		this.setLayout(new BorderLayout());
 		mazePanel = new MazePanel(getGUI());
 		getGUI().setPlayerObserver((Observer)mazePanel);
-		this.add(mazePanel, BorderLayout.CENTER);
+		this.add(mazePanel, BorderLayout.WEST);
 		
 		JPanel otherControls = new JPanel(new GridLayout(2, 1, 100, 100));
 		this.add(otherControls, BorderLayout.EAST);
