@@ -54,6 +54,7 @@ public class MazePanel extends JPanel implements Observer {
 		try {
 			int w = getWidth()/gui.getModel().getDifficulty();
 			int h = getHeight()/gui.getModel().getDifficulty();
+			boolean mode = gui.getModel().isClassicMode();
 			bImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
 			Graphics2D g = bImage.createGraphics();
 			for (BaseState s: gui.getModel().getMaze()) {
@@ -78,6 +79,12 @@ public class MazePanel extends JPanel implements Observer {
 					else if (s.getRight() == null) g.drawImage(ImageIO.read(new File("images/wall_right.bmp")), x*w, y*h, w, h, null);
 					else if (s.getDown() == null) g.drawImage(ImageIO.read(new File("images/wall_bottom.bmp")), x*w, y*h, w, h, null);
 					else g.drawImage(ImageIO.read(new File("images/open.bmp")), x*w, y*h, w, h, null);
+				}
+				if (mode == false) {
+					CollectableState cstate = (CollectableState) s;
+					if (cstate.checkCollected() == false) {
+						g.drawImage(cstate.getCollectable().getImage(), x*w, y*h, w, h, null);
+					}
 				}
 			}
 		} catch(IOException e) {System.err.println("Images not found.");}

@@ -55,4 +55,8 @@ public class Model {
 	public void setCollectorMode() {
 		isClassic = false;
 	}
+	
+	public boolean isClassicMode () {
+		return isClassic;
+	}
 }
