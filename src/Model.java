@@ -5,13 +5,14 @@ public class Model {
 	private Maze maze;
 	private Player player;
 	private int difficulty = 15;
+	private boolean isClassic = true;
 	
 	public Model() {
 		player = new SimplePlayer();
 	}
 	
 	public void createMaze() {
-		maze = new Maze(difficulty);
+		maze = new Maze(difficulty, isClassic);
 		player.reset(); 
 	}
 
@@ -45,5 +46,13 @@ public class Model {
 
 	public Maze getMaze() {
 		return maze;
+	}
+
+	public void setClassicMode() {
+		isClassic = true;
+	}
+
+	public void setCollectorMode() {
+		isClassic = false;
 	}
 }

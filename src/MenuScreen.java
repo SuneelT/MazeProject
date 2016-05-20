@@ -114,6 +114,26 @@ public class MenuScreen extends Screen {
 	    difficultyButtons.add(hard);
 	    
 	    this.add(difficulty);
+	    
+	    JPanel mode = new JPanel();
+	    JRadioButton classic = new JRadioButton("Classic", true);
+	    classic.addMouseListener(new MouseAdapter() {
+	    	@Override
+	    	public void mouseClicked(MouseEvent e) {
+	    		getModel().setClassicMode();
+	    	}
+	    });
+	    
+	    JRadioButton collector = new JRadioButton("Collector");
+	    classic.addMouseListener(new MouseAdapter() {
+	    	@Override
+	    	public void mouseClicked(MouseEvent e) {
+	    		getModel().setCollectorMode();
+	    	}
+	    });
+	    mode.add(classic);
+	    mode.add(collector);
+	    this.add(mode);
 	}
 	
 	@Override

@@ -5,46 +5,57 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class Maze implements Iterable<BaseState> {
-	private BaseState[][] states;	
+	private BaseState[][] states = null;
+	private CollectableState[][] cStates = null;
+	private int size;
 	
-	// creates width*height nodes with no walls between them
-	// each node has value initVal
-	public Maze(int size) {
+	public Maze(int size, boolean mode) {
+		this.size = size;
+		if (mode) createClassicMaze();
+		else createCollectorMaze();
+	}
+
+	private void createCollectorMaze() {
 		int x, y;
-		// need to initialize nodes
-		// need to call generator method to generate maze
-		this.states = new BaseState[size][];
-		for (x = 0; x < size; x++) {
-			states[x] = new BaseState[size];
-			
+		this.cStates = new CollectableState[size][];		//initialise the states
+		for (x = 0; x < size; x++) cStates[x] = new CollectableState[size];	
+		for (x = 0; x < size; x++) {	//first fill up the states array with stats
+			for (y = 0; y < size; y++) cStates[x][y] = new CollectableState(new State(x, y));
 		}
-		
-		// fill nodes with nodes with no connections and initial state 'initVal'
-		
-		for (x = 0; x < size; x++) {
-			for (y = 0; y < size; y++) {
-				states[x][y] = new State(x, y);
+	
+		for (x = 0; x < size; x++) {				//add connections
+			for (y = 0; y < size; y++) {			//if x == 0 || x == size-1 no side connections
+				CollectableState curr = cStates[x][y];		//likewise for y
+				if (y > 0) curr.addConnectionUp(cStates[x][y-1], true);
+				if (y < size-1) curr.addConnectionDown(cStates[x][y+1], true);
+				if (x > 0) curr.addConnectionLeft(cStates[x-1][y], true);
+				if (x < size-1) curr.addConnectionRight(cStates[x+1][y], true);
 			}
 		}
-		
-		// add connections
-		// if x = 0, no left connection
-		// if x = width-1, no right connection
-		// if y = 0, no up connection
-		// if y = height-1, no down connection
-		for (x = 0; x < size; x++) {
-			for (y = 0; y < size; y++) {
-				BaseState curr = states[x][y];
+		this.generateMaze(cStates);
+	}
+
+	private void createClassicMaze() {
+		int x, y;
+		this.states = new BaseState[size][];		//initialise the states
+		for (x = 0; x < size; x++) states[x] = new BaseState[size];	
+		for (x = 0; x < size; x++) {	//first fill up the states array with stats
+			for (y = 0; y < size; y++) states[x][y] = new State(x, y);
+		}
+	
+		for (x = 0; x < size; x++) {				//add connections
+			for (y = 0; y < size; y++) {			//if x == 0 || x == size-1 no side connections
+				BaseState curr = states[x][y];		//likewise for y
 				if (y > 0) curr.addConnectionUp(states[x][y-1], true);
 				if (y < size-1) curr.addConnectionDown(states[x][y+1], true);
 				if (x > 0) curr.addConnectionLeft(states[x-1][y], true);
 				if (x < size-1) curr.addConnectionRight(states[x+1][y], true);
 			}
 		}
-		this.generateMaze();
+		this.generateMaze(states);
 	}
 
-	private void generateMaze() {
+	private void generateMaze(BaseState[][] states) {
 		//Add all edges to a bag
 		ArrayList<Edge> edges = new ArrayList<Edge>();
 		for (BaseState[] Collection: states) {
@@ -102,12 +113,13 @@ public class Maze implements Iterable<BaseState> {
 	}
 
 	public int getSize() {
-		return states.length;
+		return size;
 	}
 
 	public boolean isConnected(int x, int y, int dir) {
 		switch (dir) {
 		case 0:
+			if (states != null)
 			return states[x][y].getUp() != null;
 		case 1:
 			return states[x][y].getDown() != null;
@@ -134,7 +146,11 @@ public class Maze implements Iterable<BaseState> {
 
 			@Override
 			public BaseState next() {
-				BaseState s = states[x++][y];
+				BaseState s;
+				if (states != null)
+					s = states[x++][y];
+				else
+					s = cStates[x++][y];
 				if (x == getSize()) {x = 0; y++;}
 				return s;
 			}
