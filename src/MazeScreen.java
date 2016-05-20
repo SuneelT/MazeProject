@@ -1,8 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.Observer;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -11,24 +13,29 @@ import javax.swing.*;
 public class MazeScreen extends Screen {
 	private static final long serialVersionUID = -8972885841964219641L;
 	JPanel mazePanel;
-	private static Clip clip; 
+	private Clip clip; 
 	private boolean muted;
 	
 	public MazeScreen(final GUI gui) {
 		setGUI(gui);
-		setLayout(new BorderLayout());
+		this.setBackground(Color.black);
+		JLabel bg = null;
+		try {
+			bg = new JLabel(new ImageIcon(ImageIO.read(new File("images/redBG.jpg"))));
+			this.add(bg);
+		} catch (IOException e1) {}
+		bg.setLayout(new BorderLayout());
 		mazePanel = new MazePanel(getGUI());
 		getGUI().setPlayerObserver((Observer)mazePanel);
-		add(mazePanel, BorderLayout.CENTER);
+		bg.add(mazePanel, BorderLayout.CENTER);
 		
 		JPanel otherControls = new JPanel(new GridLayout(2, 1, 100, 100));
-		add(otherControls, BorderLayout.EAST);
-		otherControls.setBackground(Color.WHITE);
+		bg.add(otherControls, BorderLayout.EAST);
+		otherControls.setOpaque(false);
 		
 		JButton exitButton = new JButton("Exit To Menu");
-		exitButton.setBackground(Color.WHITE);
-	    exitButton.setForeground(Color.BLACK);
-	    exitButton.setFocusPainted(false);
+		exitButton.setOpaque(true);
+		exitButton.setContentAreaFilled(false);
 	    exitButton.setFont(new Font("Ariel", Font.BOLD, 20));
 		exitButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -38,12 +45,12 @@ public class MazeScreen extends Screen {
 				   JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
 					getGUI().switchScreen("Menu");
 				}
+				mazePanel.requestFocusInWindow();
 			}
 		});
 		JButton muteButton = new JButton("Mute");
-		muteButton.setBackground(Color.WHITE);
-	    muteButton.setForeground(Color.BLACK);
-	    muteButton.setFocusPainted(false);
+		muteButton.setOpaque(false);
+		muteButton.setContentAreaFilled(false);
 	    muteButton.setFont(new Font("Ariel", Font.BOLD, 20));
 	    muteButton.addMouseListener(new MouseAdapter() {
 	        @Override
@@ -55,6 +62,7 @@ public class MazeScreen extends Screen {
 	            	clip.stop();
 	            	muted = true;
 	            }
+	            mazePanel.requestFocusInWindow();
             }
 	    });
 	    
@@ -63,9 +71,9 @@ public class MazeScreen extends Screen {
 		//music();
 	}
 	
-	public static void music() {
+	private void music() {
 		try {
-            File file = new File("Music.wav");
+            File file = new File("audio/Music.wav");
             AudioInputStream stream = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(stream);

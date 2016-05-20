@@ -1,28 +1,35 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 
 public class HelpScreen extends Screen {
 	private static final long serialVersionUID = -264471428282433023L;
-	JButton menuButton;
+	JButton returnButton;
     JLabel text;
 
     public HelpScreen(GUI gui) {
         setGUI(gui);
-        this.setLayout(new GridBagLayout());
+		this.setBackground(Color.black);
+		JLabel bg = null;
+		try {
+			bg = new JLabel(new ImageIcon(ImageIO.read(new File("images/yellowBG.jpg"))));
+			this.add(bg);
+		} catch (IOException e1) {}
+        bg.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        this.setBackground(new Color(255,204,255));
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(new Color(255,204,255));
+        buttonPanel.setOpaque(false);
         
-        menuButton = new JButton("Return");
-        menuButton.setBackground(Color.WHITE);
-        menuButton.setForeground(Color.BLACK);
-        menuButton.setFocusPainted(false);
-        menuButton.setFont(new Font("Ariel", Font.BOLD, 50));
-        buttonPanel.add(menuButton);
+        returnButton = new JButton("Return");
+        returnButton.setBackground(Color.WHITE);
+        returnButton.setFocusPainted(false);
+        returnButton.setFont(new Font("Ariel", Font.BOLD, 50));
+        buttonPanel.add(returnButton);
         c.gridx = 0;
         c.gridy = 0;
         c.weightx = 0.5;
@@ -30,14 +37,14 @@ public class HelpScreen extends Screen {
         c.insets = new Insets(20, 20, 20, 20);
         c.anchor = GridBagConstraints.PAGE_START;
         
-        menuButton.addMouseListener(new MouseAdapter() {
+        returnButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 getGUI().switchToLastScreen();
             }
         });
     	
-    	this.add(buttonPanel, c);
+    	bg.add(buttonPanel, c);
 
         text = new JLabel("<html>Use the arrow keys on your keyboard to guide your character to the exit. The exit is the"
         		+ "bottom right-hand corner of the maze.</html>", JLabel.CENTER);
@@ -47,6 +54,6 @@ public class HelpScreen extends Screen {
         c.ipady = 10;
         c.insets = new Insets(20, 20, 250, 20);
         c.anchor = GridBagConstraints.CENTER;
-        this.add(text, c);
+        bg.add(text, c);
     }
 }

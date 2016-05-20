@@ -1,5 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class MenuScreen extends Screen {
@@ -13,9 +17,14 @@ public class MenuScreen extends Screen {
 
 	public MenuScreen(GUI gui) {
 		setGUI(gui);
-		this.setLayout(new GridBagLayout());
+		this.setBackground(Color.black);
+		JLabel bg = null;
+		try {
+			bg = new JLabel(new ImageIcon(ImageIO.read(new File("images/blueBG.jpg"))));
+			this.add(bg);
+		} catch (IOException e1) {}
+		bg.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		this.setBackground(new Color(255,204,255));
 
 		playButton = new JButton("Play");
 		playButton.setBackground(Color.WHITE);
@@ -34,7 +43,8 @@ public class MenuScreen extends Screen {
 				getGUI().switchScreen("Maze");
 			}
 		});
-		this.add(playButton, c);
+		//this.add(playButton, c);
+		bg.add(playButton, c);
 
 		helpButton = new JButton("Help");
 		helpButton.setBackground(Color.WHITE);
@@ -49,12 +59,12 @@ public class MenuScreen extends Screen {
 				getGUI().switchScreen("Help");
 			}
 		});
-		this.add(helpButton, c);
+        bg.add(helpButton, c);
 		
 		JPanel difficulty = new JPanel();
-        difficulty.setBackground(new Color(255,204,255));
-        difficulty.setLayout(new GridBagLayout());
-		        c.gridx = 0;
+        difficulty.setOpaque(false);
+		difficulty.setLayout(new GridBagLayout());
+		c.gridx = 0;
         c.gridy = 0;
         c.weightx = 0.5;
         c.weighty = 0.5;
@@ -106,6 +116,7 @@ public class MenuScreen extends Screen {
 	    difficultyButtons.add(medium);
 	    difficultyButtons.add(hard);
 	    
-	    this.add(difficulty);
+	    bg.add(difficulty);
+
 	}
 }
