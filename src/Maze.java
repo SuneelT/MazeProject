@@ -79,7 +79,7 @@ public class Maze implements Iterable<BaseState> {
 				if (x > 0) edges.add(individualNode.getEdge("left"));
 			}
 		}
-		System.out.println(edges.size());
+
 		Random generator = new Random(); Edge examine = null;
 		
 		while (edges.size() != 0) {
@@ -95,8 +95,8 @@ public class Maze implements Iterable<BaseState> {
 	
 	public boolean getConnected(ArrayList<BaseState> visited, BaseState to, BaseState from) {
 		if (to == null) {return false;}
-		if (to.equals(from)) {return true;}
-		
+		if (to.getX() == from.getX() && to.getY() == from.getY()) {return true;}
+	
 		if (visited.indexOf(to) == -1) { 
 			visited.add(to);
 			boolean connected = getConnected(visited, to.getUp(),from);
