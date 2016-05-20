@@ -14,7 +14,7 @@ public class MazeScreen extends Screen {
 	private static final long serialVersionUID = -8972885841964219641L;
 	JPanel mazePanel;
 	private Clip clip; 
-	private boolean muted;
+	//private boolean muted;
 	private Image bg;
 	
 	public MazeScreen(final GUI gui) {
@@ -54,13 +54,13 @@ public class MazeScreen extends Screen {
 	    muteButton.addMouseListener(new MouseAdapter() {
 	        @Override
 	        public void mouseClicked(MouseEvent e) {
-	            if (muted == true) {
-	            	clip.loop(Clip.LOOP_CONTINUOUSLY);
-	            	muted = false;
-	            } else {
-	            	clip.stop();
-	            	muted = true;
-	            }
+	           // if (muted == true) {
+	            //	clip.loop(Clip.LOOP_CONTINUOUSLY);
+	           // 	muted = false;
+	          //  } else {
+	           // 	clip.stop();
+	           // 	muted = true;
+	           // }
 	            mazePanel.requestFocusInWindow();
             }
 	    });

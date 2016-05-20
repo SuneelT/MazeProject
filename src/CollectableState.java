@@ -1,7 +1,7 @@
 public class CollectableState extends StateDecorator {
 	private Collectable item;
 	
-	public CollectableState(State state) {
+	public CollectableState(BaseState state) {
 		super(state);
 		item = null;
 	}

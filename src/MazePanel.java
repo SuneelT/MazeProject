@@ -56,7 +56,7 @@ public class MazePanel extends JPanel implements Observer {
 			int h = getHeight()/gui.getModel().getDifficulty();
 			bImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
 			Graphics2D g = bImage.createGraphics();
-			for (State s: gui.getModel().getMaze()) {
+			for (BaseState s: gui.getModel().getMaze()) {
 				int x = s.getX(); int y = s.getY();
 				if (s.isLeftWall() && s.isTopWall()) {
 					if (s.getRight() == null) g.drawImage(ImageIO.read(new File("images/deadend_top.bmp")), x*w, y*h, w, h, null);

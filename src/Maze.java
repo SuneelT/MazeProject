@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-public class Maze implements Iterable<State> {
-	private State[][] states;	
+public class Maze implements Iterable<BaseState> {
+	private BaseState[][] states;	
 	
 	// creates width*height nodes with no walls between them
 	// each node has value initVal
@@ -13,9 +13,9 @@ public class Maze implements Iterable<State> {
 		int x, y;
 		// need to initialize nodes
 		// need to call generator method to generate maze
-		this.states = new State[size][];
+		this.states = new BaseState[size][];
 		for (x = 0; x < size; x++) {
-			states[x] = new State[size];
+			states[x] = new BaseState[size];
 			
 		}
 		
@@ -34,7 +34,7 @@ public class Maze implements Iterable<State> {
 		// if y = height-1, no down connection
 		for (x = 0; x < size; x++) {
 			for (y = 0; y < size; y++) {
-				State curr = states[x][y];
+				BaseState curr = states[x][y];
 				if (y > 0) curr.addConnectionUp(states[x][y-1], true);
 				if (y < size-1) curr.addConnectionDown(states[x][y+1], true);
 				if (x > 0) curr.addConnectionLeft(states[x-1][y], true);
@@ -47,8 +47,8 @@ public class Maze implements Iterable<State> {
 	private void generateMaze() {
 		//Add all edges to a bag
 		ArrayList<Edge> edges = new ArrayList<Edge>();
-		for (State[] Collection: states) {
-			for (State individualNode: Collection) {
+		for (BaseState[] Collection: states) {
+			for (BaseState individualNode: Collection) {
 				int x = individualNode.getX(); int y = individualNode.getY();
 				if (y > 0) edges.add(individualNode.getEdge("up")); 
 				if (x > 0) edges.add(individualNode.getEdge("left"));
@@ -60,14 +60,14 @@ public class Maze implements Iterable<State> {
 			int index = generator.nextInt(edges.size());
 			examine = edges.remove(index);
 			
-			ArrayList<State> visited = new ArrayList<State>();
+			ArrayList<BaseState> visited = new ArrayList<BaseState>();
 			if (!getConnected(visited, examine.getTo(), examine.getFrom())) {
 				examine.destroyWall();
 			}
 		}
 	}
 	
-	public boolean getConnected(ArrayList<State> visited, State to, State from) {
+	public boolean getConnected(ArrayList<BaseState> visited, BaseState to, BaseState from) {
 		if (to == null) {return false;}
 		if (to.equals(from)) {return true;}
 		
@@ -121,8 +121,8 @@ public class Maze implements Iterable<State> {
 	}
 
 	@Override
-	public Iterator<State> iterator() {
-		Iterator<State> it = new Iterator<State>() {
+	public Iterator<BaseState> iterator() {
+		Iterator<BaseState> it = new Iterator<BaseState>() {
 			private int x = 0;
 			private int y = 0;
 
@@ -133,8 +133,8 @@ public class Maze implements Iterable<State> {
 			}
 
 			@Override
-			public State next() {
-				State s = states[x++][y];
+			public BaseState next() {
+				BaseState s = states[x++][y];
 				if (x == getSize()) {x = 0; y++;}
 				return s;
 			}

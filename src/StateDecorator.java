@@ -1,8 +1,8 @@
 
 public class StateDecorator implements BaseState{
-	private State state;
+	private BaseState state;
 	
-	public StateDecorator(State state) {
+	public StateDecorator(BaseState state) {
 		this.state = state;
 	}
 	
@@ -32,22 +32,22 @@ public class StateDecorator implements BaseState{
 	}
 
 	@Override
-	public State getUp() {
+	public BaseState getUp() {
 		return state.getUp();
 	}
 
 	@Override
-	public State getDown() {
+	public BaseState getDown() {
 		return state.getDown();
 	}
 
 	@Override
-	public State getLeft() {
+	public BaseState getLeft() {
 		return state.getLeft();
 	}
 
 	@Override
-	public State getRight() {
+	public BaseState getRight() {
 		return state.getRight();
 	}
 
@@ -57,22 +57,22 @@ public class StateDecorator implements BaseState{
 	}
 
 	@Override
-	public void addConnectionUp(State node, boolean wall) {
+	public void addConnectionUp(BaseState node, boolean wall) {
 		state.addConnectionUp(node, wall);
 	}
 
 	@Override
-	public void addConnectionDown(State node, boolean wall) {
+	public void addConnectionDown(BaseState node, boolean wall) {
 		state.addConnectionDown(node, wall);
 	}
 
 	@Override
-	public void addConnectionLeft(State node, boolean wall) {
+	public void addConnectionLeft(BaseState node, boolean wall) {
 		state.addConnectionLeft(node, wall);
 	}
 
 	@Override
-	public void addConnectionRight(State node, boolean wall) {
+	public void addConnectionRight(BaseState node, boolean wall) {
 		state.addConnectionRight(node, wall);
 	}
 	

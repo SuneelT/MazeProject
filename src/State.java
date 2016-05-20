@@ -55,28 +55,28 @@ public class State implements BaseState {
 	}
 	
 	@Override
-	public State getUp() {
+	public BaseState getUp() {
 		if (up == null) return null;
 		if (up.getWall() == false) return up.getTo();
 		return null;
 	}
 	
 	@Override
-	public State getDown() {
+	public BaseState getDown() {
 		if (down == null) return null;
 		if (down.getWall() == false) return down.getTo();
 		return null;
 	}
 	
 	@Override
-	public State getLeft() {
+	public BaseState getLeft() {
 		if (left == null) return null;
 		if (left.getWall() == false) return left.getTo();
 		return null;
 	}
 	
 	@Override
-	public State getRight() {
+	public BaseState getRight() {
 		if (right == null) return null;
 		if (right.getWall() == false) return right.getTo();
 		return null;
@@ -93,22 +93,22 @@ public class State implements BaseState {
 	}
 	
 	@Override
-	public void addConnectionUp(State node, boolean wall) {
+	public void addConnectionUp(BaseState node, boolean wall) {
 		this.up = new Edge(this, node, wall);
 	}
 	
 	@Override
-	public void addConnectionDown(State node, boolean wall) {
+	public void addConnectionDown(BaseState node, boolean wall) {
 		this.down = new Edge(this, node, wall);
 	}
 	
 	@Override
-	public void addConnectionLeft(State node, boolean wall) {
+	public void addConnectionLeft(BaseState node, boolean wall) {
 		this.left = new Edge(this, node, wall);
 	}
 	
 	@Override
-	public void addConnectionRight(State node, boolean wall) {
+	public void addConnectionRight(BaseState node, boolean wall) {
 		this.right = new Edge(this, node, wall);
 	}
 	

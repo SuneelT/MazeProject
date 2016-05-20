@@ -1,20 +1,20 @@
 
 public class Edge {
-	private State from;
-	private State to;
+	private BaseState from;
+	private BaseState to;
 	private boolean wall;
 	
-	public Edge(State from, State to, boolean wall) {
+	public Edge(BaseState from, BaseState to, boolean wall) {
 		this.from = from;
 		this.to = to;
 		this.wall = wall;
 	}
 	
-	public State getTo() {
+	public BaseState getTo() {
 		return this.to;
 	}
 	
-	public State getFrom() {
+	public BaseState getFrom() {
 		return this.from;
 	}
 	

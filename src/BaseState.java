@@ -11,23 +11,23 @@ public interface BaseState {
 	
 	public boolean edgeExists(String edge);
 	
-	public State getUp();
+	public BaseState getUp();
 
-	public State getDown();
+	public BaseState getDown();
 	
-	public State getLeft();
+	public BaseState getLeft();
 	
-	public State getRight();
+	public BaseState getRight();
 	
 	public Edge getEdge(String edge);
 	
-	public void addConnectionUp(State node, boolean wall);
+	public void addConnectionUp(BaseState node, boolean wall);
 	
-	public void addConnectionDown(State node, boolean wall);
+	public void addConnectionDown(BaseState node, boolean wall);
 	
-	public void addConnectionLeft(State node, boolean wall);
+	public void addConnectionLeft(BaseState node, boolean wall);
 	
-	public void addConnectionRight(State node, boolean wall);
+	public void addConnectionRight(BaseState node, boolean wall);
 	
 	public boolean isTopWall();
 	
