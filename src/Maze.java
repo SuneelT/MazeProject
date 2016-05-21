@@ -1,5 +1,3 @@
-import java.awt.Color;
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -111,22 +109,6 @@ public class Maze implements Iterable<BaseState> {
 		return false;
 	}
 
-	public void draw(Graphics g, int width, int height) {
-		g.setColor(Color.red);
-		int intervalx = width/states.length;
-		int intervaly = height/states.length;
-		for (int posy = 0; posy < states.length; posy++) {
-			for (int posx = 0; posx < states.length; posx++) {
-				if (states[posx][posy].getDown() == null) {
-					g.drawLine(posx*intervalx, (posy+1)*intervaly, (posx+1)*intervalx, (posy+1)*intervaly);
-				}
-				if (states[posx][posy].getRight() == null) {
-					g.drawLine((posx+1)*intervalx, posy*intervaly, (posx+1)*intervalx, (posy+1)*intervaly);
-				}
-			}
-		}
-	}
-
 	public int getSize() {
 		return size;
 	}
@@ -148,7 +130,7 @@ public class Maze implements Iterable<BaseState> {
 		}
 	}
 	
-	public boolean cisConnected(int x, int y, int dir) {
+	private boolean cisConnected(int x, int y, int dir) {
 		switch (dir) {
 		case 0:
 			if (states != null)

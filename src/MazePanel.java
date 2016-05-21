@@ -75,7 +75,11 @@ public class MazePanel extends JPanel implements Observer {
 					else if (s.getDown() == null) g.drawImage(ImageIO.read(new File("images/hall_horizontal.bmp")), x*w, y*h, w, h, null);
 					else g.drawImage(ImageIO.read(new File("images/wall_top.bmp")), x*w, y*h, w, h, null);
 				} else {
-					if (s.getRight() == null && s.getDown() == null) g.drawImage(ImageIO.read(new File("images/corner_bottom_right.bmp")), x*w, y*h, w, h, null);
+					if (s.getRight() == null && s.getDown() == null) {
+						if (s.getX() == gui.getModel().getDifficulty() - 1 && s.getY() == gui.getModel().getDifficulty() - 1)
+							g.drawImage(ImageIO.read(new File("images/end.bmp")), x*w, y*h, w, h, null);
+						else g.drawImage(ImageIO.read(new File("images/corner_bottom_right.bmp")), x*w, y*h, w, h, null);
+					}
 					else if (s.getRight() == null) g.drawImage(ImageIO.read(new File("images/wall_right.bmp")), x*w, y*h, w, h, null);
 					else if (s.getDown() == null) g.drawImage(ImageIO.read(new File("images/wall_bottom.bmp")), x*w, y*h, w, h, null);
 					else g.drawImage(ImageIO.read(new File("images/open.bmp")), x*w, y*h, w, h, null);

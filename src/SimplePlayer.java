@@ -1,5 +1,3 @@
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
 
@@ -42,11 +40,6 @@ public class SimplePlayer extends Observable implements Player {
 		setChanged();
 		if (x == maze.getSize()-1 && y == maze.getSize()-1) notifyObservers(true);
 		else notifyObservers(getCoords());
-	}
-
-	public void draw(Graphics g, int intervalx, int intervaly) {
-		g.setColor(Color.black);
-		g.drawOval(x*intervalx, y*intervaly, intervalx, intervaly);
 	}
 
 	@Override

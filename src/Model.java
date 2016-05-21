@@ -1,4 +1,3 @@
-import java.awt.Graphics;
 import java.util.Observer;
 
 public class Model {
@@ -18,14 +17,6 @@ public class Model {
 
 	public void updatePlayer(int dir) {
 		player.move(dir, maze);
-	}
-
-	public void drawMaze(Graphics g, int width, int height) {
-		maze.draw(g, width, height);
-	}
-
-	public void drawPlayer(Graphics g, int width, int height) {
-		player.draw(g, width/maze.getSize(), height/maze.getSize());
 	}
 
 	public int getDifficulty() {
