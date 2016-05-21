@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -35,18 +36,26 @@ public class MazePanel extends JPanel implements Observer {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		requestFocusInWindow();
-		g.drawImage(bImage, 0, 0, null);
+		int xpad = 0;
+		int ypad = 0;
+		int difficulty = gui.getModel().getDifficulty();
+		switch (difficulty) {
+			case 16: xpad = 0; ypad = -12; break;
+			case 24: xpad = 8; ypad = 5; break;
+			case 32: xpad = 16; ypad = -12; break;
+		}
+		g.drawImage(bImage, 0, 0, 656 + xpad, 656 + ypad, null);
 		int w = getWidth()/gui.getModel().getDifficulty();
 		int h = getHeight()/gui.getModel().getDifficulty();
 		int[] pos = gui.getModel().getPlayerPos();
-		g.setColor(Color.black);
+		g.setColor(Color.BLACK);
 		g.drawOval(pos[0]*w, pos[1]*h, w, h);
 	}
 		
 	@Override
 	public void update(Observable observable, Object object) {
-		if (object.equals(new Boolean(true))) gui.switchScreen("Menu");
-		else if (object.equals(new String("Create"))) makeMaze();
+		if (object.equals(true)) gui.switchScreen("Menu");
+		else if (object.equals("Create")) makeMaze();
 		else repaint();
 	}
 
@@ -84,9 +93,9 @@ public class MazePanel extends JPanel implements Observer {
 					else if (s.getDown() == null) g.drawImage(ImageIO.read(new File("images/wall_bottom.bmp")), x*w, y*h, w, h, null);
 					else g.drawImage(ImageIO.read(new File("images/open.bmp")), x*w, y*h, w, h, null);
 				}
-				if (mode == false) {
+				if (!mode) {
 					CollectableState cstate = (CollectableState) s;
-					if (cstate.checkCollected() == false) {
+					if (!cstate.checkCollected()) {
 						g.drawImage(cstate.getCollectable().getImage(), x*w, y*h, w, h, null);
 					}
 				}
