@@ -84,7 +84,7 @@ public class MenuScreen extends Screen {
         c.weighty = 0.5;
         c.insets = new Insets(20, 20, 20, 20);
 
-        final JButton easy = new JButton(new ImageIcon("images/easy.png"));
+        final JButton easy = new JButton(new ImageIcon("images/easyselect.png"));
         easy.setBorder(BorderFactory.createEmptyBorder());
 		easy.setContentAreaFilled(false);
 

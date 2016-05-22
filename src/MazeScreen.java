@@ -21,7 +21,7 @@ public class MazeScreen extends Screen {
 		setGUI(gui);
 		this.setLayout(new BorderLayout());
 		try {
-			bg = ImageIO.read(new File("images/redBG.jpg"));
+			bg = ImageIO.read(new File("images/greenBG.jpg"));
 		} catch (IOException e1) {}
 		this.setLayout(new BorderLayout());
 		mazePanel = new MazePanel(getGUI());

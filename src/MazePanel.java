@@ -35,15 +35,7 @@ public class MazePanel extends JPanel implements Observer {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		requestFocusInWindow();
-		int xpad = 0;
-		int ypad = 0;
-		int difficulty = gui.getModel().getDifficulty();
-		switch (difficulty) {
-			case 16: xpad = 0; ypad = -12; break;
-			case 24: xpad = 8; ypad = 5; break;
-			case 32: xpad = 16; ypad = -12; break;
-		}
-		g.drawImage(bImage, 0, 0, 656 + xpad, 656 + ypad, null);
+		g.drawImage(bImage, 0, 0, null);
 		int w = getWidth()/gui.getModel().getDifficulty();
 		int h = getHeight()/gui.getModel().getDifficulty();
 		int[] pos = gui.getModel().getPlayerPos();
@@ -63,7 +55,8 @@ public class MazePanel extends JPanel implements Observer {
 			int w = getWidth()/gui.getModel().getDifficulty();
 			int h = getHeight()/gui.getModel().getDifficulty();
 			boolean mode = gui.getModel().isClassicMode();
-			bImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+			int difficulty = gui.getModel().getDifficulty();
+			bImage = new BufferedImage(difficulty*(getWidth()/difficulty), difficulty*(getHeight()/difficulty), BufferedImage.TYPE_INT_RGB);
 			Graphics2D g = bImage.createGraphics();
 			for (BaseState s: gui.getModel().getMaze()) {
 				int x = s.getX(); int y = s.getY();
