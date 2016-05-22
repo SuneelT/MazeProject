@@ -26,36 +26,51 @@ public class MenuScreen extends Screen {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 
-		playButton = new JButton("Play");
-		playButton.setBackground(Color.WHITE);
-		playButton.setForeground(Color.BLACK);
-		playButton.setFocusPainted(false);
-		playButton.setFont(new Font("Ariel", Font.BOLD, 40));
+		playButton = new JButton(new ImageIcon("images/buttonplay.png"));
+		playButton.setBorder(BorderFactory.createEmptyBorder());
+		playButton.setContentAreaFilled(false);
 		c.gridx = 0;
 		c.gridy = 0;
 		c.weightx = 0.5;
 		c.weighty = 0.5;
-		c.insets = new Insets(20, 120, 20, 20);
+		c.insets = new Insets(0, 10, 20,0);
 		playButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				getModel().createMaze();
 				getGUI().switchScreen("Maze");
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				playButton.setIcon(new ImageIcon("images/buttonplayfilled.png"));
+
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				playButton.setIcon(new ImageIcon("images/buttonplay.png"));
+
+			}
 		});
 		this.add(playButton, c);
 
-		helpButton = new JButton("Help");
-		helpButton.setBackground(Color.WHITE);
-		helpButton.setForeground(Color.BLACK);
+		helpButton = new JButton(new ImageIcon("images/buttonhelp.png"));
+		helpButton.setBorder(BorderFactory.createEmptyBorder());
+		helpButton.setContentAreaFilled(false);
 		helpButton.setFocusPainted(false);
-		helpButton.setFont(new Font("Ariel", Font.BOLD, 40));
         c.gridx = 1;
-        c.insets = new Insets(20, 20, 20, 120);
+        c.insets = new Insets(0, 20, 20, 0);
         helpButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				getGUI().switchScreen("Help");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				helpButton.setIcon(new ImageIcon("images/buttonhelpfilled.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				helpButton.setIcon(new ImageIcon("images/buttonhelp.png"));
 			}
 		});
         this.add(helpButton, c);
@@ -68,52 +83,58 @@ public class MenuScreen extends Screen {
         c.weightx = 0.5;
         c.weighty = 0.5;
         c.insets = new Insets(20, 20, 20, 20);
-        
-        JRadioButton easy = new JRadioButton("Easy", true);
-		easy.setBackground(Color.GREEN);
-	    easy.setForeground(Color.WHITE);
-	    easy.setFocusPainted(false);
-	    easy.setFont(new Font("Ariel", Font.BOLD, 50));
+
+        final JButton easy = new JButton(new ImageIcon("images/easy.png"));
+        easy.setBorder(BorderFactory.createEmptyBorder());
+		easy.setContentAreaFilled(false);
+
+	    
+	    final JButton medium = new JButton(new ImageIcon("images/medium.png"));
+	    medium.setBorder(BorderFactory.createEmptyBorder());
+		medium.setContentAreaFilled(false);
+	    
+	    final JButton hard = new JButton(new ImageIcon("images/hard.png"));
+	    hard.setBorder(BorderFactory.createEmptyBorder());
+		hard.setContentAreaFilled(false);
 
         difficulty.add(easy, c);
 	    easy.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			getModel().setDifficulty(EASY);
-		}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				getModel().setDifficulty(EASY);
+				easy.setIcon(new ImageIcon("images/easyselect.png"));
+				medium.setIcon(new ImageIcon("images/medium.png"));
+				hard.setIcon(new ImageIcon("images/hard.png"));
+			}
+
 		});
 	    
-	    JRadioButton medium = new JRadioButton("Medium");
-		medium.setBackground(Color.ORANGE);
-	    medium.setForeground(Color.WHITE);
-	    medium.setFocusPainted(false);
-	    medium.setFont(new Font("Ariel", Font.BOLD, 50));
+	    
         c.gridy = 1;
         difficulty.add(medium, c);
 	    medium.addMouseListener(new MouseAdapter() {
 		@Override
             public void mouseClicked(MouseEvent e) {
                 getModel().setDifficulty(MEDIUM);
+                easy.setIcon(new ImageIcon("images/easy.png"));
+				medium.setIcon(new ImageIcon("images/mediumselect.png"));
+				hard.setIcon(new ImageIcon("images/hard.png"));
             }
 		});
 	    
-	    JRadioButton hard = new JRadioButton("Hard");
-		hard.setBackground(Color.RED);
-	    hard.setForeground(Color.WHITE);
-	    hard.setFocusPainted(false);
-	    hard.setFont(new Font("Ariel", Font.BOLD, 50));
+	  
         c.gridy = 2;
         difficulty.add(hard, c);
 	    hard.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
             	getModel().setDifficulty(HARD);
+            	easy.setIcon(new ImageIcon("images/easy.png"));
+				medium.setIcon(new ImageIcon("images/medium.png"));
+				hard.setIcon(new ImageIcon("images/hardselect.png"));
                 }
 		});
-	    ButtonGroup difficultyButtons = new ButtonGroup();
-	    difficultyButtons.add(easy);
-	    difficultyButtons.add(medium);
-	    difficultyButtons.add(hard);
+
 	    
 	    this.add(difficulty);
 	    
