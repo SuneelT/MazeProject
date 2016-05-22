@@ -17,7 +17,7 @@ public class Collectable {
 		this.y = generator.nextInt(size-1);
 		this.collected = false;
 		setImage(mode, index);
-	}
+	} 
 	
 	public void setImage(int mode, int index) {
 		try {

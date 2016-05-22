@@ -5,7 +5,7 @@ public class CollectableState extends StateDecorator {
 		super(state);
 		item = null;
 	}
-	
+	 
 	public void addCollectable (Collectable item) {
 		this.item = item;
 	}

@@ -11,7 +11,7 @@ public class HelpScreen extends Screen {
 	JButton returnButton;
     JLabel text;
     private Image bg;
-
+ 
     public HelpScreen(GUI gui) {
         setGUI(gui);
 		this.setBackground(Color.black);

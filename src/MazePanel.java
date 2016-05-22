@@ -7,7 +7,6 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -98,7 +97,7 @@ public class MazePanel extends JPanel implements Observer {
 					if (!cstate.checkCollected()) {
 						g.drawImage(cstate.getCollectable().getImage(), x*w, y*h, w, h, null);
 					}
-				}
+				} 
 			}
 		} catch(IOException e) {System.err.println("Images not found.");}
 	}

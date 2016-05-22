@@ -1,5 +1,5 @@
 public class State implements BaseState {
-	private Edge up;
+	private Edge up; 
 	private Edge down;
 	private Edge left;
 	private Edge right;

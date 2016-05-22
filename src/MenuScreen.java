@@ -10,7 +10,7 @@ public class MenuScreen extends Screen {
 	private static final long serialVersionUID = -1725872337351590898L;
 	private JButton playButton;
 	private JButton helpButton;
-	private final int EASY = 16;
+	private final int EASY = 16; 
 	private final int MEDIUM = 24;
 	private final int HARD = 32;
 	private Image bg;

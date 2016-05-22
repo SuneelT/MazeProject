@@ -8,7 +8,7 @@ public class Edge {
 		this.from = from;
 		this.to = to;
 		this.wall = wall;
-	}
+	} 
 	
 	public BaseState getTo() {
 		return this.to;

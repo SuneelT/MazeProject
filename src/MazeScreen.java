@@ -13,7 +13,7 @@ import javax.swing.*;
 public class MazeScreen extends Screen {
 	private static final long serialVersionUID = -8972885841964219641L;
 	JPanel mazePanel;
-	private Clip clip; 
+	private Clip clip;  
 	//private boolean muted;
 	private Image bg;
 	

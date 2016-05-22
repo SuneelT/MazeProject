@@ -1,5 +1,5 @@
 
-public interface BaseState {
+public interface BaseState { 
 
 	public int getX();
 	

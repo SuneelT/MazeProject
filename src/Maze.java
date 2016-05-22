@@ -6,7 +6,7 @@ public class Maze implements Iterable<BaseState> {
 	private BaseState[][] states = null;
 	private CollectableState[][] cStates = null;
 	private int size;
-	
+	 
 	public Maze(int size, boolean mode) {
 		this.size = size;
 		if (mode) createClassicMaze();
@@ -117,7 +117,6 @@ public class Maze implements Iterable<BaseState> {
 		if (states == null) return cisConnected(x,y,dir);
 		switch (dir) {
 		case 0:
-			if (states != null)
 			return states[x][y].getUp() != null;
 		case 1:
 			return states[x][y].getDown() != null;
@@ -133,7 +132,6 @@ public class Maze implements Iterable<BaseState> {
 	private boolean cisConnected(int x, int y, int dir) {
 		switch (dir) {
 		case 0:
-			if (states != null)
 			return cStates[x][y].getUp() != null;
 		case 1:
 			return cStates[x][y].getDown() != null;

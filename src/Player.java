@@ -1,6 +1,6 @@
 import java.util.Observer;
 
-public interface Player {
+public interface Player { 
 	public void move(int direction, Maze maze);
 	public void reset();
 	public int[] getCoords();

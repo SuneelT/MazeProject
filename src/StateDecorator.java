@@ -1,6 +1,6 @@
 
 public class StateDecorator implements BaseState{
-	private BaseState state;
+	private BaseState state; 
 	
 	public StateDecorator(BaseState state) {
 		this.state = state;

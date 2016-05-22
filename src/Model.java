@@ -2,7 +2,7 @@ import java.util.Observer;
 
 public class Model {
 	private Maze maze;
-	private Player player;
+	private Player player; 
 	private int difficulty = 16;
 	private boolean isClassic = true;
 	

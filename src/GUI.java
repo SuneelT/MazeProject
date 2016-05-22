@@ -10,7 +10,7 @@ public class GUI extends JFrame {
 	private String lastScreen;
 	private final int WIDTH = 840;
 	private final int HEIGHT = 680;
-
+ 
 	/**
 	 * This main function begins by adding to queue of runnable threads our GUI. This synchronises the GUI and prevents it from doing things like
 	 * hang unresponsively. The GUI that is created extends JFrame which is necessary to put JPanels on top of. After the creation of the top-level

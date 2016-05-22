@@ -3,7 +3,7 @@ import java.util.Observable;
 
 public class SimplePlayer extends Observable implements Player {
 	private int x;
-	private int y;
+	private int y; 
 	
 	public SimplePlayer() {
 		this.x = 0;
