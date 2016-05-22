@@ -6,9 +6,10 @@ public class Maze implements Iterable<BaseState> {
 	private BaseState[][] states = null;
 	private CollectableState[][] cStates = null;
 	private int size;
+	private boolean isClassic = true;
 	 
 	public Maze(int size, boolean mode) {
-		this.size = size;
+		this.size = size; setClassic(mode);
 		if (mode) createClassicMaze();
 		else createCollectorMaze();
 	}
@@ -171,5 +172,18 @@ public class Maze implements Iterable<BaseState> {
 			public void remove() {}
 		};
 		return it;
+	}
+
+	public boolean isClassic() {
+		return isClassic;
+	}
+
+	public void setClassic(boolean isClassic) {
+		this.isClassic = isClassic;
+	}
+
+	public BaseState getState(int x, int y) {
+		if (states != null) return states[x][y];
+		else return cStates[x][y];
 	}
 }

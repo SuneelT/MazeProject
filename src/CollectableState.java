@@ -1,3 +1,5 @@
+import java.awt.Image;
+
 public class CollectableState extends StateDecorator {
 	private Collectable item;
 	
@@ -14,12 +16,16 @@ public class CollectableState extends StateDecorator {
 		return item;
 	}
 	
-	public void takeCollectable() {
+	public void collect() {
 		this.item = null;
 	}
 	
 	public boolean checkCollected() {
 		return (item == null);
 	}
-
+	
+	public Image getCollectableSprite() {
+		if (item == null) return null;
+		else return item.getImage();
+	}
 }

@@ -1,3 +1,4 @@
+import java.awt.Image;
 import java.util.Observer;
 
 public class Model {
@@ -5,6 +6,8 @@ public class Model {
 	private Player player; 
 	private int difficulty = 16;
 	private boolean isClassic = true;
+	private final int MEDIUM = 24;
+	private final int HARD = MEDIUM+8;
 	
 	public Model() {
 		player = new SimplePlayer();
@@ -12,7 +15,9 @@ public class Model {
 	
 	public void createMaze() {
 		maze = new Maze(difficulty, isClassic);
-		player.reset(); 
+		if (difficulty == MEDIUM) player.reset(3);
+		else if (difficulty == HARD)player.reset(5);
+		else player.reset(0);
 	}
 
 	public void updatePlayer(int dir) {
@@ -49,5 +54,14 @@ public class Model {
 	
 	public boolean isClassicMode () {
 		return isClassic;
+	}
+
+	public Image getPlayerSprite() {
+		return player.getSprite();
+	}
+
+	public boolean allCollected() {
+		if (player.getNumLeft() == 0) return true;
+		else return false;
 	}
 }

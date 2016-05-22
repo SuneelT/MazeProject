@@ -33,7 +33,7 @@ public class MazeScreen extends Screen {
 		otherControls.setOpaque(false);
 		
 		final JButton exitButton = new JButton(new ImageIcon("images/exit.png"));
-		exitButton.setBorder(BorderFactory.createEmptyBorder());
+		exitButton.setBorder(null);
 		exitButton.setContentAreaFilled(false);
 		exitButton.addMouseListener(new MouseAdapter() {
 			@Override

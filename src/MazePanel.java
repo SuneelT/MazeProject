@@ -17,6 +17,7 @@ public class MazePanel extends JPanel implements Observer {
 	private static final long serialVersionUID = -3329021623371321857L;
 	private GUI gui;
 	private BufferedImage bImage;
+	private BufferedImage end;
 		
 	public MazePanel(GUI guii) {
 		this.gui = guii;
@@ -28,7 +29,7 @@ public class MazePanel extends JPanel implements Observer {
 		});
 		this.setOpaque(false);
 		this.setFocusable(true);
-		this.setPreferredSize(new Dimension(656, 656));
+		this.setPreferredSize(new Dimension(670, 750));
 	}
 		
 	@Override
@@ -36,11 +37,18 @@ public class MazePanel extends JPanel implements Observer {
 		super.paintComponent(g);
 		requestFocusInWindow();
 		g.drawImage(bImage, 0, 0, null);
-		int w = getWidth()/gui.getModel().getDifficulty();
-		int h = getHeight()/gui.getModel().getDifficulty();
+		int difficulty = gui.getModel().getDifficulty();
+		int w = getWidth()/difficulty; int h = getHeight()/difficulty;
 		int[] pos = gui.getModel().getPlayerPos();
-		g.setColor(Color.BLACK);
-		g.drawOval(pos[0]*w, pos[1]*h, w, h);
+		if (!gui.getModel().isClassicMode()) {
+			for (BaseState s: gui.getModel().getMaze()) {
+				CollectableState cState = (CollectableState) s;
+				if (!cState.checkCollected())
+					g.drawImage(cState.getCollectableSprite(), cState.getX()*w, cState.getY()*h, w, h, null);
+			}
+			if (!gui.getModel().allCollected()) g.drawImage(this.end, (difficulty-1)*w, (difficulty-1)*h, w, h, null);
+		}
+		g.drawImage(gui.getModel().getPlayerSprite(), pos[0]*w, pos[1]*h, w, h, null);
 	}
 		
 	@Override
@@ -52,9 +60,9 @@ public class MazePanel extends JPanel implements Observer {
 
 	private void makeMaze() {
 		try {
+			this.end = ImageIO.read(new File("images/end_locked.bmp"));
 			int w = getWidth()/gui.getModel().getDifficulty();
 			int h = getHeight()/gui.getModel().getDifficulty();
-			boolean mode = gui.getModel().isClassicMode();
 			int difficulty = gui.getModel().getDifficulty();
 			bImage = new BufferedImage(difficulty*(getWidth()/difficulty), difficulty*(getHeight()/difficulty), BufferedImage.TYPE_INT_RGB);
 			Graphics2D g = bImage.createGraphics();
@@ -78,19 +86,13 @@ public class MazePanel extends JPanel implements Observer {
 				} else {
 					if (s.getRight() == null && s.getDown() == null) {
 						if (s.getX() == gui.getModel().getDifficulty() - 1 && s.getY() == gui.getModel().getDifficulty() - 1)
-							g.drawImage(ImageIO.read(new File("images/end.bmp")), x*w, y*h, w, h, null);
+							g.drawImage(ImageIO.read(new File("images/end_unlocked.bmp")), x*w, y*h, w, h, null);
 						else g.drawImage(ImageIO.read(new File("images/corner_bottom_right.bmp")), x*w, y*h, w, h, null);
 					}
 					else if (s.getRight() == null) g.drawImage(ImageIO.read(new File("images/wall_right.bmp")), x*w, y*h, w, h, null);
 					else if (s.getDown() == null) g.drawImage(ImageIO.read(new File("images/wall_bottom.bmp")), x*w, y*h, w, h, null);
 					else g.drawImage(ImageIO.read(new File("images/open.bmp")), x*w, y*h, w, h, null);
 				}
-				if (!mode) {
-					CollectableState cstate = (CollectableState) s;
-					if (!cstate.checkCollected()) {
-						g.drawImage(cstate.getCollectable().getImage(), x*w, y*h, w, h, null);
-					}
-				} 
 			}
 		} catch(IOException e) {System.err.println("Images not found.");}
 	}
