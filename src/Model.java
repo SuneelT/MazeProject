@@ -64,4 +64,11 @@ public class Model {
 		if (player.getNumLeft() == 0) return true;
 		else return false;
 	}
+
+	public void setCollectableOberver(Observer collected) {
+		if (isClassic) return;
+		for (BaseState s: maze) {
+			if (!((CollectableState) s).checkCollected()) ((CollectableState) s).addObserver(collected);
+		}
+	}
 }

@@ -57,4 +57,8 @@ public class GUI extends JFrame {
 	public void setPlayerObserver(Observer o) {
 		model.setPlayerObserver(o);
 	}
+
+	public void setCollectableObserver(Observer collected) {
+		model.setCollectableOberver(collected);
+	}
 }

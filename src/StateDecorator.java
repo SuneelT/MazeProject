@@ -1,5 +1,6 @@
+import java.util.Observable;
 
-public class StateDecorator implements BaseState{
+public class StateDecorator extends Observable implements BaseState{
 	private BaseState state; 
 	
 	public StateDecorator(BaseState state) {

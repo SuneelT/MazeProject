@@ -16,6 +16,8 @@ public class MazeScreen extends Screen {
 	private Clip clip;  
 	//private boolean muted;
 	private Image bg;
+	private final int MEDIUM = 24;
+	private final int HARD = 32;
 	
 	public MazeScreen(final GUI gui) {
 		setGUI(gui);
@@ -26,9 +28,9 @@ public class MazeScreen extends Screen {
 		this.setLayout(new BorderLayout());
 		mazePanel = new MazePanel(getGUI());
 		getGUI().setPlayerObserver((Observer)mazePanel);
-		this.add(mazePanel, BorderLayout.WEST);
+		this.add(mazePanel, BorderLayout.CENTER);
 		
-		JPanel otherControls = new JPanel(new GridLayout(2, 1, 100, 100));
+		JPanel otherControls = new JPanel(new GridLayout(3, 1, 100, 100));
 		this.add(otherControls, BorderLayout.EAST);
 		otherControls.setOpaque(false);
 		
@@ -57,6 +59,10 @@ public class MazeScreen extends Screen {
 
 			}
 		});
+		
+		JPanel collected = new CollectedPanel();
+		//getGUI().setCollectableObserver((Observer) collected);
+		
 		final JToggleButton muteButton = new JToggleButton(new ImageIcon("images/sound.png"));
 		
 		muteButton.setBorder(BorderFactory.createEmptyBorder());
@@ -93,6 +99,7 @@ public class MazeScreen extends Screen {
 	    });
 	    
 	    otherControls.add(muteButton);
+	    otherControls.add(collected);
 		otherControls.add(exitButton); 	
 		//music();
 	}
