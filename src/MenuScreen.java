@@ -86,15 +86,21 @@ public class MenuScreen extends Screen {
         final JButton easy = new JButton(new ImageIcon("images/easyselect.png"));
         easy.setBorder(BorderFactory.createEmptyBorder());
 		easy.setContentAreaFilled(false);
+		easy.setRolloverEnabled(true);
+		easy.setRolloverIcon(new ImageIcon("images/easyselect.png"));
 
 	    
 	    final JButton medium = new JButton(new ImageIcon("images/medium.png"));
 	    medium.setBorder(BorderFactory.createEmptyBorder());
 		medium.setContentAreaFilled(false);
+		medium.setRolloverEnabled(true);
+		medium.setRolloverIcon(new ImageIcon("images/mediumselect.png"));
 	    
 	    final JButton hard = new JButton(new ImageIcon("images/hard.png"));
 	    hard.setBorder(BorderFactory.createEmptyBorder());
 		hard.setContentAreaFilled(false);
+		hard.setRolloverEnabled(true);
+		hard.setRolloverIcon(new ImageIcon("images/hardselect.png"));
 
         difficulty.add(easy, c);
 	    easy.addMouseListener(new MouseAdapter() {
