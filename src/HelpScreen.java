@@ -25,10 +25,9 @@ public class HelpScreen extends Screen {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         
-        returnButton = new JButton("Return");
-        returnButton.setBackground(Color.WHITE);
-        returnButton.setFocusPainted(false);
-        returnButton.setFont(new Font("Ariel", Font.BOLD, 50));
+        returnButton = new JButton(new ImageIcon("images/buttonreturn.png"));
+        returnButton.setBorder(BorderFactory.createEmptyBorder());
+		returnButton.setContentAreaFilled(false);
         buttonPanel.add(returnButton);
         c.gridx = 0;
         c.gridy = 0;
@@ -42,6 +41,14 @@ public class HelpScreen extends Screen {
             public void mouseClicked(MouseEvent e) {
                 getGUI().switchToLastScreen();
             }
+            @Override
+			public void mouseEntered(MouseEvent e) {
+            	returnButton.setIcon(new ImageIcon("images/buttonreturnfilled.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				returnButton.setIcon(new ImageIcon("images/buttonreturn.png"));
+			}
         });
     	
     	this.add(buttonPanel, c);
