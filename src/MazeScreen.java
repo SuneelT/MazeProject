@@ -32,10 +32,9 @@ public class MazeScreen extends Screen {
 		this.add(otherControls, BorderLayout.EAST);
 		otherControls.setOpaque(false);
 		
-		JButton exitButton = new JButton("Exit To Menu");
-		exitButton.setOpaque(true);
+		final JButton exitButton = new JButton(new ImageIcon("images/exit.png"));
+		exitButton.setBorder(BorderFactory.createEmptyBorder());
 		exitButton.setContentAreaFilled(false);
-	    exitButton.setFont(new Font("Ariel", Font.BOLD, 20));
 		exitButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -44,13 +43,25 @@ public class MazeScreen extends Screen {
 				   JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
 					getGUI().switchScreen("Menu");
 				}
+				
 				mazePanel.requestFocusInWindow();
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				exitButton.setIcon(new ImageIcon("images/exitfilled.png"));
+
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				exitButton.setIcon(new ImageIcon("images/exit.png"));
+
+			}
 		});
-		JButton muteButton = new JButton("Mute");
-		muteButton.setOpaque(false);
+		final JButton muteButton = new JButton(new ImageIcon("images/sound.png"));
+		
+		muteButton.setBorder(BorderFactory.createEmptyBorder());
 		muteButton.setContentAreaFilled(false);
-	    muteButton.setFont(new Font("Ariel", Font.BOLD, 20));
+
 	    muteButton.addMouseListener(new MouseAdapter() {
 	        @Override
 	        public void mouseClicked(MouseEvent e) {
@@ -61,8 +72,17 @@ public class MazeScreen extends Screen {
 	           // 	clip.stop();
 	           // 	muted = true;
 	           // }
+	        	muteButton.setIcon(new ImageIcon("images/mute.png"));
 	            mazePanel.requestFocusInWindow();
             }
+	        @Override
+			public void mouseEntered(MouseEvent e) {
+				//muteButton.setIcon(new ImageIcon("images/soundhover.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				//muteButton.setIcon(new ImageIcon("images/sound.png"));
+			}
 	    });
 	    
 	    otherControls.add(muteButton);
