@@ -57,12 +57,13 @@ public class MazeScreen extends Screen {
 
 			}
 		});
-		final JButton muteButton = new JButton(new ImageIcon("images/sound.png"));
+		final JToggleButton muteButton = new JToggleButton(new ImageIcon("images/sound.png"));
 		
 		muteButton.setBorder(BorderFactory.createEmptyBorder());
 		muteButton.setContentAreaFilled(false);
 
 	    muteButton.addMouseListener(new MouseAdapter() {
+	    	int clicked = 0;
 	        @Override
 	        public void mouseClicked(MouseEvent e) {
 	           // if (muted == true) {
@@ -72,7 +73,13 @@ public class MazeScreen extends Screen {
 	           // 	clip.stop();
 	           // 	muted = true;
 	           // }
-	        	muteButton.setIcon(new ImageIcon("images/mute.png"));
+	        	clicked ++;
+	        	if (clicked%2==0){
+		             muteButton.setIcon(new ImageIcon("images/sound.png"));
+	              } else {
+		              muteButton.setIcon(new ImageIcon("images/mute.png"));         	 
+	             }
+	        	
 	            mazePanel.requestFocusInWindow();
             }
 	        @Override
