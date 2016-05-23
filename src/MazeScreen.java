@@ -34,6 +34,7 @@ public class MazeScreen extends Screen {
 		
 		final JButton exitButton = new JButton(new ImageIcon("images/exit.png"));
 		exitButton.setBorder(null);
+		exitButton.setBorder(BorderFactory.createEmptyBorder());
 		exitButton.setContentAreaFilled(false);
 		exitButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -62,7 +63,7 @@ public class MazeScreen extends Screen {
 		getGUI().setCollectableObserver((Observer) collected);
 		
 		final JToggleButton muteButton = new JToggleButton(new ImageIcon("images/sound.png"));
-		
+		muteButton.setBorder(BorderFactory.createEmptyBorder());
 		muteButton.setBorder(BorderFactory.createEmptyBorder());
 		muteButton.setContentAreaFilled(false);
 
