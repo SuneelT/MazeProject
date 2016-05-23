@@ -10,13 +10,12 @@ public class Collectable {
 	private int y;
 	private BufferedImage icon; 
 	private BufferedImage bwIcon;
-	private boolean collected;
+	private boolean collected = false;
 	
 	public Collectable (int size, int mode, int index) {
 		Random generator = new Random();
 		this.x = generator.nextInt(size-1);
 		this.y = generator.nextInt(size-1);
-		this.collected = false;
 		setImage(mode, index);
 	} 
 	
@@ -65,5 +64,9 @@ public class Collectable {
 
 	public BufferedImage getBWImage() {
 		return bwIcon;
+	}
+	
+	public void collect() {
+		collected = true;
 	}
 }
