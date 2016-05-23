@@ -27,7 +27,7 @@ public class WinScreen extends Screen{
         c.insets = new Insets(50, 50, 0, 0);
         this.add(fireworks, c);
 
-        JButton newGameButton = new JButton("New Game");
+        JButton newGameButton = new JButton("Play Again");
         newGameButton.setContentAreaFilled(false);
         c.gridx = 0;
         c.gridy = 1;
