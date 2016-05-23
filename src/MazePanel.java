@@ -50,7 +50,7 @@ public class MazePanel extends JPanel implements Observer {
 		
 	@Override
 	public void update(Observable observable, Object object) {
-		if (object.equals(true)) gui.switchScreen("Menu");
+		if (object.equals(true)) gui.switchScreen("Win");
 		else if (object.equals("Create")) makeMaze();
 		else repaint();
 	}
