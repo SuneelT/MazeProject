@@ -1,18 +1,21 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-public class Collectable {
+public class Collectable implements Comparator<Collectable> {
 	private int x;
 	private int y;
 	private BufferedImage icon; 
 	private BufferedImage bwIcon;
 	private boolean collected = false;
+	private int index;
 	
 	public Collectable (int size, int mode, int index) {
+		this.index = index;
 		Random generator = new Random();
 		this.x = generator.nextInt(size-1);
 		this.y = generator.nextInt(size-1);
@@ -21,10 +24,11 @@ public class Collectable {
 	
 	public void setImage(int mode, int index) {
 		try {
-		if (mode == 1) {
+		if (mode == 0) {
+			icon = ImageIO.read(new File("images/key.png")); bwIcon = ImageIO.read(new File("images/keyBlack.PNG"));
+		} else if (mode == 1) {
 			switch (index) {
-			case 0:
-				icon = ImageIO.read(new File("images/F.png")); bwIcon = ImageIO.read(new File("images/FBlack.PNG")); break;
+			case 0: icon = ImageIO.read(new File("images/F.png")); bwIcon = ImageIO.read(new File("images/FBlack.PNG")); break;
 			case 1: icon = ImageIO.read(new File("images/U.png")); bwIcon = ImageIO.read(new File("images/UBlack.PNG")); break;
 			case 2: icon = ImageIO.read(new File("images/N.png")); bwIcon = ImageIO.read(new File("images/NBlack.PNG")); break;
 			}
@@ -68,5 +72,19 @@ public class Collectable {
 	
 	public void collect() {
 		collected = true;
+	}
+	
+	public int getIndex() {
+		return index;
+	}
+
+	@Override
+	public int compare(Collectable arg0, Collectable arg1) {
+		if (arg0.index > arg1.index) {
+			return 1;
+		} else if (arg0.index == arg1.index) {
+			return 0;
+		}
+		return -1;
 	}
 }
