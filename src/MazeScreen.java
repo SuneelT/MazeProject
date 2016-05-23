@@ -16,8 +16,6 @@ public class MazeScreen extends Screen {
 	private Clip clip;  
 	//private boolean muted;
 	private Image bg;
-	private final int MEDIUM = 24;
-	private final int HARD = 32;
 	
 	public MazeScreen(final GUI gui) {
 		setGUI(gui);
@@ -61,7 +59,7 @@ public class MazeScreen extends Screen {
 		});
 		
 		JPanel collected = new CollectedPanel();
-		//getGUI().setCollectableObserver((Observer) collected);
+		getGUI().setCollectableObserver((Observer) collected);
 		
 		final JToggleButton muteButton = new JToggleButton(new ImageIcon("images/sound.png"));
 		

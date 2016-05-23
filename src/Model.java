@@ -8,6 +8,7 @@ public class Model {
 	private boolean isClassic = true;
 	private final int MEDIUM = 24;
 	private final int HARD = MEDIUM+8;
+	private Observer collectorObserver;
 	
 	public Model() {
 		player = new SimplePlayer();
@@ -15,9 +16,16 @@ public class Model {
 	
 	public void createMaze() {
 		maze = new Maze(difficulty, isClassic);
-		if (difficulty == MEDIUM) player.reset(3);
-		else if (difficulty == HARD)player.reset(5);
+		if (difficulty == MEDIUM && !isClassic) player.reset(3);
+		else if (difficulty == HARD && !isClassic) player.reset(5);
 		else player.reset(0);
+		if (isClassic) return;
+		for (BaseState s: maze) {
+			if (!((CollectableState) s).checkCollected()) {
+				((CollectableState) s).addObserver(this.collectorObserver);
+				((CollectableState) s).signal();
+			}
+		}
 	}
 
 	public void updatePlayer(int dir) {
@@ -66,9 +74,6 @@ public class Model {
 	}
 
 	public void setCollectableOberver(Observer collected) {
-		if (isClassic) return;
-		for (BaseState s: maze) {
-			if (!((CollectableState) s).checkCollected()) ((CollectableState) s).addObserver(collected);
-		}
+		this.collectorObserver = collected;
 	}
 }

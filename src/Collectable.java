@@ -1,4 +1,4 @@
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
@@ -8,7 +8,8 @@ import javax.imageio.ImageIO;
 public class Collectable {
 	private int x;
 	private int y;
-	private Image icon; 
+	private BufferedImage icon; 
+	private BufferedImage bwIcon;
 	private boolean collected;
 	
 	public Collectable (int size, int mode, int index) {
@@ -23,17 +24,18 @@ public class Collectable {
 		try {
 		if (mode == 1) {
 			switch (index) {
-			case 0: icon = ImageIO.read(new File("images/F.png")); break;
-			case 1: icon = ImageIO.read(new File("images/U.png")); break;
-			case 2: icon = ImageIO.read(new File("images/N.png")); break;
+			case 0:
+				icon = ImageIO.read(new File("images/F.png")); bwIcon = ImageIO.read(new File("images/FBlack.PNG")); break;
+			case 1: icon = ImageIO.read(new File("images/U.png")); bwIcon = ImageIO.read(new File("images/UBlack.PNG")); break;
+			case 2: icon = ImageIO.read(new File("images/N.png")); bwIcon = ImageIO.read(new File("images/NBlack.PNG")); break;
 			}
 		} else if (mode == 2) {
 			switch (index) {
-			case 0: icon = ImageIO.read(new File("images/L.png")); break;
-			case 1: icon = ImageIO.read(new File("images/E.png")); break;
-			case 2: icon = ImageIO.read(new File("images/A.png")); break;
-			case 3: icon = ImageIO.read(new File("images/R.png")); break;
-			case 4: icon = ImageIO.read(new File("images/N.png")); break;
+			case 0: icon = ImageIO.read(new File("images/L.png")); bwIcon = ImageIO.read(new File("images/LBlack.PNG")); break;
+			case 1: icon = ImageIO.read(new File("images/E.png")); bwIcon = ImageIO.read(new File("images/EBlack.PNG")); break;
+			case 2: icon = ImageIO.read(new File("images/A.png")); bwIcon = ImageIO.read(new File("images/ABlack.PNG")); break;
+			case 3: icon = ImageIO.read(new File("images/R.png")); bwIcon = ImageIO.read(new File("images/RBlack.PNG")); break;
+			case 4: icon = ImageIO.read(new File("images/N.png")); bwIcon = ImageIO.read(new File("images/NBlack.PNG")); break;
 			}
 		}
 		} catch (IOException e) {
@@ -41,7 +43,7 @@ public class Collectable {
 		}
 	}
 	
-	public Image getImage() {
+	public BufferedImage getCollectedImage() {
 		return icon;
 	}
 	
@@ -59,5 +61,9 @@ public class Collectable {
 	
 	public boolean returnStatus() {
 		return collected;
+	}
+
+	public BufferedImage getBWImage() {
+		return bwIcon;
 	}
 }

@@ -1,4 +1,4 @@
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public class CollectableState extends StateDecorator {
 	private Collectable item;
@@ -24,8 +24,17 @@ public class CollectableState extends StateDecorator {
 		return (item == null);
 	}
 	
-	public Image getCollectableSprite() {
+	public BufferedImage getCollectableSprite() {
 		if (item == null) return null;
-		else return item.getImage();
+		else return item.getCollectedImage();
+	}
+
+	public void signal() {
+		setChanged();
+		notifyObservers("Create");
+	}
+
+	public BufferedImage getUncollectedSprite() {
+		return item.getBWImage();
 	}
 }
