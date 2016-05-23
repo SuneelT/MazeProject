@@ -83,6 +83,11 @@ public class Maze implements Iterable<BaseState> {
 		
 		while (edges.size() != 0) {
 			int index = generator.nextInt(edges.size());
+			int factor = generator.nextInt(3);
+			switch (factor) {
+			case 0: index = index/3; break;	
+			case 2: index = edges.size() - 1 - index/3; break;	
+			}
 			examine = edges.remove(index);
 			
 			ArrayList<BaseState> visited = new ArrayList<BaseState>();
