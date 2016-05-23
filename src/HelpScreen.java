@@ -54,12 +54,13 @@ public class HelpScreen extends Screen {
     	this.add(buttonPanel, c);
 
         text = new JLabel("<html>Use the arrow keys on your keyboard to guide your character to the exit. The exit is the"
-        		+ "bottom right-hand corner of the maze.</html>", JLabel.CENTER);
-        text.setFont(new Font("Ariel",Font.PLAIN, 30));
+        		+ " bottom right-hand corner of the maze." + "<br><br>This is your player! <br><br> This is the end!"
+        		+ "<br><br>If you're playing collectable mode - collect objects to spell out a word and exit the maze!</html>", JLabel.CENTER);
+        text.setFont(new Font("Ariel",Font.PLAIN, 25));
         c.gridy = 1;
-        c.ipadx = 500;
+        c.ipadx = 390;
         c.ipady = 10;
-        c.insets = new Insets(20, 20, 250, 20);
+        c.insets = new Insets(20, 20, 110, 200);
         c.anchor = GridBagConstraints.CENTER;
         this.add(text, c);
     }
