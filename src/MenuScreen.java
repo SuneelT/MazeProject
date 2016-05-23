@@ -144,15 +144,21 @@ public class MenuScreen extends Screen {
 	    this.add(difficulty);
 	    
 	    JPanel mode = new JPanel();
-	    JRadioButton collector = new JRadioButton("Collector");
+	    mode.setOpaque(false);
+	    final JToggleButton collector = new JToggleButton(new ImageIcon("images/collector.png"));
+	    collector.setBorder(BorderFactory.createEmptyBorder());
+        collector.setContentAreaFilled(false);
+
 	    collector.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
 	    		if (classic == true) {
 	    			getModel().setCollectorMode();
+	    			collector.setIcon(new ImageIcon("images/collectorfilled.png"));
 	    			classic = false;
 	    		} else {
 	    			getModel().setClassicMode();
+	    			collector.setIcon(new ImageIcon("images/collector.png"));
 	    			classic = true;
 	    		}
 	    	}
