@@ -18,6 +18,8 @@ public class CollectableState extends StateDecorator {
 	
 	public void collect() {
 		this.item = null;
+		setChanged();
+		notifyObservers("Collect")
 	}
 	
 	public boolean checkCollected() {
