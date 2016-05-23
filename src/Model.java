@@ -20,10 +20,12 @@ public class Model {
 		else if (difficulty == HARD && !isClassic) player.reset(5);
 		else player.reset(0);
 		if (isClassic) return;
+		boolean first = true;
 		for (BaseState s: maze) {
 			if (!((CollectableState) s).checkCollected()) {
 				((CollectableState) s).addObserver(this.collectorObserver);
-				((CollectableState) s).signal();
+				if (first) {((CollectableState) s).signal("First"); first = false;}
+				else ((CollectableState) s).signal("Create");
 			}
 		}
 	}

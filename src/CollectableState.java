@@ -17,21 +17,23 @@ public class CollectableState extends StateDecorator {
 	}
 	
 	public void collect() {
-		this.item = null;
+		item.collect();
+		setChanged();
+		notifyObservers("Collect");
 	}
 	
 	public boolean checkCollected() {
-		return (item == null);
+		if (item == null) return true;
+		return item.returnStatus();
 	}
 	
-	public BufferedImage getCollectableSprite() {
-		if (item == null) return null;
-		else return item.getCollectedImage();
+	public BufferedImage getCollectedSprite() {
+		return item.getCollectedImage();
 	}
 
-	public void signal() {
+	public void signal(String sig) {
 		setChanged();
-		notifyObservers("Create");
+		notifyObservers(sig);
 	}
 
 	public BufferedImage getUncollectedSprite() {
