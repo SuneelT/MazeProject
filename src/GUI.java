@@ -32,8 +32,9 @@ public class GUI extends JFrame {
 		cards.add(new MazeScreen(this), "Maze"); cards.getComponent(0).setName("Maze");
 		cards.add(new MenuScreen(this), "Menu"); cards.getComponent(1).setName("Menu");
 		cards.add(new HelpScreen(this), "Help"); cards.getComponent(2).setName("Help");
+		cards.add(new WinScreen(this), "Win"); cards.getComponent(3).setName("Win");
 		getContentPane().add(cards);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true); setSize(WIDTH, HEIGHT); setResizable(false);
         switchScreen("Menu");
 	}
