@@ -34,6 +34,7 @@ public class CollectedPanel extends JPanel implements Observer {
 					collectables.put((Observable) s, tile);
 					this.add(tile);
 				}
+				break;
 			case "Collect":
 				tile = collectables.get(arg0);
 				tile.setSprite(((CollectableState) arg0).getCollectedSprite());

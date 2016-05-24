@@ -27,7 +27,7 @@ public class Model {
 			if (!((CollectableState) s).checkCollected()) {
 				((CollectableState) s).addObserver(this.collectorObserver);
 				((CollectableState) s).signal("Create");
-			}
+			} else if (s.getX() == difficulty-1 && s.getY() == difficulty-1) ((CollectableState) s).signal("Done");
 		}
 	}
 
