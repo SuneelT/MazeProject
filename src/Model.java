@@ -6,7 +6,8 @@ public class Model {
 	private Player player; 
 	private int difficulty = 16;
 	private boolean isClassic = true;
-	private final int MEDIUM = 24;
+	private final int EASY = 16;
+	private final int MEDIUM = EASY+8;
 	private final int HARD = MEDIUM+8;
 	private Observer collectorObserver;
 	
@@ -16,16 +17,16 @@ public class Model {
 	
 	public void createMaze() {
 		maze = new Maze(difficulty, isClassic);
-		if (difficulty == MEDIUM && !isClassic) player.reset(3);
-		else if (difficulty == HARD && !isClassic) player.reset(5);
-		else player.reset(0);
+		player.reset(0);
+		((CollectedPanel) collectorObserver).reset();
 		if (isClassic) return;
-		boolean first = true;
+		if (difficulty == MEDIUM) player.reset(3);
+		else if (difficulty == HARD) player.reset(5);
+		else if (difficulty == EASY) player.reset(1);
 		for (BaseState s: maze) {
 			if (!((CollectableState) s).checkCollected()) {
 				((CollectableState) s).addObserver(this.collectorObserver);
-				if (first) {((CollectableState) s).signal("First"); first = false;}
-				else ((CollectableState) s).signal("Create");
+				((CollectableState) s).signal("Create");
 			}
 		}
 	}

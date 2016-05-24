@@ -13,7 +13,7 @@ public class MenuScreen extends Screen {
 	private final int MEDIUM = 24;
 	private final int HARD = 32;
 	private Image bg;
-	private boolean classic;
+	private boolean classic = true;
 
 	public MenuScreen(GUI gui) {
 		setGUI(gui);
@@ -148,7 +148,8 @@ public class MenuScreen extends Screen {
 	    final JToggleButton collector = new JToggleButton(new ImageIcon("images/collector.png"));
 	    collector.setBorder(BorderFactory.createEmptyBorder());
         collector.setContentAreaFilled(false);
-
+        collector.setRolloverEnabled(true);
+        collector.setRolloverIcon(new ImageIcon("images/collectorfilled.png"));
 	    collector.addMouseListener(new MouseAdapter() {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {

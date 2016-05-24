@@ -34,7 +34,7 @@ public class Maze implements Iterable<BaseState> {
 		
 		int difficulty = -1; int index = 0;
 		switch (size) {
-		case 16: difficulty = 0; break;
+		case 16: difficulty = 0; index = 1; break;
 		case 24: difficulty = 1; index = 3; break;
 		case 32: difficulty = 2; index = 5; break;
 		}

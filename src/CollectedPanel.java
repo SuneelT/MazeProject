@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.PriorityQueue;
 
 import javax.swing.*;
 
@@ -11,6 +12,7 @@ public class CollectedPanel extends JPanel implements Observer {
 	private static final long serialVersionUID = -4222092480497835994L;
 	private int nCollectables = 0;
 	private Hashtable<Observable, CollectedTile> collectables = new Hashtable<Observable, CollectedTile>();
+	private PriorityQueue<CollectableState> tmpList = new PriorityQueue<CollectableState>();
 
 	public CollectedPanel() {
 		this.setVisible(false); this.setOpaque(false);
@@ -19,23 +21,29 @@ public class CollectedPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (!this.isVisible()) this.setVisible(true);
-		CollectedTile tmp;
+		CollectedTile tile;
 		switch((String) arg1) {
-			case "First":
-				this.removeAll();
-				nCollectables = 0;
 			case "Create":
-				this.setLayout(new GridLayout(++nCollectables, 1, 10, 10));
-				tmp = new CollectedTile();
-				tmp.setSprite(((CollectableState) arg0).getUncollectedSprite());
-				collectables.put(arg0, tmp);
-				this.add(tmp);
+				this.setLayout(new GridLayout(++nCollectables, 1));
+				tmpList.add(((CollectableState)arg0));
 				break;
+			case "Done":
+				for (CollectableState s: tmpList) {
+					tile = new CollectedTile();
+					tile.setSprite(s.getUncollectedSprite());
+					collectables.put((Observable) s, tile);
+					this.add(tile);
+				}
 			case "Collect":
-				tmp = collectables.get(arg0);
-				tmp.setSprite(((CollectableState) arg0).getCollectedSprite());
+				tile = collectables.get(arg0);
+				tile.setSprite(((CollectableState) arg0).getCollectedSprite());
 				break;
 		}
+	}
+	
+	public void reset() {
+		nCollectables = 0;
+		this.removeAll();
 	}
 	
 	private class CollectedTile extends JPanel {
@@ -49,5 +57,4 @@ public class CollectedPanel extends JPanel implements Observer {
 			g.drawImage(sprite, 0, 0, this.getWidth(), this.getHeight(), null);
 		}
 	}
-
 }
