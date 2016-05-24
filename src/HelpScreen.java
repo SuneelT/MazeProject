@@ -1,91 +1,83 @@
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.*;
 
-public class WinScreen extends Screen{
+public class HelpScreen extends Screen {
+	private static final long serialVersionUID = -264471428282433023L;
+	JButton returnButton;
+    JLabel text;
     private Image bg;
-    private JButton newGameButton;
-    private JButton menuButton;
-    private Image win;
-
-    public WinScreen(GUI gui) {
+    private Image player;
+    private Image end;
+ 
+    public HelpScreen(GUI gui) {
         setGUI(gui);
-        this.setLayout(new GridBagLayout());
+		this.setBackground(Color.black);
+		this.setLayout(new BorderLayout());
+		try {
+			bg = ImageIO.read(new File("images/yellowBG.jpg"));
+			player = ImageIO.read(new File("images/player_up.png"));
+	        end = ImageIO.read(new File("images/end_unlocked.bmp"));
+		} catch (IOException e1) {}
+       this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        try {
-            bg = ImageIO.read(new File("images/redBG.jpg"));
-            win = ImageIO.read(new File("images/.jpg"));
-        } catch (IOException e) { e.printStackTrace(); }
 
-        Fireworks fireworks = new Fireworks();
-        fireworks.setPreferredSize(new Dimension(400, 400));
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
+        
+        
+        
+        returnButton = new JButton(new ImageIcon("images/buttonreturn.png"));
+        returnButton.setBorder(BorderFactory.createEmptyBorder());
+		returnButton.setContentAreaFilled(false);
+        buttonPanel.add(returnButton);
         c.gridx = 0;
         c.gridy = 0;
         c.weightx = 0.5;
         c.weighty = 0.5;
-        c.gridwidth = 2;
-        c.insets = new Insets(0, 50, 0, 0);
-        this.add(fireworks, c);
-
-        newGameButton = new JButton(new ImageIcon("images/newgame.png"));
-        newGameButton.setContentAreaFilled(false);
-        newGameButton.setBorder(BorderFactory.createEmptyBorder());
-        newGameButton.setFocusPainted(false);
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridwidth = 1;
-        c.insets = new Insets(0, 100, 50, 0);
-        newGameButton.addMouseListener(new MouseAdapter() {
+        c.insets = new Insets(20, 20, 20, 20);
+        c.anchor = GridBagConstraints.PAGE_START;
+        
+        returnButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                getModel().createMaze();
-                getGUI().switchScreen("Maze");
+                getGUI().switchToLastScreen();
             }
             @Override
-            public void mouseEntered(MouseEvent e) {
-                newGameButton.setIcon(new ImageIcon("images/newgamefilled.png"));
-
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-                newGameButton.setIcon(new ImageIcon("images/newgame.png"));
-
-            }
+			public void mouseEntered(MouseEvent e) {
+            	returnButton.setIcon(new ImageIcon("images/buttonreturnfilled.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				returnButton.setIcon(new ImageIcon("images/buttonreturn.png"));
+			}
         });
-        this.add(newGameButton, c);
+    	
+    	this.add(buttonPanel, c);
 
-        menuButton = new JButton(new ImageIcon("images/menu.png"));
-        menuButton.setContentAreaFilled(false);
-        menuButton.setBorder(BorderFactory.createEmptyBorder());
-        menuButton.setFocusPainted(false);
-        c.gridx = 1;
+        text = new JLabel("<html>Use the arrow keys on your keyboard to guide your character to the exit. The exit is the"
+        		+ " bottom right-hand corner of the maze." + "<br><br>This is your player! <br><br> This is the end!"
+        		+ "<br><br>If you're playing collectable mode - collect objects to spell out a word and exit the maze!</html>", JLabel.CENTER);
+        text.setFont(new Font("Ariel",Font.PLAIN, 25));
         c.gridy = 1;
-        c.insets = new Insets(0, 0, 50, 100);
-        menuButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                getGUI().switchScreen("Menu");
-            }
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                menuButton.setIcon(new ImageIcon("images/menufilled.png"));
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-                menuButton.setIcon(new ImageIcon("images/menu.png"));
-            }
-        });
-        this.add(menuButton, c);
+        c.ipadx = 390;
+        c.ipady = 10;
+        c.insets = new Insets(20, 20, 110, 200);
+        c.anchor = GridBagConstraints.CENTER;
+        this.add(text, c);
+        
     }
-
+    
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
-        g.drawImage(win, 250, 250, getWidth(), getHeight(), null);
+    	super.paintComponent(g);
+    	g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
+    	g.drawImage(player, 300, 310, 80, 80, null);
+    	g.drawImage(end, 268, 380, 70, 70, null);
     }
 }
