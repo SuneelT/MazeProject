@@ -28,7 +28,9 @@ public class CollectedPanel extends JPanel implements Observer {
 				tmpList.add(((CollectableState)arg0));
 				break;
 			case "Done":
-				for (CollectableState s: tmpList) {
+				CollectableState s;
+				while(!tmpList.isEmpty()) {
+					s = tmpList.poll();
 					tile = new CollectedTile();
 					tile.setSprite(s.getUncollectedSprite());
 					collectables.put((Observable) s, tile);
@@ -42,6 +44,11 @@ public class CollectedPanel extends JPanel implements Observer {
 		}
 	}
 	
+	/**
+	 * Resets the CollectedPanel so that it can be used.
+	 * Resetting is defined to be the removal of all JComponents embedded in this panel, as well resetting of internal fields used to ensure
+	 * proper formatting of the placement of the collectable sprites.
+	 */
 	public void reset() {
 		nCollectables = 0;
 		this.removeAll();
