@@ -39,8 +39,9 @@ public class Maze implements Iterable<BaseState> {
 		case 32: difficulty = 2; index = 5; break;
 		}
 		
+		int[] xCoords = new int[index];
 		for (int i = 0; i < index; i++) {
-			Collectable collect = new Collectable (size, difficulty, i);
+			Collectable collect = new Collectable (xCoords, size, difficulty, i);
 			int[] coordinates = collect.getCoords();
 			cStates[coordinates[1]][coordinates[0]].addCollectable(collect);
 		}

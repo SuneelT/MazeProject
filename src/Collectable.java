@@ -13,11 +13,19 @@ public class Collectable {
 	private boolean collected = false;
 	private int index;
 	
-	public Collectable (int size, int mode, int index) {
+	public Collectable (int[] coords, int size, int mode, int index) {
 		this.index = index;
 		Random generator = new Random();
-		this.x = generator.nextInt(size-1);
-		this.y = generator.nextInt(size-1);
+		while (true) {
+			this.x = generator.nextInt(size-2) + 1;
+			this.y = generator.nextInt(size-2) + 1;
+			boolean flag = true;
+			for (int i = 0; i < index; i++) {
+				if (coords[i] == this.x) flag = false;
+			}
+			if (flag == true) break;
+		}
+		coords[index] = this.x;
 		setImage(mode, index);
 	} 
 	
