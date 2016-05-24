@@ -8,6 +8,8 @@ import javax.swing.*;
 
 public class WinScreen extends Screen{
     private Image bg;
+    private JButton newGameButton;
+    private JButton menuButton;
 
     public WinScreen(GUI gui) {
         setGUI(gui);
@@ -18,17 +20,19 @@ public class WinScreen extends Screen{
         } catch (IOException e) { e.printStackTrace(); }
 
         Fireworks fireworks = new Fireworks();
-        fireworks.setPreferredSize(new Dimension(500, 500));
+        fireworks.setPreferredSize(new Dimension(400, 400));
         c.gridx = 0;
         c.gridy = 0;
         c.weightx = 0.5;
         c.weighty = 0.5;
         c.gridwidth = 2;
-        c.insets = new Insets(50, 50, 0, 0);
+        c.insets = new Insets(0, 50, 0, 0);
         this.add(fireworks, c);
 
-        JButton newGameButton = new JButton("Play Again");
+        newGameButton = new JButton(new ImageIcon("images/newgame.png"));
         newGameButton.setContentAreaFilled(false);
+        newGameButton.setBorder(BorderFactory.createEmptyBorder());
+        newGameButton.setFocusPainted(false);
         c.gridx = 0;
         c.gridy = 1;
         c.gridwidth = 1;
@@ -41,19 +45,21 @@ public class WinScreen extends Screen{
             }
             @Override
             public void mouseEntered(MouseEvent e) {
-                // newGameButton.setIcon(new ImageIcon("images/buttonplayfilled.png"));
+                newGameButton.setIcon(new ImageIcon("images/newgamefilled.png"));
 
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                // newGameButton.setIcon(new ImageIcon("images/buttonplay.png"));
+                newGameButton.setIcon(new ImageIcon("images/newgame.png"));
 
             }
         });
         this.add(newGameButton, c);
 
-        final JButton menuButton = new JButton("Back to Menu");
+        menuButton = new JButton(new ImageIcon("images/menu.png"));
         menuButton.setContentAreaFilled(false);
+        menuButton.setBorder(BorderFactory.createEmptyBorder());
+        menuButton.setFocusPainted(false);
         c.gridx = 1;
         c.gridy = 1;
         c.insets = new Insets(0, 0, 50, 100);
@@ -64,11 +70,11 @@ public class WinScreen extends Screen{
             }
             @Override
             public void mouseEntered(MouseEvent e) {
-                // menuButton.setIcon(new ImageIcon("images/buttonhelpfilled.png"));
+                menuButton.setIcon(new ImageIcon("images/menufilled.png"));
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                // menuButton.setIcon(new ImageIcon("images/buttonhelp.png"));
+                menuButton.setIcon(new ImageIcon("images/menu.png"));
             }
         });
         this.add(menuButton, c);
