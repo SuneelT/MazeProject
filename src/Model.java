@@ -11,7 +11,7 @@ public class Model {
 	private Observer collectorObserver;
 	
 	public Model() {
-		player = new SimplePlayer();
+		player = new Player();
 	}
 	
 	public void createMaze() {
