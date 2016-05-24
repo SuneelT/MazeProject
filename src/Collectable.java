@@ -6,7 +6,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-public class Collectable implements Comparator<Collectable> {
+public class Collectable {
 	private int x;
 	private int y;
 	private BufferedImage icon; 
@@ -76,15 +76,5 @@ public class Collectable implements Comparator<Collectable> {
 	
 	public int getIndex() {
 		return index;
-	}
-
-	@Override
-	public int compare(Collectable arg0, Collectable arg1) {
-		if (arg0.index > arg1.index) {
-			return 1;
-		} else if (arg0.index == arg1.index) {
-			return 0;
-		}
-		return -1;
 	}
 }

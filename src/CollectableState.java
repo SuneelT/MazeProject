@@ -1,6 +1,6 @@
 import java.awt.image.BufferedImage;
 
-public class CollectableState extends StateDecorator {
+public class CollectableState extends StateDecorator implements Comparable<CollectableState> {
 	private Collectable item;
 	
 	public CollectableState(BaseState state) {
@@ -38,5 +38,17 @@ public class CollectableState extends StateDecorator {
 
 	public BufferedImage getUncollectedSprite() {
 		return item.getBWImage();
+	}
+
+	@Override
+	public int compareTo(CollectableState arg0) {
+		int compare = arg0.getCollectable().getIndex();
+		int thisIndex = getCollectable().getIndex();
+		if (thisIndex < compare) {
+			return -1;
+		} else if (thisIndex == compare) {
+			return 0;
+		}
+		return 1;
 	}
 }
