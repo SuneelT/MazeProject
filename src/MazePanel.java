@@ -57,38 +57,60 @@ public class MazePanel extends JPanel implements Observer {
 
 	private void makeMaze() {
 		try {
-			this.end = ImageIO.read(new File("images/end_locked.bmp"));
+			this.end = ImageIO.read(new File("images/tiles/end_locked.png"));
 			int w = getWidth()/gui.getModel().getDifficulty();
 			int h = getHeight()/gui.getModel().getDifficulty();
 			int difficulty = gui.getModel().getDifficulty();
 			bImage = new BufferedImage(difficulty*(getWidth()/difficulty), difficulty*(getHeight()/difficulty), BufferedImage.TYPE_INT_RGB);
 			Graphics2D g = bImage.createGraphics();
+			String tile = "";
 			for (BaseState s: gui.getModel().getMaze()) {
 				int x = s.getX(); int y = s.getY();
-				if (s.isLeftWall() && s.isTopWall()) {
-					if (s.getRight() == null) g.drawImage(ImageIO.read(new File("images/deadend_top.bmp")), x*w, y*h, w, h, null);
-					else if (s.getDown() == null) g.drawImage(ImageIO.read(new File("images/deadend_left.bmp")), x*w, y*h, w, h, null);
-					else g.drawImage(ImageIO.read(new File("images/corner_top_left.bmp")), x*w, y*h, w, h, null);
+				
+				// check walls
+				int numSides = 0;
+				boolean rightWall = false;
+				boolean leftWall = false;
+				boolean topWall = false;
+				boolean bottomWall = false;
+				if (s.getRight() == null) rightWall = true;
+				if (s.getLeft() == null) leftWall = true;
+				if (s.getUp() == null) topWall = true;
+				if (s.getDown() == null) bottomWall = true;
+				if (topWall) numSides++;
+				if (leftWall) numSides++;
+				if (bottomWall) numSides++;
+				if (rightWall) numSides++;
+				
+				// find tile type
+				if (numSides == 3) { // dead end
+					if (!rightWall) tile = "images/tiles/deadend_left.bmp";
+					else if (!leftWall) tile = "images/tiles/deadend_right.bmp";
+					else if (!topWall) tile = "images/tiles/deadend_bottom.bmp";
+					else if (!bottomWall) tile = "images/tiles/deadend_top.bmp";
+				} else if (numSides == 2) { // corner or hall
+					//hall
+					if (rightWall && leftWall) tile = "images/tiles/hall_vertical.bmp";
+					else if (topWall && bottomWall) tile = "images/tiles/hall_horizontal.bmp";
+					//corner
+					else if (topWall && leftWall) tile = "images/tiles/corner_top_left.bmp";
+					else if (topWall && rightWall) tile = "images/tiles/corner_top_right.bmp";
+					else if (bottomWall && leftWall) tile = "images/tiles/corner_bottom_left.bmp";
+					else if (bottomWall && rightWall) tile = "images/tiles/corner_bottom_right.bmp";
+				} else if (numSides == 1) { // single side
+					if (leftWall) tile = "images/tiles/wall_left.bmp";
+					else if (rightWall) tile = "images/tiles/wall_right.bmp";
+					else if (topWall) tile = "images/tiles/wall_top.bmp";
+					else if (bottomWall) tile = "images/tiles/wall_bottom.bmp";
+				} else { // open
+					tile = "images/tiles/open.bmp";
 				}
-				else if (s.isLeftWall()) {
-					if (s.getRight() == null && s.getDown() == null) g.drawImage(ImageIO.read(new File("images/deadend_bottom.bmp")), x*w, y*h, w, h, null);
-					else if (s.getRight() == null) g.drawImage(ImageIO.read(new File("images/hall_vertical.bmp")), x*w, y*h, w, h, null);
-					else if (s.getDown() == null) g.drawImage(ImageIO.read(new File("images/corner_bottom_left.bmp")), x*w, y*h, w, h, null);
-					else g.drawImage(ImageIO.read(new File("images/wall_left.bmp")), x*w, y*h, w, h, null);
-				} else if (s.isTopWall()) {
-					if (s.getRight() == null && s.getDown() == null) g.drawImage(ImageIO.read(new File("images/deadend_right.bmp")), x*w, y*h, w, h, null);
-					else if (s.getRight() == null) g.drawImage(ImageIO.read(new File("images/corner_top_right.bmp")), x*w, y*h, w, h, null);
-					else if (s.getDown() == null) g.drawImage(ImageIO.read(new File("images/hall_horizontal.bmp")), x*w, y*h, w, h, null);
-					else g.drawImage(ImageIO.read(new File("images/wall_top.bmp")), x*w, y*h, w, h, null);
-				} else {
-					if (s.getRight() == null && s.getDown() == null) {
-						if (s.getX() == gui.getModel().getDifficulty() - 1 && s.getY() == gui.getModel().getDifficulty() - 1)
-							g.drawImage(ImageIO.read(new File("images/end_unlocked.bmp")), x*w, y*h, w, h, null);
-						else g.drawImage(ImageIO.read(new File("images/corner_bottom_right.bmp")), x*w, y*h, w, h, null);
-					}
-					else if (s.getRight() == null) g.drawImage(ImageIO.read(new File("images/wall_right.bmp")), x*w, y*h, w, h, null);
-					else if (s.getDown() == null) g.drawImage(ImageIO.read(new File("images/wall_bottom.bmp")), x*w, y*h, w, h, null);
-					else g.drawImage(ImageIO.read(new File("images/open.bmp")), x*w, y*h, w, h, null);
+				// draw tile
+				g.drawImage(ImageIO.read(new File(tile)), x*w, y*h, w, h, null);
+				
+				// check for ending and draw if need be
+				if (s.getX() == gui.getModel().getDifficulty() - 1 && s.getY() == gui.getModel().getDifficulty() - 1) {
+					g.drawImage(ImageIO.read(new File("images/tiles/end_unlocked.png")), x*w, y*h, w, h, null);
 				}
 			}
 		} catch(IOException e) {System.err.println("Images not found.");}
