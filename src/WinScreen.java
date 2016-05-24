@@ -10,6 +10,7 @@ public class WinScreen extends Screen{
     private Image bg;
     private JButton newGameButton;
     private JButton menuButton;
+    private Image winningMessage;
 
     public WinScreen(GUI gui) {
         setGUI(gui);
@@ -17,6 +18,7 @@ public class WinScreen extends Screen{
         GridBagConstraints c = new GridBagConstraints();
         try {
             bg = ImageIO.read(new File("images/redBG.jpg"));
+            winningMessage = ImageIO.read(new File("images/youwin.png"));
         } catch (IOException e) { e.printStackTrace(); }
 
         Fireworks fireworks = new Fireworks();
@@ -84,5 +86,6 @@ public class WinScreen extends Screen{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
+        g.drawImage(winningMessage, 150, 135, 600, 150, null);
     }
 }
