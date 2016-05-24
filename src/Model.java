@@ -8,7 +8,6 @@ public class Model {
 	private boolean isClassic = true;
 	private final int EASY = 16;
 	private final int MEDIUM = EASY+8;
-	private final int HARD = MEDIUM+8;
 	private Observer collectorObserver;
 	
 	public Model() {
@@ -20,14 +19,18 @@ public class Model {
 		player.reset(0);
 		((CollectedPanel) collectorObserver).reset();
 		if (isClassic) return;
-		if (difficulty == MEDIUM) player.reset(3);
-		else if (difficulty == HARD) player.reset(5);
-		else if (difficulty == EASY) player.reset(1);
+		int numCollectables;
+		if (difficulty == EASY) numCollectables = 1;
+		else if (difficulty == MEDIUM) numCollectables = 3;
+		else numCollectables = 5;
+		player.reset(numCollectables);
 		for (BaseState s: maze) {
 			if (!((CollectableState) s).checkCollected()) {
 				((CollectableState) s).addObserver(this.collectorObserver);
 				((CollectableState) s).signal("Create");
-			} else if (s.getX() == difficulty-1 && s.getY() == difficulty-1) ((CollectableState) s).signal("Done");
+				numCollectables--;
+			}
+			if (numCollectables == 0) ((CollectableState) s).signal("Done");
 		}
 	}
 

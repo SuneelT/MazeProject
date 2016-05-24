@@ -1,7 +1,6 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -22,7 +21,7 @@ public class Collectable {
 		setImage(mode, index);
 	} 
 	
-	public void setImage(int mode, int index) {
+	private void setImage(int mode, int index) {
 		try {
 		if (mode == 0) {
 			icon = ImageIO.read(new File("images/key.png")); bwIcon = ImageIO.read(new File("images/keyBlack.png"));

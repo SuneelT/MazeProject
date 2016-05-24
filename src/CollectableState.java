@@ -44,11 +44,8 @@ public class CollectableState extends StateDecorator implements Comparable<Colle
 	public int compareTo(CollectableState arg0) {
 		int compare = arg0.getCollectable().getIndex();
 		int thisIndex = getCollectable().getIndex();
-		if (thisIndex < compare) {
-			return -1;
-		} else if (thisIndex == compare) {
-			return 0;
-		}
-		return 1;
+		if (thisIndex < compare) return -1;
+		else if (thisIndex == compare) return 0;
+		else return 1;
 	}
 }

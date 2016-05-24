@@ -45,6 +45,7 @@ public class CollectedPanel extends JPanel implements Observer {
 	public void reset() {
 		nCollectables = 0;
 		this.removeAll();
+		tmpList.clear();
 	}
 	
 	private class CollectedTile extends JPanel {
