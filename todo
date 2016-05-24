@@ -1,3 +1,0 @@
-give graphmaze a more concrete setting i.e. change its nodes from nodes to states, and allow those states to be accessible outside of gra[hmaze via iterators
-paint only the player, paint the maze exclusively once
-once we split the model apart from the maze more, drawing enemies/collectibles will be easier, simpler
