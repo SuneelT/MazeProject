@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class MenuScreen extends Screen {
+public class MenuScreen extends JPanel {
 	private static final long serialVersionUID = -1725872337351590898L;
 	private JButton playButton;
 	private JButton helpButton;
@@ -15,8 +15,7 @@ public class MenuScreen extends Screen {
 	private Image bg;
 	private boolean classic = true;
 
-	public MenuScreen(GUI gui) {
-		setGUI(gui);
+	public MenuScreen(final GUI gui) {
 		this.classic = true;
 		this.setLayout(new BorderLayout());
 		try {
@@ -36,8 +35,8 @@ public class MenuScreen extends Screen {
 		playButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getModel().createMaze();
-				getGUI().switchScreen("Maze");
+				gui.getModel().createMaze();
+				gui.switchScreen("Maze");
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -61,7 +60,7 @@ public class MenuScreen extends Screen {
         helpButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getGUI().switchScreen("Help");
+				gui.switchScreen("Help");
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -106,7 +105,7 @@ public class MenuScreen extends Screen {
 	    easy.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				getModel().setDifficulty(EASY);
+				gui.getModel().setDifficulty(EASY);
 				easy.setIcon(new ImageIcon("images/easyselect.png"));
 				medium.setIcon(new ImageIcon("images/medium.png"));
 				hard.setIcon(new ImageIcon("images/hard.png"));
@@ -120,7 +119,7 @@ public class MenuScreen extends Screen {
 	    medium.addMouseListener(new MouseAdapter() {
 		@Override
             public void mouseClicked(MouseEvent e) {
-                getModel().setDifficulty(MEDIUM);
+                gui.getModel().setDifficulty(MEDIUM);
                 easy.setIcon(new ImageIcon("images/easy.png"));
 				medium.setIcon(new ImageIcon("images/mediumselect.png"));
 				hard.setIcon(new ImageIcon("images/hard.png"));
@@ -133,7 +132,7 @@ public class MenuScreen extends Screen {
 	    hard.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	getModel().setDifficulty(HARD);
+            	gui.getModel().setDifficulty(HARD);
             	easy.setIcon(new ImageIcon("images/easy.png"));
 				medium.setIcon(new ImageIcon("images/medium.png"));
 				hard.setIcon(new ImageIcon("images/hardselect.png"));
@@ -154,11 +153,11 @@ public class MenuScreen extends Screen {
 	    	@Override
 	    	public void mouseClicked(MouseEvent e) {
 	    		if (classic == true) {
-	    			getModel().setCollectorMode();
+	    			gui.getModel().setCollectorMode();
 	    			collector.setIcon(new ImageIcon("images/collectorfilled.png"));
 	    			classic = false;
 	    		} else {
-	    			getModel().setClassicMode();
+	    			gui.getModel().setClassicMode();
 	    			collector.setIcon(new ImageIcon("images/collector.png"));
 	    			classic = true;
 	    		}

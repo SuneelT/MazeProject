@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
-public class HelpScreen extends Screen {
+public class HelpScreen extends JPanel {
 	private static final long serialVersionUID = -264471428282433023L;
 	JButton returnButton;
     JLabel text;
@@ -15,8 +15,7 @@ public class HelpScreen extends Screen {
     private Image end;
     private Image collectable;
  
-    public HelpScreen(GUI gui) {
-        setGUI(gui);
+    public HelpScreen(final GUI gui) {
 		this.setBackground(Color.black);
 		this.setLayout(new BorderLayout());
 		try {
@@ -45,7 +44,7 @@ public class HelpScreen extends Screen {
         returnButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                getGUI().switchScreen("Menu");
+                gui.switchScreen("Menu");
             }
             @Override
 			public void mouseEntered(MouseEvent e) {

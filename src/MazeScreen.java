@@ -10,7 +10,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 
-public class MazeScreen extends Screen {
+public class MazeScreen extends JPanel {
 	private static final long serialVersionUID = -8972885841964219641L;
 	JPanel mazePanel;
 	private Clip clip;  
@@ -18,14 +18,13 @@ public class MazeScreen extends Screen {
 	private Image bg;
 	
 	public MazeScreen(final GUI gui) {
-		setGUI(gui);
 		this.setLayout(new BorderLayout());
 		try {
 			bg = ImageIO.read(new File("images/greenBG.jpg"));
 		} catch (IOException e1) {}
 		this.setLayout(new BorderLayout());
-		mazePanel = new MazePanel(getGUI());
-		getGUI().setPlayerObserver((Observer)mazePanel);
+		mazePanel = new MazePanel(gui);
+		gui.setPlayerObserver((Observer)mazePanel);
 		this.add(mazePanel, BorderLayout.CENTER);
 		
 		JPanel otherControls = new JPanel(new GridLayout(3, 1));
@@ -42,7 +41,7 @@ public class MazeScreen extends Screen {
 				if(JOptionPane.showConfirmDialog(gui, "Are you sure you want to exit?", 
 				   "Exit", JOptionPane.YES_NO_OPTION, 
 				   JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-					getGUI().switchScreen("Menu");
+					gui.switchScreen("Menu");
 				}
 				
 				mazePanel.requestFocusInWindow();
@@ -60,7 +59,7 @@ public class MazeScreen extends Screen {
 		});
 		
 		JPanel collected = new CollectedPanel();
-		getGUI().setCollectableObserver((Observer) collected);
+		gui.setCollectableObserver((Observer) collected);
 		
 		final JToggleButton muteButton = new JToggleButton(new ImageIcon("images/sound.png"));
 		muteButton.setBorder(BorderFactory.createEmptyBorder());

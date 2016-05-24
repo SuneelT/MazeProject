@@ -6,15 +6,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class WinScreen extends Screen {
+public class WinScreen extends JPanel {
 	private static final long serialVersionUID = -6918359361500026357L;
 	private Image bg;
     private JButton newGameButton;
     private JButton menuButton;
     private Image winningMessage;
 
-    public WinScreen(GUI gui) {
-        setGUI(gui);
+    public WinScreen(final GUI gui) {
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         try {
@@ -43,8 +42,8 @@ public class WinScreen extends Screen {
         newGameButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                getModel().createMaze();
-                getGUI().switchScreen("Maze");
+                gui.getModel().createMaze();
+                gui.switchScreen("Maze");
             }
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -69,7 +68,7 @@ public class WinScreen extends Screen {
         menuButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                getGUI().switchScreen("Menu");
+                gui.switchScreen("Menu");
             }
             @Override
             public void mouseEntered(MouseEvent e) {
