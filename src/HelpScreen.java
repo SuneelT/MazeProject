@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -11,6 +12,8 @@ public class HelpScreen extends Screen {
 	JButton returnButton;
     JLabel text;
     private Image bg;
+    private Image player;
+    private Image end;
  
     public HelpScreen(GUI gui) {
         setGUI(gui);
@@ -18,12 +21,16 @@ public class HelpScreen extends Screen {
 		this.setLayout(new BorderLayout());
 		try {
 			bg = ImageIO.read(new File("images/yellowBG.jpg"));
+			player = ImageIO.read(new File("images/player_up.png"));
+	        end = ImageIO.read(new File("images/end_unlocked.bmp"));
 		} catch (IOException e1) {}
        this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
+        
+        
         
         returnButton = new JButton(new ImageIcon("images/buttonreturn.png"));
         returnButton.setBorder(BorderFactory.createEmptyBorder());
@@ -63,6 +70,7 @@ public class HelpScreen extends Screen {
         c.insets = new Insets(20, 20, 110, 200);
         c.anchor = GridBagConstraints.CENTER;
         this.add(text, c);
+        
     }
     
     @Override
