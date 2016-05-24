@@ -69,5 +69,7 @@ public class HelpScreen extends Screen {
     public void paintComponent(Graphics g) {
     	super.paintComponent(g);
     	g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
+    	g.drawImage(player, 300, 310, 80, 80, null);
+    	g.drawImage(end, 268, 380, 70, 70, null);
     }
 }
