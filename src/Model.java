@@ -4,10 +4,10 @@ import java.util.Observer;
 public class Model {
 	private Maze maze;
 	private Player player; 
-	private int difficulty = 16;
 	private boolean isClassic = true;
 	private final int EASY = 16;
 	private final int MEDIUM = EASY+8;
+	private int difficulty = EASY;
 	private Observer collectorObserver;
 	
 	public Model() {

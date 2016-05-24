@@ -55,12 +55,6 @@ public class Collectable {
 		return coords;
 	}
 	
-	public void possibleCollect(int x, int y) {
-		if (x == this.x && y == this.y) {
-			collected = true;
-		}
-	}
-	
 	public boolean returnStatus() {
 		return collected;
 	}

@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class MazePanel extends JPanel implements Observer {
 	private static final long serialVersionUID = -3329021623371321857L;
 	private GUI gui;
-	private BufferedImage bImage;
+	private BufferedImage mazeImage;
 	private BufferedImage end;
 		
 	public MazePanel(GUI guii) {
@@ -33,7 +33,7 @@ public class MazePanel extends JPanel implements Observer {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		requestFocusInWindow();
-		g.drawImage(bImage, 0, 0, null);
+		g.drawImage(mazeImage, 0, 0, null);
 		int difficulty = gui.getModel().getDifficulty();
 		int w = getWidth()/difficulty; int h = getHeight()/difficulty;
 		int[] pos = gui.getModel().getPlayerPos();
@@ -61,8 +61,8 @@ public class MazePanel extends JPanel implements Observer {
 			int w = getWidth()/gui.getModel().getDifficulty();
 			int h = getHeight()/gui.getModel().getDifficulty();
 			int difficulty = gui.getModel().getDifficulty();
-			bImage = new BufferedImage(difficulty*(getWidth()/difficulty), difficulty*(getHeight()/difficulty), BufferedImage.TYPE_INT_RGB);
-			Graphics2D g = bImage.createGraphics();
+			mazeImage = new BufferedImage(difficulty*(getWidth()/difficulty), difficulty*(getHeight()/difficulty), BufferedImage.TYPE_INT_RGB);
+			Graphics2D g = mazeImage.createGraphics();
 			String tile = "";
 			for (BaseState s: gui.getModel().getMaze()) {
 				int x = s.getX(); int y = s.getY();

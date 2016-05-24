@@ -1,6 +1,4 @@
-import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.image.BufferedImage;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
@@ -53,17 +51,5 @@ public class CollectedPanel extends JPanel implements Observer {
 		nCollectables = 0;
 		this.removeAll();
 		tmpList.clear();
-	}
-	
-	private class CollectedTile extends JPanel {
-		private static final long serialVersionUID = 1L;
-		private BufferedImage sprite;
-		public CollectedTile() {this.setOpaque(false);}
-		public void setSprite(BufferedImage s) {sprite = s; repaint();}
-		@Override
-		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.drawImage(sprite, 0, 0, this.getWidth(), this.getHeight(), null);
-		}
 	}
 }

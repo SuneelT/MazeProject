@@ -31,8 +31,6 @@ public class HelpScreen extends Screen {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setOpaque(false);
         
-        
-        
         returnButton = new JButton(new ImageIcon("images/buttonreturn.png"));
         returnButton.setBorder(BorderFactory.createEmptyBorder());
 		returnButton.setContentAreaFilled(false);
@@ -47,7 +45,7 @@ public class HelpScreen extends Screen {
         returnButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                getGUI().switchToLastScreen();
+                getGUI().switchScreen("Menu");
             }
             @Override
 			public void mouseEntered(MouseEvent e) {

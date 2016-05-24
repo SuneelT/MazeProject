@@ -6,8 +6,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class WinScreen extends Screen{
-    private Image bg;
+public class WinScreen extends Screen {
+	private static final long serialVersionUID = -6918359361500026357L;
+	private Image bg;
     private JButton newGameButton;
     private JButton menuButton;
     private Image winningMessage;

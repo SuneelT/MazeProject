@@ -7,7 +7,6 @@ public class GUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel cards = new JPanel(new CardLayout());
 	private Model model;
-	private String lastScreen;
 	private final int WIDTH = 840;
 	private final int HEIGHT = 680;
  
@@ -29,10 +28,10 @@ public class GUI extends JFrame {
 	public GUI() {
 	    model = new Model();
 		/*Add all the different screens to the card layot for ease of switching*/
-		cards.add(new MazeScreen(this), "Maze"); cards.getComponent(0).setName("Maze");
-		cards.add(new MenuScreen(this), "Menu"); cards.getComponent(1).setName("Menu");
-		cards.add(new HelpScreen(this), "Help"); cards.getComponent(2).setName("Help");
-		cards.add(new WinScreen(this), "Win"); cards.getComponent(3).setName("Win");
+		cards.add(new MazeScreen(this), "Maze");
+		cards.add(new MenuScreen(this), "Menu");
+		cards.add(new HelpScreen(this), "Help");
+		cards.add(new WinScreen(this), "Win");
 		getContentPane().add(cards);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true); setSize(WIDTH, HEIGHT); setResizable(false);
@@ -40,19 +39,12 @@ public class GUI extends JFrame {
 	}
 	
 	public void switchScreen(String switchTo) {
-		for (Component c: cards.getComponents()) {
-			if (c.isVisible()) lastScreen = c.getName();
-		}
 		((CardLayout) cards.getLayout()).show(cards, switchTo);		//to understand this code go look at java.awt.CardLayout
 		this.setTitle("Maze - "+switchTo);
 	}
 	
 	public Model getModel() {
 		return model;
-	}
-
-	public void switchToLastScreen() {
-		switchScreen(lastScreen);
 	}
 
 	public void setPlayerObserver(Observer o) {

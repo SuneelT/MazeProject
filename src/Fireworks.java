@@ -19,8 +19,8 @@ public class Fireworks extends JPanel {
     private static Color colors[] = new Color[ARRAY_LENGTH];
     private static final double PI = 3.14159;
     private int x1, moveX, index, color_index;
-    List<Integer> x = new ArrayList<>();
-    List<Integer> y = new ArrayList<>();
+    List<Integer> x = new ArrayList<Integer>();
+    List<Integer> y = new ArrayList<Integer>();
 
     public Fireworks() {
         x1 = index = color_index = 0;
