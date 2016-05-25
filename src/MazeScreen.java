@@ -35,6 +35,7 @@ public class MazeScreen extends JPanel {
 		exitButton.setBorder(null);
 		exitButton.setBorder(BorderFactory.createEmptyBorder());
 		exitButton.setContentAreaFilled(false);
+		exitButton.setFocusPainted(false);
 		exitButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -59,12 +60,13 @@ public class MazeScreen extends JPanel {
 		});
 		
 		JPanel collected = new CollectedPanel();
+		collected.setPreferredSize(new Dimension(100, 190));
 		gui.setCollectableObserver((Observer) collected);
 		
 		final JToggleButton muteButton = new JToggleButton(new ImageIcon("images/sound.png"));
 		muteButton.setBorder(BorderFactory.createEmptyBorder());
-		muteButton.setBorder(BorderFactory.createEmptyBorder());
 		muteButton.setContentAreaFilled(false);
+		muteButton.setFocusPainted(false);
 
 	    muteButton.addMouseListener(new MouseAdapter() {
 	    	int clicked = 0;
@@ -86,14 +88,7 @@ public class MazeScreen extends JPanel {
 	        	
 	            mazePanel.requestFocusInWindow();
             }
-	        @Override
-			public void mouseEntered(MouseEvent e) {
-				//muteButton.setIcon(new ImageIcon("images/soundhover.png"));
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				//muteButton.setIcon(new ImageIcon("images/sound.png"));
-			}
+
 	    });
 	    
 	    otherControls.add(muteButton);
