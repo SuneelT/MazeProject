@@ -63,7 +63,7 @@ public class Fireworks extends JPanel {
         }
     }
 
-    class MyChangeListener implements ActionListener {
+    private class MyChangeListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent arg0) {
             x1 += moveX;
