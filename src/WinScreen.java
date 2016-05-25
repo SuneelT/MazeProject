@@ -86,6 +86,6 @@ public class WinScreen extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
-        g.drawImage(winningMessage, 150, 135, 600, 150, null);
+        g.drawImage(winningMessage, 150, 160, 600, 150, null);
     }
 }
