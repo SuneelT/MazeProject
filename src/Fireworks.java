@@ -11,6 +11,9 @@ import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * Used to display the moving firework graphic on the maze's end screen
+ */
 public class Fireworks extends JPanel {
     private static final long serialVersionUID = 5053650234847311814L;
     private static final int DELAY = 10, DIVIDER = 180, MULTIPLY_FACTOR = 36, LINE_LENGTH = 2, FIREWORK_RADIUS = 75;
@@ -22,6 +25,9 @@ public class Fireworks extends JPanel {
     List<Integer> x = new ArrayList<Integer>();
     List<Integer> y = new ArrayList<Integer>();
 
+    /**
+     * Constructor for fireworks
+     */
     public Fireworks() {
         x1 = index = color_index = 0;
         moveX = 3;
@@ -51,6 +57,9 @@ public class Fireworks extends JPanel {
         setOpaque(false);
     }
 
+    /**
+     * Paints the firework image
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -63,8 +72,15 @@ public class Fireworks extends JPanel {
         }
     }
 
+    /**
+     * Event hander class used to identify when the firework has finished its animation in order to start a new one
+     */
     private class MyChangeListener implements ActionListener {
         @Override
+        /**
+         * Reacts to an action event and resets the firework animation
+         * @param arg0 the action even being reacted to
+         */
         public void actionPerformed(ActionEvent arg0) {
             x1 += moveX;
             if (x1 == 0 || x1 >= FIREWORK_RADIUS) {
