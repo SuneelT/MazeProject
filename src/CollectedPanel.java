@@ -3,7 +3,7 @@ import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.PriorityQueue;
-
+ 
 import javax.swing.*;
 
 public class CollectedPanel extends JPanel implements Observer {
@@ -11,11 +11,23 @@ public class CollectedPanel extends JPanel implements Observer {
 	private int nCollectables = 0;
 	private Hashtable<Observable, CollectedTile> collectables = new Hashtable<Observable, CollectedTile>();
 	private PriorityQueue<CollectableState> tmpList = new PriorityQueue<CollectableState>();
-
+	
+	/**
+	 * Constructor for the CollectedPanel class
+	 * Makes the CollectedPanel visible and sets it as opaque - allowing for the background to 
+	 * show through. The drawing of the panel is completed in the update class.
+	 */
 	public CollectedPanel() {
 		this.setVisible(false); this.setOpaque(false);
 	}
 	
+	/**
+	 * Updates the CollectedPanel with the new state of the game
+	 * The function has three modes depending on the arg1 parameters.
+	 * Create: The CollectedPanel is constructed with the correct number of rows to accommodate the number of collectables
+	 * Done: All relevant collectable sprites are drawn in the panel
+	 * Collect: A collectables' CollectedPanel sprite is updated to reflect that it has now been collected
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (!this.isVisible()) this.setVisible(true);
