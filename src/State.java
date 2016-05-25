@@ -7,14 +7,11 @@ public class State implements BaseState {
 	private int x;
 	private int y;
 	
-	private boolean player;
-	
 	public State(int x, int y) {
 		this.up = null;
 		this.down = null;
 		this.left = null;
 		this.right = null;
-		this.player = false;
 		this.x = x;
 		this.y = y;
 	}
@@ -27,16 +24,6 @@ public class State implements BaseState {
 	@Override
 	public int getY() {
 		return this.y;
-	}
-	
-	@Override
-	public boolean getPlayer() {
-		return this.player;
-	}
-	
-	@Override
-	public void movePlayer() {
-		this.player = true;
 	}
 	
 	@Override
@@ -110,37 +97,5 @@ public class State implements BaseState {
 	@Override
 	public void addConnectionRight(BaseState node, boolean wall) {
 		this.right = new Edge(this, node, wall);
-	}
-	
-	@Override
-	public boolean isTopWall() {
-		if (getY() == 0) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean isBottomWall() {
-		if (down == null) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean isLeftWall() {
-		if (getX() == 0) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean isRightWall() {
-		if (right == null) {
-			return true;
-		}
-		return false;
 	}
 }

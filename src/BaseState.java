@@ -5,10 +5,6 @@ public interface BaseState {
 	
 	public int getY();
 	
-	public boolean getPlayer();
-	
-	public void movePlayer();
-	
 	public boolean edgeExists(String edge);
 	
 	public BaseState getUp();
@@ -28,12 +24,4 @@ public interface BaseState {
 	public void addConnectionLeft(BaseState node, boolean wall);
 	
 	public void addConnectionRight(BaseState node, boolean wall);
-	
-	public boolean isTopWall();
-	
-	public boolean isBottomWall();
-	
-	public boolean isLeftWall();
-	
-	public boolean isRightWall();
 }
