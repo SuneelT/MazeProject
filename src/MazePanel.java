@@ -11,12 +11,20 @@ import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+/**
+ * MazePanel displays the graphical representation of the maze.
+ * 
+ */
 public class MazePanel extends JPanel implements Observer {
 	private static final long serialVersionUID = -3329021623371321857L;
 	private GUI gui;
 	private BufferedImage mazeImage;
 	private BufferedImage end;
-		
+	
+	/**
+	 * Constructor for the MazePanel
+	 * @param guii - A reference to the parent GUI class to allow for the switching of screens
+	 */
 	public MazePanel(GUI guii) {
 		this.gui = guii;
 		this.addKeyListener(new KeyAdapter() {
@@ -28,7 +36,12 @@ public class MazePanel extends JPanel implements Observer {
 		this.setOpaque(false);
 		this.setFocusable(true);
 	}
-		
+	
+	/**
+	 * Draws the graphical representation of the maze and all its components,
+	 * including the maze, the player sprite and the collectibles
+	 * @param g - This component's graphics context
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -47,7 +60,14 @@ public class MazePanel extends JPanel implements Observer {
 		}
 		g.drawImage(gui.getModel().getPlayerSprite(), pos[0]*w, pos[1]*h, w, h, null);
 	}
-		
+	
+	/**
+	 * Updates the MazePanel when theres a new state of the game.
+	 * The function has three modes depending on the object parameter.
+	 * Win: Switches to the win screen when the player reaches the end.
+	 * Create: Constructs the maze panel
+	 * Repaint: Updates the position of the player in the maze
+	 */
 	@Override
 	public void update(Observable observable, Object object) {
 		if (object.equals(true)) gui.switchScreen("Win");
@@ -55,6 +75,9 @@ public class MazePanel extends JPanel implements Observer {
 		else repaint();
 	}
 
+	/**
+	 * Generates a graphical representation of the maze using image tiles.
+	 */
 	private void makeMaze() {
 		try {
 			this.end = ImageIO.read(new File("images/tiles/end_locked.png"));
