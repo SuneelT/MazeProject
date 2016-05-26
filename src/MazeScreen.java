@@ -10,13 +10,23 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 
+/**
+ * The MazeScreen is one of the game's screens. It contains a MazePanel that the user interacts with to play the
+ * game, an exit button that takes the user back to the menu, a mute/unmute button to toggle the music and a
+ * CollectedPanel that displays any items that the player has collected if collectible mode is turned on.
+ */
 public class MazeScreen extends JPanel {
 	private static final long serialVersionUID = -8972885841964219641L;
 	JPanel mazePanel;
 	private Clip clip;  
 	//private boolean muted;
 	private Image bg;
-	
+
+	/**
+	 * Constructor for a MazeScreen.
+	 * A MazeScreen contains a MazePanel, an exit button, a mute/unmute button and a CollectedPanel.
+	 * @param gui - A reference to the parent GUI class to allow for the switching of screens
+     */
 	public MazeScreen(final GUI gui) {
 		this.setLayout(new BorderLayout());
 		try {
@@ -96,12 +106,21 @@ public class MazeScreen extends JPanel {
 		otherControls.add(exitButton); 	
 		//music();
 	}
-	
+
+	/**
+	 * Draws the graphical elements of a MazeScreen.
+	 * The background of a MazeScreen is the only graphical element drawn here.
+	 * @param g - This component's graphics context
+     */
 	@Override public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
 	}
-	
+
+	/**
+	 * Plays music when the user is on the MazeScreen.
+	 * Takes in a .wav file and plays it on loop.
+	 */
 	private void music() {
 		try {
             File file = new File("audio/Music.wav");

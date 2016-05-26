@@ -5,6 +5,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+/**
+ * The MenuScreen is one of the game's screens. It contains easy, medium and hard difficulty selection buttons for the
+ * maze game as well as an optional collectible mode button that puts items in the maze that the user must collect
+ * before exiting the maze. There is a play button that takes the user to a maze game of the specified difficulty and
+ * collectible mode as well as a help button that takes the user to the instructions.
+ */
 public class MenuScreen extends JPanel {
 	private static final long serialVersionUID = -1725872337351590898L;
 	private JButton playButton;
@@ -15,6 +21,12 @@ public class MenuScreen extends JPanel {
 	private Image bg;
 	private boolean classic = true;
 
+	/**
+	 * Constructor for a MenuScreen.
+	 * A MenuScreen consists of a play button, a help button, easy/medium/hard difficulty selections and a collectible
+	 * mode toggle button.
+	 * @param gui - A reference to the parent GUI class to allow for the switching of screens
+     */
 	public MenuScreen(final GUI gui) {
 		this.classic = true;
 		this.setLayout(new BorderLayout());
@@ -166,7 +178,12 @@ public class MenuScreen extends JPanel {
 	    mode.add(collector);
 	    this.add(mode);
 	}
-	
+
+	/**
+	 * Draws the graphical elements of a MenuScreen.
+	 * The background of a MenuScreen is the only graphical element drawn here.
+	 * @param g - This component's graphics context
+     */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
