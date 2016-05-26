@@ -2,18 +2,33 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+/**
+ * The Maze class represents the maze itself.
+ * It is responsible for the generation of the maze.  
+ *
+ */
 public class Maze implements Iterable<BaseState> {
 	private BaseState[][] states = null;
 	private CollectibleState[][] cStates = null;
 	private int size;
 	private boolean isClassic = true;
-	 
+	
+	/**
+	 * Constructor for a Maze
+	 * Sets the size of the maze (difficulty)
+	 * Generates a new maze depending on the game mode. 
+	 * @param size - the size of the maze to be generated. 
+	 * @param mode - the mode of the maze to be generated. 
+	 */
 	public Maze(int size, boolean mode) {
 		this.size = size; setClassic(mode);
 		if (mode) createClassicMaze();
 		else createCollectorMaze();
 	}
-
+	
+	/**
+	 * Creates a new representation of the maze which implements collectibles.
+	 */
 	private void createCollectorMaze() {
 		int x, y;
 		this.cStates = new CollectibleState[size][];		//initialise the states
@@ -48,7 +63,9 @@ public class Maze implements Iterable<BaseState> {
 		
 		this.generateMaze(cStates);
 	}
-
+	/**
+	 * Creates a new representation of the maze without collectibles.
+	 */
 	private void createClassicMaze() {
 		int x, y;
 		this.states = new BaseState[size][];		//initialise the states
@@ -68,7 +85,11 @@ public class Maze implements Iterable<BaseState> {
 		}
 		this.generateMaze(states);
 	}
-
+	/**
+	 * A helper function that is used by createClassicMaze() and createCollectorMaze()
+	 * Uses an algorithm to generate the actual maze representation.
+	 * @param states
+	 */
 	private void generateMaze(BaseState[][] states) {
 		//Add all edges to a bag
 		ArrayList<Edge> edges = new ArrayList<Edge>();
@@ -97,7 +118,13 @@ public class Maze implements Iterable<BaseState> {
 			}
 		}
 	}
-	
+	/**
+	 * checks if two nodes are connected
+	 * @param visited - a list of nodes that have been visited
+	 * @param to - the first node
+	 * @param from - node to be checked if it is connected to the first node
+	 * @return true if it is connected and false if it isn't connected
+	 */
 	public boolean getConnected(ArrayList<BaseState> visited, BaseState to, BaseState from) {
 		if (to == null) {return false;}
 		if (to.getX() == from.getX() && to.getY() == from.getY()) {return true;}
@@ -115,11 +142,21 @@ public class Maze implements Iterable<BaseState> {
 		}
 		return false;
 	}
-
+	/**
+	 * Gets the size of the maze. 
+	 * @return the size of the maze.
+	 */
 	public int getSize() {
 		return size;
 	}
-
+	/**
+	 * Used by classic maze mode. 
+	 * Checks if there is an edge from a coordinate in a particular direction
+	 * @param x - the x coordinate of the node
+	 * @param y - the y coordinate of the node
+	 * @param dir - the direction of the edge to be checked if it is connected
+	 * @return true if there is an edge connected and false if there isn't
+	 */
 	public boolean isConnected(int x, int y, int dir) {
 		if (states == null) return cisConnected(x,y,dir);
 		switch (dir) {
@@ -135,7 +172,15 @@ public class Maze implements Iterable<BaseState> {
 			return false;
 		}
 	}
-	
+	/**
+	 * Used by collector maze mode. 
+	 * c is for collector
+	 * Checks if there is an edge from a coordinate in a particular direction
+	 * @param x - the x coordinate of the node
+	 * @param y - the y coordinate of the node
+	 * @param dir - the direction of the edge to be checked if it is connected
+	 * @return true if there is an edge connected and false if there isn't
+	 */
 	private boolean cisConnected(int x, int y, int dir) {
 		switch (dir) {
 		case 0:
@@ -150,7 +195,9 @@ public class Maze implements Iterable<BaseState> {
 			return false;
 		}
 	}
-
+	/**
+	 * Iterator through different base states
+	 */
 	@Override
 	public Iterator<BaseState> iterator() {
 		Iterator<BaseState> it = new Iterator<BaseState>() {
@@ -179,15 +226,26 @@ public class Maze implements Iterable<BaseState> {
 		};
 		return it;
 	}
-
+	/**
+	 * Checks if the game mode is classic
+	 * @return true if it is classic and false if it isn't classic
+	 */
 	public boolean isClassic() {
 		return isClassic;
 	}
-
+	/**
+	 * Sets the game mode to be classic
+	 * @param isClassic - boolean representation of the game mode
+	 */
 	public void setClassic(boolean isClassic) {
 		this.isClassic = isClassic;
 	}
-
+	/**
+	 * Gets one of the nodes
+	 * @param x - x coordinate of the node
+	 * @param y - y coordinate of the node
+	 * @return one of the nodes
+	 */
 	public BaseState getState(int x, int y) {
 		if (states != null) return states[x][y];
 		else return cStates[x][y];
