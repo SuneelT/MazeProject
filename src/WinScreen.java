@@ -39,7 +39,7 @@ public class WinScreen extends JPanel {
         c.weightx = 0.5;
         c.weighty = 0.5;
         c.gridwidth = 2;
-        c.insets = new Insets(0, 50, 0, 0);
+        c.insets = new Insets(0, 40, 0, 0);
         this.add(fireworks, c);
 
         newGameButton = new JButton(new ImageIcon("images/newgame.png"));
