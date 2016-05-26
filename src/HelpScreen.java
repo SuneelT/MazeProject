@@ -5,7 +5,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-
+/**
+ * The Help screen is one of the game's screens. 
+ * It contains a return button which takes the user back to the menu screen.
+ * It also contains a panel containing text that explains the game controls to the user.
+ * There are also images of important features of the game. 
+ */ 
 public class HelpScreen extends JPanel {
 	private static final long serialVersionUID = -264471428282433023L;
 	JButton returnButton;
@@ -14,7 +19,12 @@ public class HelpScreen extends JPanel {
     private Image player;
     private Image end;
     private Image collectible;
- 
+    
+    /**
+     * Constructor for the  Help Screen.
+     * Contains a return button, a Jlabel, and three images.
+     * @param gui - A reference to the parent GUI class to allow for the switching of screens
+     */
     public HelpScreen(final GUI gui) {
 		this.setBackground(Color.black);
 		this.setLayout(new BorderLayout());
@@ -70,7 +80,12 @@ public class HelpScreen extends JPanel {
         this.add(text, c);
         
     }
-    
+    /**
+     * Draws the Help Screen.
+     * It draws the screen's bacgkround, the player image, the maze end image
+     * and a sample of the collectible image.
+     * @param g - This component's graphics context.
+     */
     @Override
     public void paintComponent(Graphics g) {
     	super.paintComponent(g);
