@@ -12,53 +12,63 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 /**
- * Used to display the moving firework graphic on the maze's end screen
+ * Displays a firework animation on the WinScreen. Fireworks originate from five points on the panel one at a time and
+ * are randomised in colour and location.
  */
 public class Fireworks extends JPanel {
-    private static final long serialVersionUID = 5053650234847311814L;
-    private static final int DELAY = 10, DIVIDER = 180, MULTIPLY_FACTOR = 36, LINE_LENGTH = 2, FIREWORK_RADIUS = 75;
-    private static final int ARRAY_LENGTH = 5;
-    private static int X_CENTER[] = new int[ARRAY_LENGTH], Y_CENTER[] = new int[ARRAY_LENGTH];
-    private static Color colors[] = new Color[ARRAY_LENGTH];
-    private static final double PI = 3.14159;
-    private int x1, moveX, index, color_index;
+    private final long serialVersionUID = 5053650234847311814L;
+    private final int numFireworks;
+    private int xCentre[], yCentre[];
+    private Color colours[];
+    private int currRadius;
+    private int stepSize;
+    private int location;
+    private int colourIndex;
     List<Integer> x = new ArrayList<Integer>();
     List<Integer> y = new ArrayList<Integer>();
 
     /**
-     * Constructor for fireworks
+     * Constructor for fireworks.
+     * The x- and y-coordinates of the five firework origin points are initialised in the xCentre and yCentre arrays
+     * and the colours array is populated. A timer is used to control the speed of the fireworks. The radius is
+     * initialised to zero and the number of pixels by which it steps is initialised.
      */
     public Fireworks() {
-        x1 = index = color_index = 0;
-        moveX = 3;
-        Timer timer = new Timer(DELAY, new MyChangeListener());
+        numFireworks = 5;
+        xCentre = new int[numFireworks];
+        yCentre = new int[numFireworks];
+        colours = new Color[numFireworks];
+        currRadius = location = colourIndex = 0;
+        stepSize = 4;
+        Timer timer = new Timer(10, new MyChangeListener());
         timer.start();
-        X_CENTER[0] = 100;
-        Y_CENTER[0] = 100;
+        xCentre[0] = 100;
+        yCentre[0] = 100;
 
-        X_CENTER[1] = 200;
-        Y_CENTER[1] = 200;
+        xCentre[1] = 200;
+        yCentre[1] = 200;
 
-        X_CENTER[2] = 300;
-        Y_CENTER[2] = 300;
+        xCentre[2] = 300;
+        yCentre[2] = 300;
 
-        X_CENTER[3] = 300;
-        Y_CENTER[3] = 100;
+        xCentre[3] = 300;
+        yCentre[3] = 100;
 
-        X_CENTER[4] = 100;
-        Y_CENTER[4] = 300;
+        xCentre[4] = 100;
+        yCentre[4] = 300;
 
-        colors[0] = Color.RED;
-        colors[1] = Color.YELLOW;
-        colors[2] = Color.GREEN;
-        colors[3] = Color.BLUE;
-        colors[4] = Color.MAGENTA;
+        colours[0] = Color.RED;
+        colours[1] = Color.YELLOW;
+        colours[2] = Color.GREEN;
+        colours[3] = Color.BLUE;
+        colours[4] = Color.MAGENTA;
 
         setOpaque(false);
     }
 
     /**
-     * Paints the firework image
+     * Draws the firework image as a circle of coloured dots.
+     * @param g - This component's graphics context
      */
     @Override
     protected void paintComponent(Graphics g) {
@@ -66,34 +76,35 @@ public class Fireworks extends JPanel {
         Graphics2D graphics2d = (Graphics2D) g;
         Stroke stroke = new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 5, new float[]{9}, 0);
         graphics2d.setStroke(stroke);
-        graphics2d.setColor(colors[color_index]);
+        graphics2d.setColor(colours[colourIndex]);
         for (int i = 0; i < x.size(); i++) {
-            graphics2d.drawLine(x.get(i), y.get(i), x.get(i)+LINE_LENGTH, y.get(i)+LINE_LENGTH);
+            graphics2d.drawLine(x.get(i), y.get(i), x.get(i)+2, y.get(i)+2);
         }
     }
 
     /**
-     * Event hander class used to identify when the firework has finished its animation in order to start a new one
+     * Event handling class identifies when a firework burst has finished its animation and begins a new one.
      */
     private class MyChangeListener implements ActionListener {
-        @Override
         /**
-         * Reacts to an action event and resets the firework animation
-         * @param arg0 the action even being reacted to
+         * Keeps track of the current radius of the fireworks and decides if it should continue growing or begin a new
+         * firework.
+         * @param arg0 - The action being reacted to
          */
+        @Override
         public void actionPerformed(ActionEvent arg0) {
-            x1 += moveX;
-            if (x1 == 0 || x1 >= FIREWORK_RADIUS) {
-                x1 = 0;
+            currRadius += stepSize;
+            if (currRadius >= 150) {
+                currRadius = 0;
                 Random random = new Random();
-                index = random.nextInt(ARRAY_LENGTH);
-                color_index = random.nextInt(ARRAY_LENGTH);
+                location = random.nextInt(numFireworks);
+                colourIndex = random.nextInt(numFireworks);
             }
             x.clear();
             y.clear();
             for (int i = 0; i < 10; i++) {
-                x.add((int) (X_CENTER[index] + x1 * Math.cos((MULTIPLY_FACTOR * i * PI) / DIVIDER)));
-                y.add((int) (Y_CENTER[index] + x1 * Math.sin((MULTIPLY_FACTOR * i * PI) / DIVIDER)));
+                x.add((int) (xCentre[location] + currRadius * Math.cos((36 * i * 3.14159) / 180)));
+                y.add((int) (yCentre[location] + currRadius * Math.sin((36 * i * 3.14159) / 180)));
             }
             repaint();
         }

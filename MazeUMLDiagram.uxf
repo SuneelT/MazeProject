@@ -41,7 +41,7 @@ BaseState
       <w>220</w>
       <h>130</h>
     </coordinates>
-    <panel_attributes>Collectable
+    <panel_attributes>Collectible
 --
 -x: int
 -y: int
@@ -50,7 +50,7 @@ BaseState
 -collected: boolean
 -index: int
 --
-+&lt;&lt;constructor&gt;&gt;Collectable(coords: int[], size: int, mode: int, index: int)
++&lt;&lt;constructor&gt;&gt;Collectible(coords: int[], size: int, mode: int, index: int)
 -setImage(mode: int, index: int)
 +getCollectedImage(): BufferedImage
 +getCoords(): int[]
@@ -68,19 +68,19 @@ BaseState
       <w>165</w>
       <h>100</h>
     </coordinates>
-    <panel_attributes>CollectableState
+    <panel_attributes>CollectibleState
 --
--item: Collectable
+-item: Collectible
 --
-+&lt;&lt;constructor&gt;&gt;CollectableState(state: BaseState)
-+addCollectable(item: Collectable)
-+getCollectable(): Collectable
++&lt;&lt;constructor&gt;&gt;CollectibleState(state: BaseState)
++addCollectible(item: Collectible)
++getCollectible(): Collectible
 +collect()
 +checkCollected(): boolean
 +getCollectedSprite(): BufferedImage
 +signal(sig: String)
 +getUncollectedSprite(): BufferedImage
-+compareTo(arg0: CollectableState): int</panel_attributes>
++compareTo(arg0: CollectibleState): int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -94,9 +94,9 @@ BaseState
     <panel_attributes>CollectedPanel
 --
 _-serialVersionUID: long_
--nCollectables: int
--collectables: Hashtable&lt;Observable, CollectedTile&gt;
--tmpList: PriorityQueue&lt;CollectableState&gt;
+-nCollectibles: int
+-Collectibles: Hashtable&lt;Observable, CollectedTile&gt;
+-tmpList: PriorityQueue&lt;CollectibleState&gt;
 --
 +&lt;&lt;constructor&gt;&gt;CollectedPanel()
 +update(arg0: Observable, arg1: object)
@@ -154,20 +154,15 @@ _-serialVersionUID: long_
     <panel_attributes>Fireworks
 --
 _-serialVersionUID: long_
-_-DELAY: int_
-_-DIVIDER: int_
-_-MULTIPLY_FACTOR: int_
-_-LINE_LENGTH: int_
-_-FIREWORK_RADIUS: int_
-_-ARRAY_LENGTH: int_
-_-X_CENTER: int[]_
-_-Y_CENTER: int[]_
-_-colors: Color[]_
+_-numFireworks: int_
+_-xCentre: int[]_
+_-yCentre: int[]_
+_-colours: Color[]_
 _-PI: double_
--int: x1
--int: moveX
+-int: currRadius
+-int: stepSize
 -int: index
--int: color_index
+-int: colourIndex
 -x: List&lt;Integer&gt;
 -y: List&lt;Integer&gt;
 --
@@ -196,7 +191,7 @@ _+main(args: String[])_
 +switchScreen(switchTo: String)
 +getModel(): Model
 +setPlayerObserver (o: Observer)
-+setCollectableObserver(collected: Observer)</panel_attributes>
++setCollectibleObserver(collected: Observer)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -215,7 +210,7 @@ _-serialVersionUID: long_
 -bg: Image
 -player: Image
 -end: Image
--collectable: Image
+-Collectible: Image
 --
 +&lt;&lt;constructor&gt;&gt;HelpScreen(gui: GUI)
 +paintComponent(g: Graphics)
@@ -233,7 +228,7 @@ _-serialVersionUID: long_
     <panel_attributes>Maze
 --
 -state: BaseState[][]
--cStates: CollectableState[][]
+-cStates: CollectibleState[][]
 -size: int
 -isClassic: boolean
 --
@@ -347,7 +342,7 @@ _-HARD: int_
 +isClassicMode(): boolean
 +getPlayerSprite(): Image
 +allCollected(): boolean
-+setCollectableObserver(collected: Observer)</panel_attributes>
++setCollectibleObserver(collected: Observer)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -362,7 +357,7 @@ _-HARD: int_
 --
 -x: int
 -y: int
--collectableCount: int
+-CollectibleCount: int
 -sprites: List&lt;BufferedImages&gt;
 -_UP: int_
 -_DOWN: int_
@@ -376,7 +371,7 @@ _-HARD: int_
 +setX(position: int)
 +setY(position: int)
 +move(direction: int, maze: Maze)
-+reset(collectableCount: int)
++reset(CollectibleCount: int)
 +getCoords(): int[]
 +getSprite(): Image
 +getNumLeft(): int</panel_attributes>
