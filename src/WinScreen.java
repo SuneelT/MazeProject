@@ -6,6 +6,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+/**
+ * The WinScreen class is another of the GUI's screens. This screen specifically contains the message "You Win!", and provides an interface needed to
+ * either continue playing the game in the sam estate, or select of new mode of play. The screen also has an animation effect of fireworks, to signify the tremendous
+ * accomplishment that is beating this maze.
+ *
+ */
 public class WinScreen extends JPanel {
 	private static final long serialVersionUID = -6918359361500026357L;
 	private Image bg;
@@ -13,6 +19,11 @@ public class WinScreen extends JPanel {
     private JButton menuButton;
     private Image winningMessage;
 
+    /**
+     * Constructs the WinScreen.
+     * The WinScreen consists of a background with a lovely "You Win" message, as well as two buttons: "New Game" and "Menu".
+     * @param gui - A reference to the parent GUI class to allow for access of switching screens.
+     */
     public WinScreen(final GUI gui) {
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -82,6 +93,11 @@ public class WinScreen extends JPanel {
         this.add(menuButton, c);
     }
 
+    /**
+     * Custom drawing for the WinScreen.
+     * Explicitly, it just repaints the background and the winning message.
+     * @param g - This components graphics context.
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

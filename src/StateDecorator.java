@@ -93,21 +93,45 @@ public abstract class StateDecorator extends Observable implements BaseState{
 		return state.getEdge(edge);
 	}
 
+	/**
+	 * Adds an up connection from this state to another state.
+	 * Note: the other node may be a wall, which is signified from the wall parameter.
+	 * @param node - the node to connect this node to.
+	 * @param wall - a boolean to see if the node to connect to is a wall or not.
+	 */
 	@Override
 	public void addConnectionUp(BaseState node, boolean wall) {
 		state.addConnectionUp(node, wall);
 	}
 
+	/**
+	 * Adds a down connection from this state to another state.
+	 * Note: the other node may be a wall, which is signified from the wall parameter.
+	 * @param node - the node to connect this node to.
+	 * @param wall - a boolean to see if the node to connect to is a wall or not.
+	 */
 	@Override
 	public void addConnectionDown(BaseState node, boolean wall) {
 		state.addConnectionDown(node, wall);
 	}
 
+	/**
+	 * Adds a left connection from this state to another state.
+	 * Note: the other node may be a wall, which is signified from the wall parameter.
+	 * @param node - the node to connect this node to.
+	 * @param wall - a boolean to see if the node to connect to is a wall or not.
+	 */
 	@Override
 	public void addConnectionLeft(BaseState node, boolean wall) {
 		state.addConnectionLeft(node, wall);
 	}
 
+	/**
+	 * Adds a right connection from this state to another state.
+	 * Note: the other node may be a wall, which is signified from the wall parameter.
+	 * @param node - the node to connect this node to.
+	 * @param wall - a boolean to see if the node to connect to is a wall or not.
+	 */
 	@Override
 	public void addConnectionRight(BaseState node, boolean wall) {
 		state.addConnectionRight(node, wall);
