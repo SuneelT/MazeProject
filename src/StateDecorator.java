@@ -3,7 +3,7 @@ import java.util.Observable;
 /**
  * The StateDecorator class is a concrete use of the Decorator pattern in an attempt to alter the Maze's state easily.
  * The states of the maze would change due to the inclusion of more modes of play in the maze; specifically collector's mode. When
- * using collectable states, the new class must extend this abstract class.
+ * using collectible states, the new class must extend this abstract class.
  * 
  *
  */

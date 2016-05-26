@@ -31,18 +31,18 @@ public class Model {
 		player.reset(0);
 		((CollectedPanel) collectorObserver).reset();
 		if (isClassic) return;
-		int numCollectables;
-		if (difficulty == EASY) numCollectables = 1;
-		else if (difficulty == MEDIUM) numCollectables = 3;
-		else numCollectables = 5;
-		player.reset(numCollectables);
+		int numCollectibles;
+		if (difficulty == EASY) numCollectibles = 1;
+		else if (difficulty == MEDIUM) numCollectibles = 3;
+		else numCollectibles = 5;
+		player.reset(numCollectibles);
 		for (BaseState s: maze) {
-			if (!((CollectableState) s).checkCollected()) {
-				((CollectableState) s).addObserver(this.collectorObserver);
-				((CollectableState) s).signal("Create");
-				numCollectables--;
+			if (!((CollectibleState) s).checkCollected()) {
+				((CollectibleState) s).addObserver(this.collectorObserver);
+				((CollectibleState) s).signal("Create");
+				numCollectibles--;
 			}
-			if (numCollectables == 0) ((CollectableState) s).signal("Done");
+			if (numCollectibles == 0) ((CollectibleState) s).signal("Done");
 		}
 	}
 
@@ -137,7 +137,7 @@ public class Model {
 	 * Puts an observer on the collectibles.
 	 * @param collected - An observer
      */
-	public void setCollectableOberver(Observer collected) {
+	public void setCollectibleOberver(Observer collected) {
 		this.collectorObserver = collected;
 	}
 }

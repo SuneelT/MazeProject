@@ -71,7 +71,7 @@ public class MazeScreen extends JPanel {
 		
 		JPanel collected = new CollectedPanel();
 		collected.setPreferredSize(new Dimension(100, 190));
-		gui.setCollectableObserver((Observer) collected);
+		gui.setCollectibleObserver((Observer) collected);
 		
 		final JToggleButton muteButton = new JToggleButton(new ImageIcon("images/sound.png"));
 		muteButton.setBorder(BorderFactory.createEmptyBorder());

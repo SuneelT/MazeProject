@@ -13,7 +13,7 @@ public class HelpScreen extends JPanel {
     private Image bg;
     private Image player;
     private Image end;
-    private Image collectable;
+    private Image collectible;
  
     public HelpScreen(final GUI gui) {
 		this.setBackground(Color.black);
@@ -22,7 +22,7 @@ public class HelpScreen extends JPanel {
 			bg = ImageIO.read(new File("images/yellowBG.jpg"));
 			player = ImageIO.read(new File("images/player_up.png"));
 	        end = ImageIO.read(new File("images/tiles/end_unlocked.png"));
-	        collectable = ImageIO.read(new File("images/key.png"));
+	        collectible = ImageIO.read(new File("images/key.png"));
 		} catch (IOException e1) {}
        this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -60,7 +60,7 @@ public class HelpScreen extends JPanel {
 
         text = new JLabel("<html>Use the arrow keys on your keyboard to guide your character to the exit. The exit is the"
         		+ " bottom right-hand corner of the maze." + "<br><br>This is your player! <br><br> This is the end!"
-        		+ "<br><br>If you're playing collectable mode - collect objects to spell out a word and exit the maze!</html>", JLabel.CENTER);
+        		+ "<br><br>If you're playing collectible mode - collect objects to spell out a word and exit the maze!</html>", JLabel.CENTER);
         text.setFont(new Font("Ariel",Font.PLAIN, 25));
         c.gridy = 1;
         c.ipadx = 390;
@@ -77,6 +77,6 @@ public class HelpScreen extends JPanel {
     	g.drawImage(bg, 0, 0, getWidth(), getHeight(), null);
     	g.drawImage(player, 300, 310, 80, 80, null);
     	g.drawImage(end, 268, 380, 70, 70, null);
-    	g.drawImage(collectable, 600, 470, 65, 65, null);
+    	g.drawImage(collectible, 600, 470, 65, 65, null);
     }
 }

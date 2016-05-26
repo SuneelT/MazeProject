@@ -39,7 +39,7 @@ public class MazePanel extends JPanel implements Observer {
 		int[] pos = gui.getModel().getPlayerPos();
 		if (!gui.getModel().isClassicMode()) {
 			for (BaseState s: gui.getModel().getMaze()) {
-				CollectableState cState = (CollectableState) s;
+				CollectibleState cState = (CollectibleState) s;
 				if (!cState.checkCollected())
 					g.drawImage(cState.getCollectedSprite(), cState.getX()*w, cState.getY()*h, w, h, null);
 			}

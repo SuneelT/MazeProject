@@ -77,10 +77,10 @@ public class GUI extends JFrame {
 	}
 
 	/**
-	 * Adds an observer for the collectables
+	 * Adds an observer for the collectibles
 	 * @param collected the observer being added
 	 */
-	public void setCollectableObserver(Observer collected) {
-		model.setCollectableOberver(collected);
+	public void setCollectibleObserver(Observer collected) {
+		model.setCollectibleOberver(collected);
 	}
 }

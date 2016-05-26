@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Maze implements Iterable<BaseState> {
 	private BaseState[][] states = null;
-	private CollectableState[][] cStates = null;
+	private CollectibleState[][] cStates = null;
 	private int size;
 	private boolean isClassic = true;
 	 
@@ -16,15 +16,15 @@ public class Maze implements Iterable<BaseState> {
 
 	private void createCollectorMaze() {
 		int x, y;
-		this.cStates = new CollectableState[size][];		//initialise the states
-		for (x = 0; x < size; x++) cStates[x] = new CollectableState[size];	
+		this.cStates = new CollectibleState[size][];		//initialise the states
+		for (x = 0; x < size; x++) cStates[x] = new CollectibleState[size];
 		for (x = 0; x < size; x++) {	//first fill up the states array with stats
-			for (y = 0; y < size; y++) cStates[x][y] = new CollectableState(new State(x, y));
+			for (y = 0; y < size; y++) cStates[x][y] = new CollectibleState(new State(x, y));
 		}
 	
 		for (x = 0; x < size; x++) {				//add connections
 			for (y = 0; y < size; y++) {			//if x == 0 || x == size-1 no side connections
-				CollectableState curr = cStates[x][y];		//likewise for y
+				CollectibleState curr = cStates[x][y];		//likewise for y
 				if (y > 0) curr.addConnectionUp(cStates[x][y-1], true);
 				if (y < size-1) curr.addConnectionDown(cStates[x][y+1], true);
 				if (x > 0) curr.addConnectionLeft(cStates[x-1][y], true);
@@ -41,9 +41,9 @@ public class Maze implements Iterable<BaseState> {
 		
 		int[] xCoords = new int[index];
 		for (int i = 0; i < index; i++) {
-			Collectable collect = new Collectable (xCoords, size, difficulty, i);
+			Collectible collect = new Collectible (xCoords, size, difficulty, i);
 			int[] coordinates = collect.getCoords();
-			cStates[coordinates[1]][coordinates[0]].addCollectable(collect);
+			cStates[coordinates[1]][coordinates[0]].addCollectible(collect);
 		}
 		
 		this.generateMaze(cStates);

@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
 public class Player extends Observable {
 	private int x;
 	private int y;
-	private int collectableCount; 
+	private int collectibleCount;
 	private List<BufferedImage> sprites = new ArrayList<BufferedImage>();
 	private final int UP = 0; private final int DOWN = 1;
 	private final int LEFT = 2; private final int RIGHT = 3;
@@ -89,25 +89,25 @@ public class Player extends Observable {
 			x = (maze.isConnected(x, y, 3)) ? x+1: x; this.direction = RIGHT; break;
 		}
 		if (!maze.isClassic()) {
-			CollectableState cState = (CollectableState) maze.getState(x, y);
+			CollectibleState cState = (CollectibleState) maze.getState(x, y);
 			if (!cState.checkCollected()) {
 				cState.collect();
-				collectableCount--;
+				collectibleCount--;
 			}
 		}
 		setChanged();
-		if (x == maze.getSize()-1 && y == maze.getSize()-1 && collectableCount == 0) notifyObservers(true);
+		if (x == maze.getSize()-1 && y == maze.getSize()-1 && collectibleCount == 0) notifyObservers(true);
 		else notifyObservers(getCoords());
 	}
 
 	/**
 	 * Resets the position of the player to its starting position.
-	 * @param collectableCount - The number of collectibles remaining in the maze
+	 * @param collectibleCount - The number of collectibles remaining in the maze
      */
-	public void reset(int collectableCount) {
+	public void reset(int collectibleCount) {
 		x = 0;
 		y = 0;
-		this.collectableCount = collectableCount;
+		this.collectibleCount = collectibleCount;
 		direction = DOWN;
 		setChanged();
 		notifyObservers("Create");
@@ -135,6 +135,6 @@ public class Player extends Observable {
 	 * @return The number of collectibles in the maze
      */
 	public int getNumLeft() {
-		return collectableCount;
+		return collectibleCount;
 	}
 }

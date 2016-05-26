@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 /**
- * Used for the display of the various collectables available in the maze
+ * Used for the display of the various collectibles available in the maze
  */
 public class CollectedTile extends JPanel {
 		private static final long serialVersionUID = 1L;
@@ -19,7 +19,7 @@ public class CollectedTile extends JPanel {
 		}
 		
 		/**
-		 * Sets the sprite of the collectable
+		 * Sets the sprite of the collectible
 		 * @param s the image that the tile is to be set to
 		 */
 		public void setSprite(BufferedImage s) {
