@@ -7,15 +7,13 @@
       <x>384</x>
       <y>632</y>
       <w>288</w>
-      <h>272</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 BaseState
 --
 +getX(): int
 +getY(): int
-+getPlayer(): boolean
-+movePlayer()
 +edgeExists(edge: String): boolean
 +getUp(): BaseState
 +getDown(): BaseState
@@ -26,10 +24,7 @@ BaseState
 +addConnectionDown(node: BaseState, wall: boolean)
 +addConnectionLeft(node: BaseState, wall: boolean)
 +addConnectionRight(node: BaseState, wall: boolean)
-+isTopWall(): boolean
-+isBottomWall(): boolean
-+isLeftWall(): boolean
-+isRightWall(): boolean
+
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -125,7 +120,7 @@ _-serialVersionUID: long_
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>1056</y>
+      <y>960</y>
       <w>360</w>
       <h>144</h>
     </coordinates>
@@ -388,7 +383,7 @@ _-HARD: int_
       <x>24</x>
       <y>640</y>
       <w>296</w>
-      <h>376</h>
+      <h>280</h>
     </coordinates>
     <panel_attributes>State
 --
@@ -398,13 +393,10 @@ _-HARD: int_
 -right: Edge
 -x: int
 -y: int
--player: boolean
 --
 +&lt;&lt;constructor&gt;&gt;State(x: int, y: int)
 +getX(): int
 +getY(): int
-+getPlayer(): boolean
-+movePlayer()
 +edgeExists(edge: String): boolean
 +getUp(): BaseState
 +getDown(): BaseState
@@ -415,10 +407,6 @@ _-HARD: int_
 +addConnectionDown(node: BaseState, wall: boolean)
 +addConnectionLeft(node: BaseState, wall: boolean)
 +addConnectionRight(node: BaseState, wall: boolean)
-+isTopWall(): boolean
-+isBottomWall(): boolean
-+isLeftWall(): boolean
-+isRightWall(): boolean
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -426,9 +414,9 @@ _-HARD: int_
     <id>UMLClass</id>
     <coordinates>
       <x>384</x>
-      <y>944</y>
+      <y>904</y>
       <w>288</w>
-      <h>304</h>
+      <h>224</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
 StateDecorator
@@ -438,8 +426,6 @@ StateDecorator
 +&lt;&lt;constructor&gt;&gt;StateDecorator(state: BaseState)
 +getX(): int
 +getY(): int
-+getPlayer(): boolean
-+movePlayer()
 +edgeExists(edge: String): boolean
 +getUp(): BaseState
 +getDown(): BaseState
@@ -449,11 +435,7 @@ StateDecorator
 +addConnectionUp(node: BaseState, wall: boolean)
 +addConnectionDown(node: BaseState, wall: boolean)
 +addConnectionLeft(node: BaseState, wall: boolean)
-+addConnectionRight(node: BaseState, wall: boolean)
-+isTopWall(): boolean
-+isBottomWall(): boolean
-+isLeftWall(): boolean
-+isRightWall(): boolean</panel_attributes>
++addConnectionRight(node: BaseState, wall: boolean)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -548,29 +530,29 @@ m1=0..n^2</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>528</x>
-      <y>896</y>
+      <y>824</y>
       <w>24</w>
-      <h>64</h>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>464</x>
-      <y>896</y>
+      <y>824</y>
       <w>24</w>
-      <h>64</h>
+      <h>96</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
-    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>664</x>
-      <y>1064</y>
+      <y>1040</y>
       <w>80</w>
       <h>32</h>
     </coordinates>
@@ -582,7 +564,7 @@ m1=0..n</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>160</x>
-      <y>1008</y>
+      <y>912</y>
       <w>24</w>
       <h>64</h>
     </coordinates>
@@ -670,7 +652,7 @@ m1=0..n</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>184</x>
-      <y>1008</y>
+      <y>912</y>
       <w>32</w>
       <h>64</h>
     </coordinates>
